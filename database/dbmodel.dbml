@@ -1,0 +1,6 @@
+Table Users {
+    id int [pk, increment]
+    name string [not null]
+    email string [unique, not null]
+    email_verified_at string
+}
