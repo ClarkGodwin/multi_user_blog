@@ -8,9 +8,9 @@ Enum levels {
 
 Table Users {
     id int [pk, increment]
-    name string [not null]
-    email string [unique, not null]
-    email_verified_at string
+    name varchar(15) [not null]
+    email varchar [unique, not null]
+    email_verified_at datetime
     password string [not null]
     blocked bool [default: false]
     level levels [default: `levels.user`]
@@ -21,8 +21,8 @@ Table Users {
 Table Articles {
     id int [pk, increment]
     user_id int [ref: > Users.id, not null] //a user can write multiple articles
-    title string [not null]
-    content string [not null]
+    title varchar(15) [not null]
+    content text [not null]
     created_at datetime [default: `now()`]
     updated_at datetime [default: `now()`]
 
