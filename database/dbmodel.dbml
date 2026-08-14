@@ -11,6 +11,7 @@ Table Users {
     name string [not null]
     email string [unique, not null]
     email_verified_at string
+    password string [not null]
     blocked bool [default: false]
     level levels [default: `levels.user`]
     created_at datetime [default: `now()`]
