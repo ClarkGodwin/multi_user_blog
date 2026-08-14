@@ -1,6 +1,28 @@
+//this file contains the conceptual modelisation of the database of the application. It uses dbml tools vscode extension for the visualization, highlight and completion suggestion
+
+Enum levels {
+    user //the basic level of users who can just create and edit articles
+    admin //who can edit other people's articles and even block some users
+    superAdmin //this is for me, who has the admin's abilities plus deciding who can be an admin
+}
+
 Table Users {
     id int [pk, increment]
     name string [not null]
     email string [unique, not null]
     email_verified_at string
+    blocked bool [default: false]
+    level levels [default: `levels.user`]
+    created_at datetime [default: `now()`]
+    updated_at datetime [default: `now()`]
+}
+
+Table Articles {
+    id int [pk, increment]
+    user_id int [ref: > Users.id, not null] //a user can write multiple articles
+    title string [not null]
+    content string [not null]
+    created_at datetime [default: `now()`]
+    updated_at datetime [default: `now()`]
+
 }
