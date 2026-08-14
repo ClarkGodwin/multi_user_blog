@@ -8,4 +8,38 @@
         Instrument Sans, ui-sans-serif, system-ui, sans-serif,
         'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
         'Noto Color Emoji';
+
+    /* ==========================================================================
+   PERFECT LIGHT MODE (High Contrast & Crisp)
+   ========================================================================== */
+    --color-surface-100: #ffffff;
+    /* Pure foreground: Vibrant white cards, inputs, and menus */
+    --color-surface-200: #f8fafc;
+    /* Very subtle white/gray: For table rows or secondary elements */
+    --color-surface-300: #f1f5f9;
+    /* Structuring light gray: For large background containers */
+    --color-surface-400: #e2e8f0;
+    /* Page background & borders: Provides real structure and elevates blocks */
+
+    /* Light Mode Text */
+    --color-text-main: #0f172a;
+    /* Very dark slate, almost black */
+    --color-text-muted: #475569;
+    /* Medium gray for labels and subtitles */
+
+    /* ==========================================================================
+   DARK MODE (Deep Black to Charcoal Gray Gradients)
+   ========================================================================== */
+    --color-dark-surface-100: #090d16;
+    /* Ink black: Main page background */
+    --color-dark-surface-200: #111827;
+    /* Container black */
+    --color-dark-surface-300: #1f2937;
+    /* Charcoal gray: For nested cards */
+    --color-dark-surface-400: #374151;
+    /* Lighter gray: For inputs and focused elements */
+
+    /* Dark Mode Text (White to Gray Gradients) */
+    --color-dark-text-main: #f8fafc;
+    --color-dark-text-muted: #94a3b8;
 }
