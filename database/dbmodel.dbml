@@ -38,3 +38,7 @@ Table Comments {
     article_id int [ref: > Articles.id]
     content text [not null]
 }
+
+Table Categories{
+    id int [primary key, increment]
+}
