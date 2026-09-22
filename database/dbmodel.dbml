@@ -32,3 +32,7 @@ Table Articles {
     created_at datetime
     updated_at datetime
 }
+
+Table Comments {
+    id int [primary key, increment]
+}

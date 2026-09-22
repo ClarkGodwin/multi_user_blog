@@ -18,6 +18,18 @@
         "schemaName": "public",
         "x": 12,
         "y": 12
+      },
+      {
+        "name": "Comment",
+        "schemaName": "public",
+        "x": 12,
+        "y": 334
+      },
+      {
+        "name": "Comments",
+        "schemaName": "public",
+        "x": 12,
+        "y": 334
       }
     ],
     "tableGroupCollapseStates": [],
