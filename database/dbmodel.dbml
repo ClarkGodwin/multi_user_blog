@@ -50,4 +50,7 @@ Table Categories{
 
 Table Tags {
     id int [primary key, increment]
+    name varchar(30) [not null]
+    created_at datetime
+    updated_at datetime
 }
