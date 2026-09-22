@@ -48,7 +48,7 @@ Table Categories{
     updated_at datetime [default: `now()`]
 }
 
-Table Articles_Categorie {
+Table Articles_Categories {
     id int [primary key, increment]
     article_id int [ref: > Articles.id, not null]
     category_id int [ref: > Categories.id, not null]
@@ -59,6 +59,12 @@ Table Articles_Categorie {
 Table Tags {
     id int [primary key, increment]
     name varchar(30) [not null]
+    created_at datetime [default: `now()`]
+    updated_at datetime [default: `now()`]
+}
+
+Table Articles_Tags {
+    id int [primary key, increment]
     created_at datetime [default: `now()`]
     updated_at datetime [default: `now()`]
 }
