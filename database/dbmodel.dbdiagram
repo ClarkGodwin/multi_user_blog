@@ -36,6 +36,12 @@
         "schemaName": "public",
         "x": 48,
         "y": 836
+      },
+      {
+        "name": "Articles_Categorie",
+        "schemaName": "public",
+        "x": 48,
+        "y": 1046
       }
     ],
     "tableGroupCollapseStates": [],

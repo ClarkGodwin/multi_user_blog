@@ -48,6 +48,10 @@ Table Categories{
     updated_at datetime
 }
 
+Table Articles_Categorie {
+    id int [primary key, increment]
+}
+
 Table Tags {
     id int [primary key, increment]
     name varchar(30) [not null]
