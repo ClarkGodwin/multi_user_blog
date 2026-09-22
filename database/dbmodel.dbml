@@ -65,6 +65,8 @@ Table Tags {
 
 Table Articles_Tags {
     id int [primary key, increment]
+    article_id int [ref: > Articles.id, not null]
+    tag_id int [ref: > Tags.id, not null]
     created_at datetime [default: `now()`]
     updated_at datetime [default: `now()`]
 }

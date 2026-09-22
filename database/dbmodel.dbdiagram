@@ -10,50 +10,44 @@
       {
         "name": "Users",
         "schemaName": "public",
-        "x": 384,
-        "y": 288
+        "x": 299.6123847504756,
+        "y": -380.9759984134075
       },
       {
         "name": "Articles",
         "schemaName": "public",
-        "x": 48,
-        "y": 96
+        "x": 296,
+        "y": 0
       },
       {
         "name": "Comments",
         "schemaName": "public",
-        "x": 416,
-        "y": 48
+        "x": 608,
+        "y": 0
       },
       {
         "name": "Categories",
         "schemaName": "public",
-        "x": 48,
-        "y": 626
+        "x": -53.22742471827545,
+        "y": 363.7891112669381
       },
       {
         "name": "Tags",
         "schemaName": "public",
-        "x": 48,
-        "y": 836
-      },
-      {
-        "name": "Articles_Categorie",
-        "schemaName": "public",
-        "x": 48,
-        "y": 1046
+        "x": 717.078735088503,
+        "y": 381.3409921591127
       },
       {
         "name": "Articles_Categories",
         "schemaName": "public",
-        "x": 48,
-        "y": 1046
+        "x": -71.6120297769563,
+        "y": 61.0098056564878
       },
       {
         "name": "Articles_Tags",
         "schemaName": "public",
-        "x": 48,
-        "y": 1288
+        "x": 312.95843731893996,
+        "y": 310.17978918141705
       }
     ],
     "tableGroupCollapseStates": [],
@@ -99,172 +93,7 @@
         "secondFieldNames": [
           "article_id"
         ],
-        "secondTableName": "Articles_Categorie",
-        "secondSchemaName": "public",
-        "secondRelation": "*",
-        "checkPoints": []
-      },
-      {
-        "firstFieldNames": [
-          "id"
-        ],
-        "firstTableName": "Articles",
-        "firstSchemaName": "public",
-        "firstRelation": "1",
-        "secondFieldNames": [
-          "c"
-        ],
-        "secondTableName": "Articles_Categorie",
-        "secondSchemaName": "public",
-        "secondRelation": "*",
-        "checkPoints": []
-      },
-      {
-        "firstFieldNames": [
-          "id"
-        ],
-        "firstTableName": "Articles",
-        "firstSchemaName": "public",
-        "firstRelation": "1",
-        "secondFieldNames": [
-          "ca"
-        ],
-        "secondTableName": "Articles_Categorie",
-        "secondSchemaName": "public",
-        "secondRelation": "*",
-        "checkPoints": []
-      },
-      {
-        "firstFieldNames": [
-          "id"
-        ],
-        "firstTableName": "Articles",
-        "firstSchemaName": "public",
-        "firstRelation": "1",
-        "secondFieldNames": [
-          "cat"
-        ],
-        "secondTableName": "Articles_Categorie",
-        "secondSchemaName": "public",
-        "secondRelation": "*",
-        "checkPoints": []
-      },
-      {
-        "firstFieldNames": [
-          "id"
-        ],
-        "firstTableName": "Articles",
-        "firstSchemaName": "public",
-        "firstRelation": "1",
-        "secondFieldNames": [
-          "cate"
-        ],
-        "secondTableName": "Articles_Categorie",
-        "secondSchemaName": "public",
-        "secondRelation": "*",
-        "checkPoints": []
-      },
-      {
-        "firstFieldNames": [
-          "id"
-        ],
-        "firstTableName": "Articles",
-        "firstSchemaName": "public",
-        "firstRelation": "1",
-        "secondFieldNames": [
-          "categ"
-        ],
-        "secondTableName": "Articles_Categorie",
-        "secondSchemaName": "public",
-        "secondRelation": "*",
-        "checkPoints": []
-      },
-      {
-        "firstFieldNames": [
-          "id"
-        ],
-        "firstTableName": "Articles",
-        "firstSchemaName": "public",
-        "firstRelation": "1",
-        "secondFieldNames": [
-          "catego"
-        ],
-        "secondTableName": "Articles_Categorie",
-        "secondSchemaName": "public",
-        "secondRelation": "*",
-        "checkPoints": []
-      },
-      {
-        "firstFieldNames": [
-          "id"
-        ],
-        "firstTableName": "Articles",
-        "firstSchemaName": "public",
-        "firstRelation": "1",
-        "secondFieldNames": [
-          "categor"
-        ],
-        "secondTableName": "Articles_Categorie",
-        "secondSchemaName": "public",
-        "secondRelation": "*",
-        "checkPoints": []
-      },
-      {
-        "firstFieldNames": [
-          "id"
-        ],
-        "firstTableName": "Articles",
-        "firstSchemaName": "public",
-        "firstRelation": "1",
-        "secondFieldNames": [
-          "category"
-        ],
-        "secondTableName": "Articles_Categorie",
-        "secondSchemaName": "public",
-        "secondRelation": "*",
-        "checkPoints": []
-      },
-      {
-        "firstFieldNames": [
-          "id"
-        ],
-        "firstTableName": "Articles",
-        "firstSchemaName": "public",
-        "firstRelation": "1",
-        "secondFieldNames": [
-          "category_"
-        ],
-        "secondTableName": "Articles_Categorie",
-        "secondSchemaName": "public",
-        "secondRelation": "*",
-        "checkPoints": []
-      },
-      {
-        "firstFieldNames": [
-          "id"
-        ],
-        "firstTableName": "Articles",
-        "firstSchemaName": "public",
-        "firstRelation": "1",
-        "secondFieldNames": [
-          "category_i"
-        ],
-        "secondTableName": "Articles_Categorie",
-        "secondSchemaName": "public",
-        "secondRelation": "*",
-        "checkPoints": []
-      },
-      {
-        "firstFieldNames": [
-          "id"
-        ],
-        "firstTableName": "Articles",
-        "firstSchemaName": "public",
-        "firstRelation": "1",
-        "secondFieldNames": [
-          "category_id"
-        ],
-        "secondTableName": "Articles_Categorie",
+        "secondTableName": "Articles_Categories",
         "secondSchemaName": "public",
         "secondRelation": "*",
         "checkPoints": []
@@ -279,7 +108,7 @@
         "secondFieldNames": [
           "category_id"
         ],
-        "secondTableName": "Articles_Categorie",
+        "secondTableName": "Articles_Categories",
         "secondSchemaName": "public",
         "secondRelation": "*",
         "checkPoints": []
@@ -294,7 +123,7 @@
         "secondFieldNames": [
           "article_id"
         ],
-        "secondTableName": "Articles_Categories",
+        "secondTableName": "Articles_Tags",
         "secondSchemaName": "public",
         "secondRelation": "*",
         "checkPoints": []
@@ -303,13 +132,13 @@
         "firstFieldNames": [
           "id"
         ],
-        "firstTableName": "Categories",
+        "firstTableName": "Tags",
         "firstSchemaName": "public",
         "firstRelation": "1",
         "secondFieldNames": [
-          "category_id"
+          "tag_id"
         ],
-        "secondTableName": "Articles_Categories",
+        "secondTableName": "Articles_Tags",
         "secondSchemaName": "public",
         "secondRelation": "*",
         "checkPoints": []
