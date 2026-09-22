@@ -37,8 +37,13 @@ Table Comments {
     id int [primary key, increment]
     article_id int [ref: > Articles.id]
     content text [not null]
+    created_at datetime
+    updated_at datetime
 }
 
 Table Categories{
     id int [primary key, increment]
+    name varchars(30) [not null]
+    created_at datetime
+    updated_at datetime
 }
