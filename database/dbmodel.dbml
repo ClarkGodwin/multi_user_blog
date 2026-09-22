@@ -17,6 +17,18 @@ Table Users {
     updated_at datetime
 }
 
+Enum Articles_statuses{
+    craft
+    published
+    archived
+}
+
 Table Articles {
-    id int
+    id int [primary key, increment]
+    user_id int [ref: > Users.id]
+    title varchar(30) [not null]
+    content text [not null]
+    status Articles_statuses [default: Articles_statuses.craft]
+    created_at datetime
+    updated_at datetime
 }
