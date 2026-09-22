@@ -16,3 +16,7 @@ Table Users {
     created_at datetime
     updated_at datetime
 }
+
+Table Articles {
+    id int
+}
