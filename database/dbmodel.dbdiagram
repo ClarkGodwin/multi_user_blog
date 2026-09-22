@@ -76,6 +76,21 @@
         "secondSchemaName": "public",
         "secondRelation": "*",
         "checkPoints": []
+      },
+      {
+        "firstFieldNames": [
+          "id"
+        ],
+        "firstTableName": "Articles",
+        "firstSchemaName": "public",
+        "firstRelation": "1",
+        "secondFieldNames": [
+          "article_id"
+        ],
+        "secondTableName": "Articles_Categorie",
+        "secondSchemaName": "public",
+        "secondRelation": "*",
+        "checkPoints": []
       }
     ]
   },

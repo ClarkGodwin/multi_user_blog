@@ -13,8 +13,8 @@ Table Users {
     email_verified_at date
     password varchar(255) [not null]
     role User_roles [default: User_roles.reader]
-    created_at datetime
-    updated_at datetime
+    created_at datetime [default: `now()`]
+    updated_at datetime [default: `now()`]
 }
 
 Enum Articles_statuses{
@@ -25,36 +25,39 @@ Enum Articles_statuses{
 
 Table Articles {
     id int [primary key, increment]
-    user_id int [ref: > Users.id]
+    user_id int [ref: > Users.id, not null]
     title varchar(30) [not null]
     content text [not null]
     status Articles_statuses [default: Articles_statuses.craft]
-    created_at datetime
-    updated_at datetime
+    created_at datetime [default: `now()`]
+    updated_at datetime [default: `now()`]
 }
 
 Table Comments {
     id int [primary key, increment]
-    article_id int [ref: > Articles.id]
+    article_id int [ref: > Articles.id, not null]
     content text [not null]
-    created_at datetime
-    updated_at datetime
+    created_at datetime [default: `now()`]
+    updated_at datetime [default: `now()`]
 }
 
 Table Categories{
     id int [primary key, increment]
     name varchars(30) [not null]
-    created_at datetime
-    updated_at datetime
+    created_at datetime [default: `now()`]
+    updated_at datetime [default: `now()`]
 }
 
 Table Articles_Categorie {
     id int [primary key, increment]
+    article_id int [ref: > Articles.id, not null]
+    created_at datetime [default: `now()`]
+    updated_at datetime [default: `now()`]
 }
 
 Table Tags {
     id int [primary key, increment]
     name varchar(30) [not null]
-    created_at datetime
-    updated_at datetime
+    created_at datetime [default: `now()`]
+    updated_at datetime [default: `now()`]
 }
