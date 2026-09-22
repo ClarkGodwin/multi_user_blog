@@ -35,4 +35,6 @@ Table Articles {
 
 Table Comments {
     id int [primary key, increment]
+    article_id int [ref: > Articles.id]
+    content text [not null]
 }
