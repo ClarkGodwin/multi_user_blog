@@ -47,3 +47,7 @@ Table Categories{
     created_at datetime
     updated_at datetime
 }
+
+Table Tags {
+    id int [primary key, increment]
+}

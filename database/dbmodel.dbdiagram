@@ -30,6 +30,12 @@
         "schemaName": "public",
         "x": 48,
         "y": 626
+      },
+      {
+        "name": "Tags",
+        "schemaName": "public",
+        "x": 48,
+        "y": 836
       }
     ],
     "tableGroupCollapseStates": [],
