@@ -51,6 +51,7 @@ Table Categories{
 Table Articles_Categorie {
     id int [primary key, increment]
     article_id int [ref: > Articles.id, not null]
+    category_id int [ref: > Categories.id, not null]
     created_at datetime [default: `now()`]
     updated_at datetime [default: `now()`]
 }
