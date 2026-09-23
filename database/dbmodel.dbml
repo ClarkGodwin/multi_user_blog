@@ -26,7 +26,7 @@ Enum Articles_statuses{
 Table Articles {
     id int [primary key, increment]
     user_id int [ref: > Users.id, not null]
-    title varchar(30) [not null]
+    title varchar [not null]
     content text [not null]
     status Articles_statuses [default: Articles_statuses.craft]
     created_at datetime [default: `now()`]
