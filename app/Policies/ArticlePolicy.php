@@ -2,6 +2,7 @@
 
 namespace App\Policies;
 
+use App\Enums\UserRoleEnum;
 use App\Models\Article;
 use App\Models\User;
 use Illuminate\Auth\Access\Response;
@@ -21,7 +22,7 @@ class ArticlePolicy
      */
     public function view(User $user, Article $article): bool
     {
-        return false;
+        return $user->id === $article->user_id && $user->role == UserRoleEnum::Author->value;
     }
 
     /**
@@ -29,7 +30,7 @@ class ArticlePolicy
      */
     public function create(User $user): bool
     {
-        return false;
+        return $user->role == UserRoleEnum::Author->value;
     }
 
     /**
@@ -37,7 +38,7 @@ class ArticlePolicy
      */
     public function update(User $user, Article $article): bool
     {
-        return false;
+        return $user->id == $article->user_id && $user->role == UserRoleEnum::Author->value;
     }
 
     /**
@@ -45,7 +46,7 @@ class ArticlePolicy
      */
     public function delete(User $user, Article $article): bool
     {
-        return false;
+        return $user->id == $article->user_id && $user->role == UserRoleEnum::Author->value;
     }
 
     /**
