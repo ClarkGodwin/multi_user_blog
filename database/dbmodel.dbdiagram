@@ -10,44 +10,44 @@
       {
         "name": "Users",
         "schemaName": "public",
-        "x": 777.8313672961137,
-        "y": 634.7670137195548
+        "x": 0,
+        "y": 0
       },
       {
         "name": "Articles",
         "schemaName": "public",
-        "x": 255.6730832416336,
-        "y": 459.396391671972
+        "x": 288,
+        "y": 0
       },
       {
         "name": "Comments",
         "schemaName": "public",
-        "x": 738.2845775734829,
-        "y": 316.8250759006116
+        "x": 592,
+        "y": 0
       },
       {
         "name": "Categories",
         "schemaName": "public",
-        "x": -41.43428707939325,
-        "y": 203.74766597171515
+        "x": 848,
+        "y": 0
       },
       {
         "name": "Tags",
         "schemaName": "public",
-        "x": -28.530414940310806,
-        "y": 775.4185763360873
+        "x": 288,
+        "y": 304
       },
       {
         "name": "Articles_Categories",
         "schemaName": "public",
-        "x": 293.861352193979,
-        "y": 207.6974407830105
+        "x": 0,
+        "y": 368
       },
       {
         "name": "Articles_Tags",
         "schemaName": "public",
-        "x": -103.83662517978797,
-        "y": 520.6001520837144
+        "x": 592,
+        "y": 272
       }
     ],
     "tableGroupCollapseStates": [],
@@ -154,6 +154,36 @@
           "user_id"
         ],
         "secondTableName": "Comments",
+        "secondSchemaName": "public",
+        "secondRelation": "*",
+        "checkPoints": []
+      },
+      {
+        "firstFieldNames": [
+          "id"
+        ],
+        "firstTableName": "Users",
+        "firstSchemaName": "public",
+        "firstRelation": "1",
+        "secondFieldNames": [
+          "user_id"
+        ],
+        "secondTableName": "Articles_Categories",
+        "secondSchemaName": "public",
+        "secondRelation": "*",
+        "checkPoints": []
+      },
+      {
+        "firstFieldNames": [
+          "id"
+        ],
+        "firstTableName": "Users",
+        "firstSchemaName": "public",
+        "firstRelation": "1",
+        "secondFieldNames": [
+          "user_id"
+        ],
+        "secondTableName": "Articles_Tags",
         "secondSchemaName": "public",
         "secondRelation": "*",
         "checkPoints": []

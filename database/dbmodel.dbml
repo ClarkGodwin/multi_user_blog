@@ -52,6 +52,7 @@ Table Categories{
 
 Table Articles_Categories {
     id int [primary key, increment]
+    user_id int [ref: > Users.id, not null]
     article_id int [ref: > Articles.id, not null]
     category_id int [ref: > Categories.id, not null]
     created_at datetime [default: `now()`]
@@ -67,6 +68,7 @@ Table Tags {
 
 Table Articles_Tags {
     id int [primary key, increment]
+    user_id int [ref: > Users.id, not null]
     article_id int [ref: > Articles.id, not null]
     tag_id int [ref: > Tags.id, not null]
     created_at datetime [default: `now()`]
