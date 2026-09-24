@@ -2,9 +2,9 @@
 
 namespace App\Policies;
 
+use App\Enums\UserRoleEnum;
 use App\Models\Tag;
 use App\Models\User;
-use Illuminate\Auth\Access\Response;
 
 class TagPolicy
 {
@@ -29,7 +29,7 @@ class TagPolicy
      */
     public function create(User $user): bool
     {
-        return false;
+        return $user->role == UserRoleEnum::Author->value;
     }
 
     /**
@@ -37,7 +37,7 @@ class TagPolicy
      */
     public function update(User $user, Tag $tag): bool
     {
-        return false;
+        return $user->id == $tag->user_id;
     }
 
     /**
@@ -45,7 +45,7 @@ class TagPolicy
      */
     public function delete(User $user, Tag $tag): bool
     {
-        return false;
+        return $user->id == $tag->user_id;
     }
 
     /**
