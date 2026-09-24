@@ -2,14 +2,13 @@
 
 namespace Database\Factories;
 
-use App\Models\Category;
-use App\Models\User;
+use App\Models\Model;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends Factory<Category>
+ * @extends Factory<Model>
  */
-class CategoryFactory extends Factory
+class ArticleCategoryFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -19,8 +18,7 @@ class CategoryFactory extends Factory
     public function definition(): array
     {
         return [
-            "user_id" => User::inRandomOrder('id')->first()->id,
-            "name" => $this->faker->word(),
+            //
         ];
     }
 }
