@@ -13,6 +13,7 @@ Table Users {
     email_verified_at date
     password varchar(255) [not null]
     role User_roles [default: User_roles.reader]
+    avatar varchar(255)
     created_at datetime [default: `now()`]
     updated_at datetime [default: `now()`]
 }
