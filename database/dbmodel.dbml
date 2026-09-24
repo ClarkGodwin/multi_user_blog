@@ -36,6 +36,7 @@ Table Articles {
 
 Table Comments {
     id int [primary key, increment]
+    user_id int [ref: > Users.id, not null]
     article_id int [ref: > Articles.id, not null]
     content text [not null]
     created_at datetime [default: `now()`]

@@ -35,6 +35,10 @@ class User extends Authenticatable implements MustVerifyEmail
     /** @use HasFactory<UserFactory> */
     use HasFactory, Notifiable;
 
+    public function users() : HasMany {
+        return $this->hasMany(User::class);
+    }
+
     public function articles() : HasMany {
         return $this->hasMany(Article::class);
     }
