@@ -2,12 +2,11 @@
 
 namespace Database\Factories;
 
+use App\Models\Article;
 use App\Models\Model;
+use App\Models\Tag;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-/**
- * @extends Factory<Model>
- */
 class ArticleTagFactory extends Factory
 {
     /**
@@ -18,7 +17,8 @@ class ArticleTagFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            "article_id" => Article::inRandomOrder('id')->first()->id,
+            "tag_id" => Tag::inRandomOrder('id')->first()->id,
         ];
     }
 }
