@@ -45,7 +45,7 @@ class TagPolicy
      */
     public function delete(User $user, Tag $tag): bool
     {
-        return $user->id == $tag->user_id;
+        return $user->id == $tag->user_id || $user->role == UserRoleEnum::Admin->value;
     }
 
     /**
