@@ -3,7 +3,7 @@ export type User = {
     name: string;
     email: string;
     avatar?: string;
-    role: UserRole;
+    role: UserRoleEnum;
     email_verified_at: string | null;
     created_at: string;
     updated_at: string;
@@ -14,7 +14,7 @@ export type Auth = {
     user: User;
 };
 
-export enum UserRole {
+export enum UserRoleEnum {
     Reader = 'reader',
     Author = 'author',
     Admin = 'admin',
