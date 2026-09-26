@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { Head, Link } from '@inertiajs/vue3';
-import { articles } from '@/routes';
+import { articles, toAuthor } from '@/routes';
 import { User, UserRoleEnum } from '@/types';
 import Button from '../components/Button.vue';
 
@@ -33,7 +33,7 @@ defineProps<{
     >
         <div>It seems like you're trying to create articles without being registered as an author</div>
         <Button class="w-fit">
-            <Link href="#">Become an author</Link>
+            <Link :href="toAuthor()" method="post" class="hover:cursor-pointer">Become an author</Link>
         </Button>
     </div>
 
