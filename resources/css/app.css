@@ -49,6 +49,20 @@
 
     /*=======================CUSTOM SIZES=======================================*/
 
+    /*for the Articles/Articles component*/
+    --spacing-articles-notAnAuthor-mt : 100px;
+    --spacing-articles-notAnAuthor-gap : 10px;
+    --text-articles-notAnAuthor : 16px;
+
+
+
+
+
+
+
+
+
+
     --radius-lg: var(--radius);
     --radius-md: calc(var(--radius) - 2px);
     --radius-sm: calc(var(--radius) - 4px);
