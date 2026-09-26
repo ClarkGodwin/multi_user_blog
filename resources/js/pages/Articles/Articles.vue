@@ -29,10 +29,10 @@ defineProps<{
     <!-- for the part where the user has not yet an author role -->
     <div
     v-if="auth.user.role != UserRoleEnum.Author"
-    class="w-fit mx-auto flex flex-col mt-[100px]"
+    class="w-fit mx-auto flex flex-col items-center gap-articles-notAnAuthor-gap mt-articles-notAnAuthor-mt text-articles-notAnAuthor"
     >
         <div>It seems like you're trying to create articles without being registered as an author</div>
-        <Button class="w-fit">Become an author</Button>
+        <Button class="w-fit text-articles-notAnAuthor">Become an author</Button>
     </div>
 
     <div v-else>
