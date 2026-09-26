@@ -50,9 +50,8 @@
     /*=======================CUSTOM SIZES=======================================*/
 
     /*for the Articles/Articles component*/
-    --spacing-articles-notAnAuthor-mt : 100px;
-    --spacing-articles-notAnAuthor-gap : 10px;
-    --text-articles-notAnAuthor : 12px;
+    --spacing-articles-notAnAuthor-gap : clamp(0.625rem, 0.44rem + 0.926vw, 1.25rem);
+    --text-articles-notAnAuthor : clamp(0.75rem, 0.676rem + 0.37vw, 1rem);
 
 
 
