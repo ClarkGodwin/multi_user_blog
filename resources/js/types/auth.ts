@@ -3,6 +3,7 @@ export type User = {
     name: string;
     email: string;
     avatar?: string;
+    role: UserRole;
     email_verified_at: string | null;
     created_at: string;
     updated_at: string;
@@ -12,3 +13,11 @@ export type User = {
 export type Auth = {
     user: User;
 };
+
+export enum UserRole {
+    Reader = 'reader',
+    Author = 'author',
+    Admin = 'admin',
+    Suspended = 'suspended',
+    Banned = 'banned',
+}

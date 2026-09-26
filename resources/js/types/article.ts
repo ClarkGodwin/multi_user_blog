@@ -5,3 +5,4 @@ export type Article = {
     content : string;
     status : string;
 }
+
