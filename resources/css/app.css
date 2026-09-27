@@ -53,6 +53,13 @@
     --spacing-articles-notAnAuthor-gap : clamp(0.625rem, 0.44rem + 0.926vw, 1.25rem);
     --text-articles-notAnAuthor : clamp(0.75rem, 0.676rem + 0.37vw, 1rem);
 
+    /*for the Toast component*/
+    --spacing-toast-left-position: clamp(0.625rem,-2.894rem + 17.593vw,12.5rem);
+    --spacing-toast-top-position: clamp(1.25rem, 1.25rem + 0vw, 1.25rem);
+    --spacing-toast-p: clamp(0.313rem, 0.183rem + 0.648vw, 0.75rem);
+    --spacing-toast-gap: clamp(0.313rem, 0.183rem + 0.648vw, 0.75rem);
+    --text-toast: clamp(0.75rem, 0.676rem + 0.37vw, 1rem);
+
 
 
 
