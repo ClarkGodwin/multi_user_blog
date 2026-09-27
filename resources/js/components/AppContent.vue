@@ -2,6 +2,7 @@
 import { computed } from 'vue';
 import { SidebarInset } from '@/components/ui/sidebar';
 import type { AppVariant } from '@/types';
+import Toast from '@/pages/components/Toast.vue';
 
 type Props = {
     variant?: AppVariant;
@@ -16,6 +17,7 @@ const className = computed(() => props.class);
 
 <template>
     <SidebarInset v-if="props.variant === 'sidebar'" :class="className" class="p-3">
+        <Toast/>
         <slot />
     </SidebarInset>
     <main
