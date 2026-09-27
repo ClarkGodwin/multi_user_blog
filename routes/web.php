@@ -2,6 +2,7 @@
 
 use App\Enums\UserRoleEnum;
 use Illuminate\Support\Facades\Route;
+use Inertia\Inertia;
 
 Route::inertia('/', 'Welcome')->name('home');
 
@@ -16,6 +17,17 @@ Route::middleware(['auth', 'verified'])->group(function () {
         return redirect()->back()->with('success',"Congratulations, you're now an author");
 
     })->middleware('password.confirm')->name('toAuthor');
+
+    Route::post('toReader', function () {
+        $user = auth()->user();
+        $user->role = UserRoleEnum::Reader->value;
+        $user->save();
+
+        Inertia::flash('success',"Congratulations, you're now an reader");
+
+        return redirect()->back();
+
+    })->middleware('password.confirm')->name('toReader');
 
     Route::inertia('articles','Articles/Articles')->name('articles');
     Route::inertia('article/create','Articles/CreateArticleForm')->name('articleCreate');
