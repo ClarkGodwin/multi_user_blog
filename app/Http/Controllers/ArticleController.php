@@ -48,6 +48,26 @@ class ArticleController extends Controller
     }
 
     /**
+     *It renders the Craft component with, as data, the paginated craft articles created by the authenticated user who has to be an author
+     * @return \Inertia\Response
+     */
+    public function craft() {
+        $articles = $this->articlesByStatus(ArticleStatusEnum::Craft->value);
+
+        return Inertia::render("Articles/Craft", compact("articles"));
+    }
+
+    /**
+     *It renders the Archived component with, as data, the paginated Archived articles created by the authenticated user who has to be an author
+     * @return \Inertia\Response
+     */
+    public function archived() {
+        $articles = $this->articlesByStatus(ArticleStatusEnum::Archived->value);
+
+        return Inertia::render("Articles/Archived", compact("articles"));
+    }
+
+    /**
      * Show the form for creating a new resource.
      */
     public function create()
