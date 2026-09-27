@@ -1,17 +1,17 @@
 <script setup lang="ts">
 import { Head, Link } from '@inertiajs/vue3';
-import { articles } from '@/routes';
+import {  } from '@/routes';
 
-defineOptions({
-    layout: {
-        breadcrumbs: [
-            {
-                title: 'Articles',
-                href: articles(),
-            },
-        ],
-    },
-});
+// defineOptions({
+//     layout: {
+//         breadcrumbs: [
+//             {
+//                 title: 'Articles',
+//                 href: articles(),
+//             },
+//         ],
+//     },
+// });
 </script>
 
 <template>

@@ -21,7 +21,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     })->middleware('password.confirm')->name('toAuthor');
 
-    Route::get('articles', [ArticleController::class, 'viewArticlesCreatedByTheAuthenticatedAuthor'])->name('articles');
+    Route::get('published', [ArticleController::class, ''])->name('articlesPublished');
+    Route::get('published', [ArticleController::class, ''])->name('articlesPublished');
+    Route::get('published', [ArticleController::class, ''])->name('articlesPublished');
 
     Route::inertia('article/create','Articles/CreateArticleForm')->name('articleCreate');
 });

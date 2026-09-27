@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { Head, Link } from '@inertiajs/vue3';
-import { articles as toPageArticles, toAuthor, articleCreate } from '@/routes';
+import { articlesPublished, toAuthor, articleCreate } from '@/routes';
 import { User, UserRoleEnum } from '@/types';
 import Button from '../components/Button.vue';
 import type { ArticlesPaginated } from '@/types/article.js';
@@ -9,8 +9,8 @@ defineOptions({
     layout: {
         breadcrumbs: [
             {
-                title: 'Articles',
-                href: toPageArticles(),
+                title: 'Published',
+                href: articlesPublished(),
             },
         ],
     },

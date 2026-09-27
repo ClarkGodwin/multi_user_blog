@@ -14,7 +14,7 @@ import {
     SidebarMenuButton,
     SidebarMenuItem,
 } from '@/components/ui/sidebar';
-import { articles, dashboard } from '@/routes';
+import { articlesPublished, dashboard } from '@/routes';
 import type { NavItem } from '@/types';
 
 const mainNavItems: NavItem[] = [
@@ -24,8 +24,8 @@ const mainNavItems: NavItem[] = [
         icon: LayoutGrid,
     },
     {
-        title: 'Articles',
-        href: articles(),
+        title: 'Published',
+        href: articlesPublished(),
         icon: NewspaperIcon,
     },
 ];
