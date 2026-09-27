@@ -14,7 +14,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
         $user->role = UserRoleEnum::Author->value;
         $user->save();
 
-        return redirect()->back()->with('success',"Congratulations, you're now an author");
+        Inertia::flash('status',"Congratulations, you're now an author");
+
+        return redirect()->back();
 
     })->middleware('password.confirm')->name('toAuthor');
 

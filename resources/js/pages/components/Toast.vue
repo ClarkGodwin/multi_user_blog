@@ -21,15 +21,21 @@ watch( //to watch if any flash message was sent to one of the components with th
             background.value = 'bg-frosted'
             toastText.value = flash.success
             successVisible.value = true
+            statusVisible.value = false
+            errorVisible.value = false
         }
         else if (flash.error) {
             background.value = 'bg-red-500'
             toastText.value = flash.error
+            successVisible.value = false
             errorVisible.value = true
+            statusVisible.value = false
         }
         else if (flash.status) {
             background.value = 'bg-yellow-500'
             toastText.value = flash.status
+            successVisible.value = false
+            errorVisible.value = false
             statusVisible.value = true
         }
         toastVisible.value = true
