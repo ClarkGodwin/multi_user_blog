@@ -3,7 +3,7 @@ import { Head, Link } from '@inertiajs/vue3';
 import { articles as toPageArticles, toAuthor } from '@/routes';
 import { User, UserRoleEnum } from '@/types';
 import Button from '../components/Button.vue';
-import { Article } from '@/types/article.js';
+import type { ArticlesPaginated } from '@/types/article.js';
 
 defineOptions({
     layout: {
@@ -20,7 +20,7 @@ defineProps<{
     auth: {
         user: User
     }
-    articles: Article[]
+    articles: ArticlesPaginated
 }>()
 </script>
 
@@ -41,7 +41,7 @@ defineProps<{
 
     <!-- for the part where the user has an author role -->
     <div v-else>
-        <div v-if="articles.length == 0">
+        <!-- <div v-if="articles.length == 0">
             It seems like you've never created an article
         </div>
 
@@ -51,6 +51,6 @@ defineProps<{
             :key="article.id"
             >
             </div>
-        </div>
+        </div> -->
     </div>
 </template>
