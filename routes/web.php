@@ -1,6 +1,7 @@
 <?php
 
 use App\Enums\UserRoleEnum;
+use App\Http\Controllers\ArticleController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -20,18 +21,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     })->middleware('password.confirm')->name('toAuthor');
 
-    Route::post('toReader', function () {
-        $user = auth()->user();
-        $user->role = UserRoleEnum::Reader->value;
-        $user->save();
+    Route::get('articles', [ArticleController::class, 'viewArticlesCreatedByTheAuthenticatedAuthor'])->name('articles');
 
-        Inertia::flash('success',"Congratulations, you're now an reader");
-
-        return redirect()->back();
-
-    })->middleware('password.confirm')->name('toReader');
-
-    Route::inertia('articles','Articles/Articles')->name('articles');
     Route::inertia('article/create','Articles/CreateArticleForm')->name('articleCreate');
 });
 

@@ -1,15 +1,16 @@
 <script setup lang="ts">
 import { Head, Link } from '@inertiajs/vue3';
-import { articles, toAuthor, toReader } from '@/routes';
+import { articles as toPageArticles, toAuthor } from '@/routes';
 import { User, UserRoleEnum } from '@/types';
 import Button from '../components/Button.vue';
+import { Article } from '@/types/article.js';
 
 defineOptions({
     layout: {
         breadcrumbs: [
             {
                 title: 'Articles',
-                href: articles(),
+                href: toPageArticles(),
             },
         ],
     },
@@ -19,6 +20,7 @@ defineProps<{
     auth: {
         user: User
     }
+    articles: Article[]
 }>()
 </script>
 
@@ -39,11 +41,16 @@ defineProps<{
 
     <!-- for the part where the user has an author role -->
     <div v-else>
-        you're an author now
-        <Link :href="toReader()" method="post" class="">
-            <Button class="w-fit hover:cursor-pointer">
-                Become a reader
-            </Button>
-        </Link>
+        <div v-if="articles.length == 0">
+            It seems like you've never created an article
+        </div>
+
+        <div v-else>
+            <div
+            v-for="article in articles"
+            :key="article.id"
+            >
+            </div>
+        </div>
     </div>
 </template>

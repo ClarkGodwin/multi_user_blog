@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreArticleRequest;
 use App\Http\Requests\UpdateArticleRequest;
 use App\Models\Article;
+use Inertia\Inertia;
 
 class ArticleController extends Controller
 {
@@ -14,6 +15,21 @@ class ArticleController extends Controller
     public function index()
     {
         //
+    }
+
+    public function viewArticlesCreatedByTheAuthenticatedAuthor() {
+        $articles = Article::orderBy("updated_at","desc")
+        ->where("user_id", auth()->user()->id)
+        ->select([
+            "id",
+            "title",
+            "content",
+            "created_at",
+            "updated_at",
+        ])
+        ->paginate(10);
+
+        return Inertia::render("Articles/Articles", compact("articles"));
     }
 
     /**
