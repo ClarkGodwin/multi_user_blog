@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { Head, Link } from '@inertiajs/vue3';
-import { articles as toPageArticles, toAuthor } from '@/routes';
+import { articles as toPageArticles, toAuthor, articleCreate } from '@/routes';
 import { User, UserRoleEnum } from '@/types';
 import Button from '../components/Button.vue';
 import type { ArticlesPaginated } from '@/types/article.js';
@@ -46,7 +46,7 @@ defineProps<{
             <div>
                 It seems like you've never created an article
             </div>
-            <Link :href="toAuthor()" method="post">
+            <Link :href="articleCreate()">
                 <Button class="w-fit hover:cursor-pointer">
                     Create an article
                 </Button>
