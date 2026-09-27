@@ -40,17 +40,23 @@ defineProps<{
     </div>
 
     <!-- for the part where the user has an author role -->
-    <div v-else>
-        <!-- <div v-if="articles.length == 0">
-            It seems like you've never created an article
+    <div v-else class="min-h-[90%]">
+        <div v-if="articles.data.length == 0"
+            class="w-fit mx-auto flex flex-col justify-center items-center gap-articles-notAnAuthor-gap min-h-[90%] text-articles-notAnAuthor">
+            <div>
+                It seems like you've never created an article
+            </div>
+            <Link :href="toAuthor()" method="post">
+                <Button class="w-fit hover:cursor-pointer">
+                    Create an article
+                </Button>
+            </Link>
         </div>
 
         <div v-else>
-            <div
-            v-for="article in articles"
-            :key="article.id"
-            >
+            <div v-for="article in articles.data" :key="article.id">
+                {{ article.title }}
             </div>
-        </div> -->
+        </div>
     </div>
 </template>
