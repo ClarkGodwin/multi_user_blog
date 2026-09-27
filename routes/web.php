@@ -21,9 +21,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     })->middleware('password.confirm')->name('toAuthor');
 
-    Route::get('published', [ArticleController::class, ''])->name('articlesPublished');
-    Route::get('published', [ArticleController::class, ''])->name('articlesPublished');
-    Route::get('published', [ArticleController::class, ''])->name('articlesPublished');
+    Route::get('published', [ArticleController::class, 'published'])->name('articlesPublished');
+    Route::get('craft', [ArticleController::class, 'craft'])->name('articlesCraft');
+    Route::get('archived', [ArticleController::class, 'archived'])->name('articlesArchived');
 
     Route::inertia('article/create','Articles/CreateArticleForm')->name('articleCreate');
 });
