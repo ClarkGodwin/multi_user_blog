@@ -3,11 +3,24 @@ import { LucideIcon } from "@lucide/vue"
 export type InputItem = {
     id : number
     label? : string
-    type : InputType
+    type : InputType | TextareaType | SelectType
     name : string
     value? : string | number
     required : boolean
     icon? : LucideIcon
 }
 
-export type InputType = 'text' | 'textarea' | 'email' | 'password' | 'hidden' | 'number' | 'select'
+export type InputType = {
+    kind : 'inputType'
+    option : 'text' | 'email' | 'password' | 'hidden' | 'number'
+}
+
+export type TextareaType = {
+    kind : 'textareaType'
+    option :'textarea'
+}
+
+export type SelectType = {
+    kind : 'SelectType'
+    option : 'select'
+}
