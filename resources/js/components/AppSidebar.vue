@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { Link } from '@inertiajs/vue3';
-import { Archive, BookOpen, FileBox, FolderGit2, LayoutGrid, NewspaperIcon } from '@lucide/vue';
+import { Archive, BookOpen, FileBox, FolderGit2, LayoutGrid, NewspaperIcon, PencilLine } from '@lucide/vue';
 import AppLogo from '@/components/AppLogo.vue';
 import NavFooter from '@/components/NavFooter.vue';
 import NavMain from '@/components/NavMain.vue';
@@ -14,7 +14,7 @@ import {
     SidebarMenuButton,
     SidebarMenuItem,
 } from '@/components/ui/sidebar';
-import { articlesArchived, articlesCraft, articlesPublished, dashboard } from '@/routes';
+import { articleCreate, articlesArchived, articlesCraft, articlesPublished, dashboard } from '@/routes';
 import type { NavItem } from '@/types';
 
 const mainNavItems: NavItem[] = [
@@ -37,6 +37,11 @@ const mainNavItems: NavItem[] = [
         title: 'Archived',
         href: articlesArchived(),
         icon: Archive,
+    },
+    {
+        title: 'Create',
+        href: articleCreate(),
+        icon: PencilLine,
     },
 ];
 
