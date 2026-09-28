@@ -22,7 +22,7 @@ defineProps<{
         <!-- <label v-if="inputItem.label" :for="inputItem.label">{{ inputItem.label }}</label> -->
         <!-- <Input/> -->
         <InputGroup>
-            <InputGroupInput v-if="inputItem.label" :placeholder='inputItem.label' />
+            <InputGroupInput v-if="inputItem.label" :placeholder='inputItem.label' :required="inputItem.required"/>
             <InputGroupAddon>
                 <component v-if="inputItem.icon" :is="inputItem.icon" />
             </InputGroupAddon>
