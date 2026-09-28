@@ -1,16 +1,17 @@
 <script setup lang="ts">
 import { Head, Link } from '@inertiajs/vue3';
-import { toAuthor, articlesCraft, articleCreateForm } from '@/routes';
+import { toAuthor } from '@/routes';
 import { User, UserRoleEnum } from '@/types';
 import Button from '../components/Button.vue';
 import type { ArticlesPaginated } from '@/types/article.js';
+import { craft, create } from '@/routes/article/index.js';
 
 defineOptions({
     layout: {
         breadcrumbs: [
             {
                 title: 'Craft',
-                href: articlesCraft(),
+                href: craft(),
             },
         ],
     },
@@ -46,7 +47,7 @@ defineProps<{
             <div>
                 It seems like you've never created an article
             </div>
-            <Link :href="articleCreateForm()">
+            <Link :href="create()">
                 <Button class="w-fit hover:cursor-pointer">
                     Create an article
                 </Button>

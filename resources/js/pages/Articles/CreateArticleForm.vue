@@ -1,15 +1,15 @@
 <script setup lang="ts">
-import { Head, Link } from '@inertiajs/vue3';
-import { articleCreate, articleCreateForm } from '@/routes';
+import { Head, } from '@inertiajs/vue3';
 import { InputItem } from '@/types/inputItem';
 import Form from '../components/Form.vue';
+import { create, store } from '@/routes/article/index.js';
 
 defineOptions({
     layout: {
         breadcrumbs: [
             {
                 title: 'Create an article',
-                href: articleCreateForm(),
+                href: create,
             },
         ],
     },
@@ -43,5 +43,5 @@ const inputItems : InputItem[] = [
 
 <template>
     <Head title="Create an article" />
-    <Form formTitle="Create an article" :action="createArticle()" :input-items="inputItems"/>
+    <Form formTitle="Create an article" :action="store()" :input-items="inputItems"/>
 </template>

@@ -21,12 +21,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     })->middleware('password.confirm')->name('toAuthor');
 
-    Route::get('published', [ArticleController::class, 'published'])->name('articlesPublished');
-    Route::get('craft', [ArticleController::class, 'craft'])->name('articlesCraft');
-    Route::get('archived', [ArticleController::class, 'archived'])->name('articlesArchived');
+    Route::get('published', [ArticleController::class, 'published'])->name('article.published');
+    Route::get('craft', [ArticleController::class, 'craft'])->name('article.craft');
+    Route::get('archived', [ArticleController::class, 'archived'])->name('article.archived');
 
-    Route::inertia('article/create','Articles/CreateArticleForm')->name('articleCreateForm');
-    Route::post('article/create', [ArticleController::class, 'craft'])->name('articleCreate');
+    Route::get('article/create',[ArticleController::class, 'create'])->name('article.create');
+    Route::post('article/create', [ArticleController::class, 'store'])->name('article.store');
 });
 
 require __DIR__.'/settings.php';
