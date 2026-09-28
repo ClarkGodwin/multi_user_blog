@@ -9,5 +9,8 @@ defineProps<{
 </script>
 
 <template>
-    <Input/>
+    <div>
+        <label v-if="inputItem.label" :for="inputItem.label">{{ inputItem.label }}</label>
+        <Input/>
+    </div>
 </template>

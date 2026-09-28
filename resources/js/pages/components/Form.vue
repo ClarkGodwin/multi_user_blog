@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { InputItem } from '@/types/input.js';
+import { InputItem } from '@/types/input';
 import { Form } from '@inertiajs/vue3';
 import Input from './Input.vue';
 import { RouteDefinition } from '@/wayfinder/index.js';
@@ -15,8 +15,10 @@ defineProps<{
 </script>
 
 <template>
-    <Form :action="action" method="post" #default="{ errors:formErrors }">
-        <h2>
+    <Form :action="action" method="post" #default="{ errors:formErrors }"
+    class="flex flex-col justify-center gap-[10px] min-h-[80%] w-[650px] mx-auto"
+    >
+        <h2 class="text-center font-bold text-[25px] text-dark-surface-300">
             {{ formTitle }}
         </h2>
 

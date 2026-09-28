@@ -1,7 +1,7 @@
 export type InputItem = {
     id : number
     label? : string
-    type : string
+    type : InputType
     name : string
     value? : string | number
     required : boolean
