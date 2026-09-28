@@ -3,7 +3,7 @@ import { Head, } from '@inertiajs/vue3';
 import { InputItem } from '@/types/input.js';
 import Form from '../components/Form.vue';
 import { create, store } from '@/routes/article/index.js';
-import { TypeOutline } from '@lucide/vue';
+import { FileTypeCorner, SquareText, Tag, TypeOutline } from '@lucide/vue';
 
 defineOptions({
     layout: {
@@ -22,31 +22,33 @@ const inputItems : InputItem[] = [
         label : 'Title',
         type : {
             kind : 'InputType',
-            option : 'text'
+            type : 'text'
         },
         name : 'title',
         required : true,
-        icon : TypeOutline
+        icon : FileTypeCorner
     },
     {
         id : 2,
         label : 'Content',
         type : {
             kind : 'TextareaType',
-            option : 'textarea'
+            type : 'textarea'
         },
         name : 'content',
-        required : true
+        required : true,
+        icon : SquareText
     },
     {
         id : 3,
         label : 'Save to Published or Craft',
         type : {
             kind: 'SelectType',
-            option: 'select'
+            type: 'select'
         },
         name : 'status',
-        required : true
+        required : true,
+        icon: Tag
     },
 ]
 

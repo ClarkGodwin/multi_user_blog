@@ -12,15 +12,16 @@ export type InputItem = {
 
 export type InputType = {
     kind : 'InputType'
-    option : 'text' | 'email' | 'password' | 'hidden' | 'number'
+    type : 'text' | 'email' | 'password' | 'hidden' | 'number'
 }
 
 export type TextareaType = {
     kind : 'TextareaType'
-    option :'textarea'
+    type :'textarea'
 }
 
 export type SelectType = {
     kind : 'SelectType'
-    option : 'select'
+    type : 'select'
+    options : string[]
 }

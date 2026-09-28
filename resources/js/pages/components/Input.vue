@@ -21,12 +21,10 @@ defineProps<{
 
 <template>
     <div>
-        <!-- <label v-if="inputItem.label" :for="inputItem.label">{{ inputItem.label }}</label> -->
-        <!-- <Input/> -->
         <InputGroup>
             <InputGroupInput v-if="inputItem.type.kind == 'InputType'" :placeholder='inputItem.label' :required="inputItem.required"/>
             <InputGroupTextarea v-if="inputItem.type.kind == 'TextareaType'" :placeholder="inputItem.label" :required="inputItem.required"></InputGroupTextarea>
-            <InputGroupAddon>
+            <InputGroupAddon :align="inputItem.type.kind == 'TextareaType' ? 'block-start' : 'inline-start'">
                 <component v-if="inputItem.icon" :is="inputItem.icon" />
             </InputGroupAddon>
         </InputGroup>
