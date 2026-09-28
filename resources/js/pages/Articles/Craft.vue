@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { Head, Link } from '@inertiajs/vue3';
-import { articlesPublished, toAuthor, articleCreate } from '@/routes';
+import { toAuthor, articleCreate, articlesCraft } from '@/routes';
 import { User, UserRoleEnum } from '@/types';
 import Button from '../components/Button.vue';
 import type { ArticlesPaginated } from '@/types/article.js';
@@ -9,8 +9,8 @@ defineOptions({
     layout: {
         breadcrumbs: [
             {
-                title: 'Published',
-                href: articlesPublished(),
+                title: 'Craft',
+                href: articlesCraft(),
             },
         ],
     },
