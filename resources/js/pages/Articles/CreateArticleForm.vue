@@ -3,6 +3,7 @@ import { Head, } from '@inertiajs/vue3';
 import { InputItem } from '@/types/input.js';
 import Form from '../components/Form.vue';
 import { create, store } from '@/routes/article/index.js';
+import { TypeOutline } from '@lucide/vue';
 
 defineOptions({
     layout: {
@@ -21,7 +22,8 @@ const inputItems : InputItem[] = [
         label : 'Title',
         type : 'text',
         name : 'title',
-        required : true
+        required : true,
+        icon : TypeOutline
     },
     {
         id : 2,
