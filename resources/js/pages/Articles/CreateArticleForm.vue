@@ -21,7 +21,8 @@ const inputItems : InputItem[] = [
         id : 1,
         label : 'Title',
         type : {
-            kind : ''
+            kind : 'InputType',
+            option : 'text'
         },
         name : 'title',
         required : true,
@@ -30,14 +31,20 @@ const inputItems : InputItem[] = [
     {
         id : 2,
         label : 'Content',
-        type : 'text',
+        type : {
+            kind : 'TextareaType',
+            option : 'textarea'
+        },
         name : 'content',
         required : true
     },
     {
         id : 3,
         label : 'Save to Published or Craft',
-        type : 'text',
+        type : {
+            kind: 'SelectType',
+            option: 'select'
+        },
         name : 'status',
         required : true
     },
