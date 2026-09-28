@@ -20,7 +20,9 @@ const inputItems : InputItem[] = [
     {
         id : 1,
         label : 'Title',
-        type : 'text',
+        type : {
+            kind : ''
+        },
         name : 'title',
         required : true,
         icon : TypeOutline

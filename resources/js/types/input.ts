@@ -11,12 +11,12 @@ export type InputItem = {
 }
 
 export type InputType = {
-    kind : 'inputType'
+    kind : 'InputType'
     option : 'text' | 'email' | 'password' | 'hidden' | 'number'
 }
 
 export type TextareaType = {
-    kind : 'textareaType'
+    kind : 'TextareaType'
     option :'textarea'
 }
 
