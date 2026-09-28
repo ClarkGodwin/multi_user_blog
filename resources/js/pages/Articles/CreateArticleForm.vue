@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { Head, } from '@inertiajs/vue3';
-import { InputItem } from '@/types/inputItem';
+import { InputItem } from '@/types/input.js';
 import Form from '../components/Form.vue';
 import { create, store } from '@/routes/article/index.js';
 
@@ -26,14 +26,14 @@ const inputItems : InputItem[] = [
     {
         id : 2,
         label : 'Content',
-        type : 'textarea',
+        type : 'text',
         name : 'content',
         required : true
     },
     {
         id : 3,
         label : 'Save to Published or Craft',
-        type : 'select',
+        type : 'text',
         name : 'status',
         required : true
     },

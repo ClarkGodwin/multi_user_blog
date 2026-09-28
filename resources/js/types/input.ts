@@ -6,3 +6,5 @@ export type InputItem = {
     value? : string | number
     required : boolean
 }
+
+export type InputType = 'text' | 'textarea' | 'email' | 'password' | 'hidden' | 'number' | 'select'

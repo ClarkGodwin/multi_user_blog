@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { Input } from '@/components/ui/input';
-import { InputItem } from '@/types/inputItem';
+import { InputItem } from '@/types/input';
 
 defineProps<{
     inputItem : InputItem

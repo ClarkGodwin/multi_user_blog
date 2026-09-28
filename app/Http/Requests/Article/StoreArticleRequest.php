@@ -12,7 +12,8 @@ class StoreArticleRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return $this->user()->can("create");
+        return true;
+        // return $this->user()->can("create");
     }
 
     /**
@@ -23,9 +24,7 @@ class StoreArticleRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "title"=> [
-                "required"
-            ],
+            "title"=> "required",
         ];
     }
 }

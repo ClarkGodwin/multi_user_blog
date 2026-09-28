@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { InputItem } from '@/types/inputItem';
+import { InputItem } from '@/types/input.js';
 import { Form } from '@inertiajs/vue3';
 import Input from './Input.vue';
 import { RouteDefinition } from '@/wayfinder/index.js';
