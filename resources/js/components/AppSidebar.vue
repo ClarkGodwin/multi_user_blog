@@ -14,7 +14,7 @@ import {
     SidebarMenuButton,
     SidebarMenuItem,
 } from '@/components/ui/sidebar';
-import { articleCreate, articlesArchived, articlesCraft, articlesPublished, dashboard } from '@/routes';
+import { articleCreateForm, articlesArchived, articlesCraft, articlesPublished, dashboard } from '@/routes';
 import type { NavItem } from '@/types';
 
 const mainNavItems: NavItem[] = [
@@ -40,7 +40,7 @@ const mainNavItems: NavItem[] = [
     },
     {
         title: 'Create',
-        href: articleCreate(),
+        href: articleCreateForm(),
         icon: PencilLine,
     },
 ];

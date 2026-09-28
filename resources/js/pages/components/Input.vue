@@ -1,3 +1,13 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { Input } from '@/components/ui/input';
+import { InputItem } from '@/types/inputItem';
 
-<template></template>
+defineProps<{
+    inputItem : InputItem
+    error? : string
+}>()
+</script>
+
+<template>
+    <Input/>
+</template>

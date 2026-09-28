@@ -25,7 +25,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('craft', [ArticleController::class, 'craft'])->name('articlesCraft');
     Route::get('archived', [ArticleController::class, 'archived'])->name('articlesArchived');
 
-    Route::inertia('article/create','Articles/CreateArticleForm')->name('articleCreate');
+    Route::inertia('article/create','Articles/CreateArticleForm')->name('articleCreateForm');
+    Route::post('article/create', [ArticleController::class, 'craft'])->name('articleCreate');
 });
 
 require __DIR__.'/settings.php';
