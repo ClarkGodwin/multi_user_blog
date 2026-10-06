@@ -38,4 +38,7 @@ defineProps<{
     </Select>
 
     <Textarea v-else :placeholder="inputItem.label" :required="inputItem.required"/>
+
+    <div v-if="error" class="text-red-500">{{ error }}</div>
+
 </template>

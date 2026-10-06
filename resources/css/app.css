@@ -60,6 +60,9 @@
     --spacing-toast-gap: clamp(0.313rem, 0.183rem + 0.648vw, 0.75rem);
     --text-toast: clamp(0.75rem, 0.676rem + 0.37vw, 1rem);
 
+    /*for the custom Input component*/
+    --width-form: clamp(18.125rem,11.458rem + 33.333vw,40.625rem);
+
 
 
 
