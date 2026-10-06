@@ -44,7 +44,8 @@ const inputItems : InputItem[] = [
         label : 'Save to Published or Craft',
         type : {
             kind: 'SelectType',
-            type: 'select'
+            type: 'select',
+            options: ['Published', 'Craft']
         },
         name : 'status',
         required : true,
