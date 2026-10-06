@@ -22,7 +22,7 @@ defineProps<{
 </script>
 
 <template>
-    <Input v-if="inputItem.type.kind == 'InputType'" :placeholder="inputItem.label" :required="inputItem.required"/>
+    <Input v-if="inputItem.type.kind == 'InputType'" :type="inputItem.type.type" :placeholder="inputItem.label" :required="inputItem.required"/>
 
     <Select v-else-if="inputItem.type.kind == 'SelectType'" :required="inputItem.required">
         <SelectTrigger class="w-full">
