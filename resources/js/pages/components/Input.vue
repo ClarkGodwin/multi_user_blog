@@ -22,9 +22,9 @@ defineProps<{
 </script>
 
 <template>
-    <Input v-if="inputItem.type.kind == 'InputType'" :placeholder="inputItem.label" />
+    <Input v-if="inputItem.type.kind == 'InputType'" :placeholder="inputItem.label" :required="inputItem.required"/>
 
-    <Select v-else-if="inputItem.type.kind == 'SelectType'">
+    <Select v-else-if="inputItem.type.kind == 'SelectType'" :required="inputItem.required">
         <SelectTrigger class="w-full">
             <SelectValue :placeholder="inputItem.label" />
         </SelectTrigger>
@@ -37,5 +37,5 @@ defineProps<{
         </SelectContent>
     </Select>
 
-    <Textarea v-else :placeholder="inputItem.label"/>
+    <Textarea v-else :placeholder="inputItem.label" :required="inputItem.required"/>
 </template>
