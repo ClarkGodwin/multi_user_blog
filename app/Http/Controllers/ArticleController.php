@@ -7,6 +7,7 @@ use App\Http\Requests\Article\StoreArticleRequest;
 use App\Http\Requests\Article\UpdateArticleRequest;
 use App\Models\Article;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -89,7 +90,11 @@ class ArticleController extends Controller
      */
     public function store(StoreArticleRequest $request)
     {
-        dd($request->all());
+        $request->user()->articles()->create($request->validated());
+
+        Inertia::flash('success', 'The article was successfully created');
+
+        return redirect()->route('dashboard');
     }
 
     /**

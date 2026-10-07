@@ -19,7 +19,7 @@ use Illuminate\Support\Carbon;
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  */
-#[Fillable(['title', 'content'])]
+#[Fillable(['title', 'content', 'status'])]
 class Article extends Model
 {
     /** @use HasFactory<\Database\Factories\ArticleFactory> */

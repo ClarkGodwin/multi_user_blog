@@ -26,15 +26,16 @@ class StoreArticleRequest extends FormRequest
     {
         return [
             "title"=> [
-                'alpha_num',
+                'string',
                 'required',
                 'min:3',
                 'max:100',
             ],
 
             "content" => [
-                'alpha_num',
+                'string',
                 'required',
+                'min:10'
             ],
 
             "status" => [
