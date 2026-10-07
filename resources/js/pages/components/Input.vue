@@ -24,7 +24,7 @@ defineProps<{
 <template>
     <Input v-if="inputItem.type.kind == 'InputType'" :type="inputItem.type.type" :name="inputItem.name" :placeholder="inputItem.label" :required="inputItem.required"/>
 
-    <Select v-else-if="inputItem.type.kind == 'SelectType'" :name="inputItem.name" :required="inputItem.required" class="w-[400px]">
+    <Select v-else-if="inputItem.type.kind == 'SelectType'" :name="inputItem.name"  :required="inputItem.required" class="w-full h-full absolute inset-0">
         <SelectTrigger class="w-full">
             <SelectValue :placeholder="inputItem.label" />
         </SelectTrigger>

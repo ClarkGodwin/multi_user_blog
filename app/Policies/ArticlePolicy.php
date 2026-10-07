@@ -30,7 +30,7 @@ class ArticlePolicy
      */
     public function create(User $user): bool
     {
-        return $user->role == UserRoleEnum::Author->value;
+        return $user->role == UserRoleEnum::Author->value || $user->role == UserRoleEnum::Admin->value;
     }
 
     /**

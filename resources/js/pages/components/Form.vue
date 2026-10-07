@@ -19,13 +19,15 @@ defineProps<{
     :action="action"
     method="post"
     #default="{ errors: formErrors }"
-    class="flex flex-col justify-center gap-[10px] min-h-[70%] w-form mx-auto">
+    class="flex flex-col justify-center gap-[10px] min-h-[70%] w-form mx-auto relative">
         <h2 class="text-center font-bold text-[25px] text-dark-surface-300">
             {{ formTitle }}
         </h2>
 
-        <Input v-for="inputItem in inputItems" :key="inputItem.id" :inputItem="inputItem"
+        <div v-for="inputItem in inputItems" :key="inputItem.id" class="relative">
+            <Input :inputItem="inputItem"
             :error="formErrors[inputItem.name]" />
+        </div>
 
         <Button type="submit">{{ submitText ? submitText : 'Submit' }}</Button>
     </Form>

@@ -2,10 +2,7 @@
 import type { SelectRootEmits, SelectRootProps } from "reka-ui"
 import { SelectRoot, useForwardPropsEmits } from "reka-ui"
 
-const props = defineProps<SelectRootProps & {
-    required?: boolean
-    name: string
-}>()
+const props = defineProps<SelectRootProps>()
 const emits = defineEmits<SelectRootEmits>()
 
 const forwarded = useForwardPropsEmits(props, emits)
@@ -16,8 +13,6 @@ const forwarded = useForwardPropsEmits(props, emits)
     v-slot="slotProps"
     data-slot="select"
     v-bind="forwarded"
-    :required="required"
-    :name="name"
   >
     <slot v-bind="slotProps" />
   </SelectRoot>

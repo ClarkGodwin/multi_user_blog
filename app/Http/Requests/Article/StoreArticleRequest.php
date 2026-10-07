@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Article;
 
+use App\Models\Article;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -12,8 +13,8 @@ class StoreArticleRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return true;
-        // return $this->user()->can("create");
+        // return true;
+        return $this->user()->can("create", Article::class);
     }
 
     /**
@@ -25,9 +26,21 @@ class StoreArticleRequest extends FormRequest
     {
         return [
             "title"=> [
+                'alpha_num',
                 'required',
-                'min:3'
+                'min:3',
+                'max:100',
             ],
+
+            "content" => [
+                'alpha_num',
+                'required',
+            ],
+
+            "status" => [
+                'string',
+                'required'
+            ]
         ];
     }
 }
