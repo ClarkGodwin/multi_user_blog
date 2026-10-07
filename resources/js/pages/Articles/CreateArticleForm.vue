@@ -22,7 +22,7 @@ const inputItems : InputItem[] = [
         label : 'Title',
         type : {
             kind : 'InputType',
-            type : 'hidden'
+            type : 'text'
         },
         name : 'title',
         required : true,

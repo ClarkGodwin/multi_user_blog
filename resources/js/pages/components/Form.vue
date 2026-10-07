@@ -24,7 +24,7 @@ defineProps<{
             {{ formTitle }}
         </h2>
 
-        <Input v-for="inputItem in inputItems" :key="inputItem.id" :input-item="inputItem"
+        <Input v-for="inputItem in inputItems" :key="inputItem.id" :inputItem="inputItem"
             :error="formErrors[inputItem.name]" />
 
         <Button type="submit">{{ submitText ? submitText : 'Submit' }}</Button>
