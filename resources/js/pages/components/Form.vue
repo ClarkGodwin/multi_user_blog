@@ -19,8 +19,8 @@ defineProps<{
     :action="action"
     method="post"
     #default="{ errors: formErrors }"
-    class="flex flex-col justify-center gap-[10px] min-h-[70%] w-form mx-auto relative">
-        <h2 class="text-center font-bold text-[25px] text-dark-surface-300">
+    class="flex flex-col justify-center gap-[25px] min-h-[70%] w-form mx-auto relative">
+        <h2 class="text-center font-bold text-[25px] text-dark-surface-300 dark:text-surface-200">
             {{ formTitle }}
         </h2>
 
