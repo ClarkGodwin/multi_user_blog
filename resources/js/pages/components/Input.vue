@@ -30,7 +30,7 @@ defineProps<{
         </SelectTrigger>
         <SelectContent>
             <SelectGroup>
-                <SelectItem v-for="option in inputItem.type.options" :value="option">
+                <SelectItem v-for="option in inputItem.type.options" :value="option.toLowerCase()">
                     {{ option }}
                 </SelectItem>
             </SelectGroup>
