@@ -5,6 +5,7 @@ import { User, UserRoleEnum } from '@/types';
 import Button from '../components/Button.vue';
 import type { ArticlesPaginated } from '@/types/article.js';
 import { craft, create } from '@/routes/article/index.js';
+import ArticleView from '../components/ArticleView.vue';
 
 defineOptions({
     layout: {
@@ -56,7 +57,7 @@ defineProps<{
 
         <div v-else>
             <div v-for="article in articles.data" :key="article.id">
-                {{ article.title }}
+                <ArticleView :article="article" :user="auth.user"/>
             </div>
         </div>
     </div>
