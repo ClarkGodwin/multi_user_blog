@@ -6,6 +6,7 @@ import Button from '../components/Button.vue';
 import type { ArticlesPaginated } from '@/types/article.js';
 import { craft, create } from '@/routes/article/index.js';
 import ArticleView from '../components/ArticleView.vue';
+import Input from '@/components/ui/input/Input.vue';
 
 defineOptions({
     layout: {
@@ -59,6 +60,10 @@ defineProps<{
             <div v-for="article in articles.data" :key="article.id">
                 <ArticleView :article="article" :user="auth.user"/>
             </div>
+
+            <form action="" method="post" enctype="multipart/form-data" >
+                <Input name="default"/>
+            </form>
         </div>
     </div>
 </template>
