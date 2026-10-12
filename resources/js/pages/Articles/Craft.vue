@@ -7,6 +7,7 @@ import type { ArticlesPaginated } from '@/types/article.js';
 import { craft, create } from '@/routes/article/index.js';
 import ArticleView from '../components/ArticleView.vue';
 import Input from '@/components/ui/input/Input.vue';
+import ImageCropperInput from '../components/ImageCropperInput.vue';
 
 defineOptions({
     layout: {
@@ -61,9 +62,8 @@ defineProps<{
                 <ArticleView :article="article" :user="auth.user"/>
             </div>
 
-            <form action="" method="post" enctype="multipart/form-data" >
-                <Input name="default"/>
-            </form>
+            <ImageCropperInput/>
+
         </div>
     </div>
 </template>
