@@ -6,6 +6,7 @@ use App\Enums\ArticleStatusEnum;
 use App\Http\Requests\Article\StoreArticleRequest;
 use App\Http\Requests\Article\UpdateArticleRequest;
 use App\Models\Article;
+use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
@@ -31,6 +32,21 @@ class ArticleController extends Controller
                 'updated_at',
             ])
             ->paginate(10);
+    }
+
+    public function registerImage(Request $request)
+    {
+        $extension = $request->file('image')->getClientOriginalExtension();
+        $image = $request->file('image');
+        $filename = 'default.' . $extension;
+
+        if ($image) {
+            $path = $image->storeAs('images', $filename, 'public');
+        }
+
+        Inertia::flash('success', 'Image stored in '  . $path);
+
+        return redirect()->route('article.craft', compact('path'));
     }
 
     /**

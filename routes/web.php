@@ -27,6 +27,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::get('article/create',[ArticleController::class, 'create'])->name('article.create');
     Route::post('article/create', [ArticleController::class, 'store'])->name('article.store');
+
+    Route::post('image/default', [ArticleController::class, 'registerImage'])->name('registerDefaultImage');
 });
 
 require __DIR__.'/settings.php';

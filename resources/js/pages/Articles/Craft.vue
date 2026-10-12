@@ -7,7 +7,9 @@ import type { ArticlesPaginated } from '@/types/article.js';
 import { craft, create } from '@/routes/article/index.js';
 import ArticleView from '../components/ArticleView.vue';
 import Input from '@/components/ui/input/Input.vue';
+import { Form } from '@inertiajs/vue3';
 import ImageCropperInput from '../components/ImageCropperInput.vue';
+import { registerImage } from '@/actions/App/Http/Controllers/ArticleController.js';
 
 defineOptions({
     layout: {
@@ -25,6 +27,7 @@ defineProps<{
         user: User
     }
     articles: ArticlesPaginated
+    path?: string
 }>()
 </script>
 
@@ -62,7 +65,14 @@ defineProps<{
                 <ArticleView :article="article" :user="auth.user"/>
             </div>
 
-            <ImageCropperInput/>
+            <Form :action="registerImage()" enctype="multipart/form-data" method="post">
+                <ImageCropperInput name="image"/>
+                <button type="submit">save</button>
+
+            </Form>
+
+            <img src='/storage/images/default.jpg' alt="default image">
+             <!-- {{ path }} -->
 
         </div>
     </div>
