@@ -71,7 +71,7 @@ defineProps<{
 
             </Form>
 
-            <img src='/storage/images/default.jpg' alt="default image">
+            <img src='/storage/images/avatars/default.jpg' alt="default image">
              <!-- {{ path }} -->
 
         </div>

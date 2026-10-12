@@ -41,7 +41,7 @@ class ArticleController extends Controller
         $filename = 'default.' . $extension;
 
         if ($image) {
-            $path = $image->storeAs('images', $filename, 'public');
+            $path = $image->storeAs('images/avatars', $filename, 'public');
         }
 
         Inertia::flash('success', 'Image stored in '  . $path);

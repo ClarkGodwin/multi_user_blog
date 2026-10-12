@@ -11,6 +11,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { edit } from '@/routes/profile';
 import { send } from '@/routes/verification';
+import ImageCropperInput from '../components/ImageCropperInput.vue';
 
 defineOptions({
     layout: {
@@ -71,6 +72,33 @@ const user = computed(() => page.props.auth.user);
                     placeholder="Email address"
                 />
                 <InputError class="mt-2" :message="errors.email" />
+            </div>
+
+            <div class="grid gap-2">
+                <Label for="avatar">Avatar</Label>
+                <!-- <Input
+                    id="email"
+                    type="email"
+                    class="mt-1 block w-full"
+                    name="email"
+                    :default-value="user.email"
+                    required
+                    autocomplete="username"
+                    placeholder="Email address"
+                /> -->
+                <ImageCropperInput name="avatar" id="avatar"/>
+
+                <div class="w-[50px]">
+                    <img v-if="user.avatar" :src="user.avatar" alt=""
+                    class="rounded-lg"
+                    >
+
+                    <img v-else src="/storage/images/default.jpg" alt="default"
+                    class="rounded-lg"
+                    >
+                </div>
+
+                <InputError class="mt-2" :message="errors.avatar" />
             </div>
 
             <div v-if="page.props.mustVerifyEmail && !user.email_verified_at">

@@ -27,8 +27,8 @@ const showAvatar = computed(
         <AvatarFallback class="rounded-lg text-black dark:text-white">
             {{ getInitials(user.name) }}
         </AvatarFallback> -->
-        <img v-if="user.avatar" :src="user.avatar" alt="">
-        <img v-else src="/storage/images/default.jpg" alt="default">
+        <img v-if="user.avatar" :src="user.avatar" :alt="getInitials(user.name)">
+        <img v-else src="/storage/images/avatars/default.jpg" :alt="getInitials(user.name)">
     </Avatar>
 
     <div class="grid flex-1 text-left text-sm leading-tight">
