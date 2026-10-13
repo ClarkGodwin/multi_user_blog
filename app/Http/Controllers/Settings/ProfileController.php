@@ -49,6 +49,7 @@ class ProfileController extends Controller
 
         $request->user()->save();
 
+        //if the registration of the new avatar is successfull, delete the old one
         if ($request->hasFile('avatar') && $oldAvatar && str_starts_with($oldAvatar, '/storage/')) {
             $oldPath = substr($oldAvatar, strlen('/storage/'));
             Storage::disk('public')->delete($oldPath);
