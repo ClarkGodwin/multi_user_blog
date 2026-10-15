@@ -4,11 +4,8 @@ import { toAuthor } from '@/routes';
 import { User, UserRoleEnum } from '@/types';
 import Button from '../components/Button.vue';
 import type { ArticlesPaginated } from '@/types/article.js';
-import { craft, create } from '@/routes/article/index.js';
+import { craft, create, details } from '@/routes/article/index.js';
 import ArticleView from '../components/ArticleView.vue';
-import Input from '@/components/ui/input/Input.vue';
-import { Form } from '@inertiajs/vue3';
-import ImageCropperInput from '../components/ImageCropperInput.vue';
 
 defineOptions({
     layout: {
@@ -59,10 +56,9 @@ defineProps<{
         </div>
 
         <div v-else>
-            <div v-for="article in articles.data" :key="article.id">
-                <ArticleView :article="article" :userName="auth.user.name" :userAvatar="auth.user.avatar"/>
-            </div>
-
+            <Link v-for="article in articles.data" :key="article.id" :href="details(article.id)">
+                <ArticleView :article="article" :user="auth.user" />
+            </Link>
 
         </div>
     </div>
