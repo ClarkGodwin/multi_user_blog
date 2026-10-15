@@ -27,7 +27,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::get('article/create',[ArticleController::class, 'create'])->name('article.create');
     Route::post('article/create', [ArticleController::class, 'store'])->name('article.store');
-    Route::get('article/detail',[ArticleController::class, 'details'])->name('article.details');
+    Route::get('article/detail/{id}',[ArticleController::class, 'details'])->name('article.details');
 
 });
 

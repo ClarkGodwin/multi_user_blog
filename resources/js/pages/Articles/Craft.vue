@@ -26,7 +26,6 @@ defineProps<{
         user: User
     }
     articles: ArticlesPaginated
-    path?: string
 }>()
 </script>
 
@@ -61,7 +60,7 @@ defineProps<{
 
         <div v-else>
             <div v-for="article in articles.data" :key="article.id">
-                <ArticleView :article="article" :user="auth.user"/>
+                <ArticleView :article="article" :userName="auth.user.name" :userAvatar="auth.user.avatar"/>
             </div>
 
 

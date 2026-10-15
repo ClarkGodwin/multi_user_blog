@@ -37,9 +37,16 @@ class ArticleController extends Controller
     /**
      * Display the details of an article.
      */
-    public function details()
+    public function details(int $id)
     {
-        //
+        $article = Article::find($id);
+        $userAuthor = $article->user()->select([
+            "id",
+            "name",
+            "avatar",
+        ])->first();
+
+        return Inertia::render("Articles/ArticleDetails", compact(["article", "userAuthor"]));
     }
 
     /**
