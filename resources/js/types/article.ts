@@ -6,6 +6,12 @@ export type Article = {
     status : ArticleStatusEnum;
 }
 
+export enum ArticleStatusEnum {
+    Craft = 'craft',
+    Published = 'published',
+    Archived = 'archived',
+}
+
 export type ArticlesPaginated = {
     current_page: number;
     data: Article[];
@@ -25,9 +31,3 @@ export type ArticlesPaginated = {
     to: number | null;
     total: number;
 };
-
-export enum ArticleStatusEnum {
-    Craft = 'craft',
-    Published = 'published',
-    Archived = 'archived',
-}
