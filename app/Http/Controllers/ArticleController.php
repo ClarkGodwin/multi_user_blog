@@ -31,7 +31,7 @@ class ArticleController extends Controller
                 'created_at',
                 'updated_at',
             ])
-            ->paginate(10)->withQueryString();
+            ->paginate(10)->onEachSide(1)->withQueryString();
     }
 
     /**
