@@ -6,6 +6,7 @@ import Button from '../components/Button.vue';
 import type { ArticlesPaginated } from '@/types/article.js';
 import { craft, create, details } from '@/routes/article/index.js';
 import ArticleView from '../components/ArticleView.vue';
+import Pagination from '../components/Pagination.vue';
 
 defineOptions({
     layout: {
@@ -57,6 +58,8 @@ console.log(props.articles)
         </div>
 
         <div v-else>
+            <Pagination :paginationLinks="articles.links" />
+
             <Link v-for="article in articles.data" :key="article.id" :href="details(article.id)">
                 <ArticleView :article="article" :user="auth.user" />
             </Link>

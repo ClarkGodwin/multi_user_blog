@@ -23,7 +23,8 @@ class ArticleFactory extends Factory
             "user_id" => User::inRandomOrder('id')->first()->id,
             'title' => $this->faker->sentence,
             'content' => $this->faker->paragraph(100),
-            'status' => $this->faker->randomElement(ArticleStatusEnum::cases())->value,
+            // 'status' => $this->faker->randomElement(ArticleStatusEnum::cases())->value,
+            'status' => 'craft'
         ];
     }
 }
