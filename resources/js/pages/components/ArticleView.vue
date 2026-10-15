@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { details } from '@/routes/article';
-import { User } from '@/types';
 import { Article } from '@/types/article';
 import { Link } from '@inertiajs/vue3';
 
