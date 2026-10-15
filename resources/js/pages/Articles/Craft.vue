@@ -65,14 +65,6 @@ defineProps<{
                 <ArticleView :article="article" :user="auth.user"/>
             </div>
 
-            <Form :action="registerImage()" enctype="multipart/form-data" method="post">
-                <ImageCropperInput name="image"/>
-                <button type="submit">save</button>
-
-            </Form>
-
-            <img src='/storage/images/avatars/default.jpg' alt="default image">
-             <!-- {{ path }} -->
 
         </div>
     </div>
