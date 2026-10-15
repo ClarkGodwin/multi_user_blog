@@ -1,19 +1,21 @@
 <script setup lang="ts">
+import { details } from '@/routes/article';
 import { User } from '@/types';
 import { Article } from '@/types/article';
-import { usePage } from '@inertiajs/vue3';
+import { Link } from '@inertiajs/vue3';
 
 defineProps<{
     user : User
     article : Article
 }>()
 
-const authenticatedUser = usePage().props.auth.user
-
 </script>
 
 <template>
-    <section class=" w-article-view mx-auto py-4 flex flex-col gap-3 border-b">
+    <Link
+    :href="details()"
+    class=" w-article-view mx-auto py-4 flex flex-col gap-3 border-b"
+    >
         <div class="flex items-center justify-between">
             <div class="flex items-center gap-1.5">
                 <img
@@ -31,5 +33,5 @@ const authenticatedUser = usePage().props.auth.user
         <div class="text-article-view-content">
             {{ article.content }}
         </div>
-    </section>
+    </Link>
 </template>

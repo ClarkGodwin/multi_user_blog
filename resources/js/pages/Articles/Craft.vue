@@ -9,7 +9,6 @@ import ArticleView from '../components/ArticleView.vue';
 import Input from '@/components/ui/input/Input.vue';
 import { Form } from '@inertiajs/vue3';
 import ImageCropperInput from '../components/ImageCropperInput.vue';
-import { registerImage } from '@/actions/App/Http/Controllers/ArticleController.js';
 
 defineOptions({
     layout: {

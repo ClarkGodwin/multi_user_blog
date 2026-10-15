@@ -34,25 +34,10 @@ class ArticleController extends Controller
             ->paginate(10);
     }
 
-    public function registerImage(Request $request)
-    {
-        $extension = $request->file('image')->getClientOriginalExtension();
-        $image = $request->file('image');
-        $filename = 'default.' . $extension;
-
-        if ($image) {
-            $path = $image->storeAs('images/avatars', $filename, 'public');
-        }
-
-        Inertia::flash('success', 'Image stored in '  . $path);
-
-        return redirect()->route('article.craft', compact('path'));
-    }
-
     /**
-     * Display a listing of the resource.
+     * Display the details of an article.
      */
-    public function index()
+    public function details()
     {
         //
     }
