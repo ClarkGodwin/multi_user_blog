@@ -18,12 +18,13 @@ defineOptions({
     },
 });
 
-defineProps<{
+const props = defineProps<{
     auth: {
         user: User
     }
     articles: ArticlesPaginated
 }>()
+console.log(props.articles)
 </script>
 
 <template>
