@@ -94,6 +94,24 @@ class ArticleController extends Controller
     }
 
     /**
+     * Show the form for updating a new resource.
+     */
+    public function updateForm($article_id)
+    {
+        $isUpdateForm = true;
+        $article = Article::find($article_id)->select([
+            "id",
+            "title",
+            "content",
+            "status"
+        ]);
+
+        dd($article);
+
+        return Inertia::render('Articles/ArticleForm', compact('isUpdateForm'));
+    }
+
+    /**
      * Store a newly created resource in storage.
      */
     public function store(StoreArticleRequest $request)

@@ -26,6 +26,7 @@ defineProps<{
     <Label v-if="inputItem.type.type != 'hidden'" :for="inputItem.name" class="mb-1">{{ inputItem.label }}</Label>
     <Input v-if="inputItem.type.kind == 'InputType'" :type="inputItem.type.type" :name="inputItem.name" :required="inputItem.required"/>
 
+
     <Select v-else-if="inputItem.type.kind == 'SelectType'" :name="inputItem.name"  :required="inputItem.required" class="w-full h-full absolute inset-0">
         <SelectTrigger class="w-full">
             <SelectValue />

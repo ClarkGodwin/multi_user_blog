@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { updateForm } from '@/routes/article';
 import { User } from '@/types';
 import { Article } from '@/types/article';
 import { Link } from '@inertiajs/vue3';
@@ -28,7 +29,7 @@ defineProps<{
             </div>
 
             <div v-if="isDetails" class="flex gap-2.5 **:size-(--text-article-view-content)">
-                <Link>
+                <Link :href="updateForm(article.id)">
                     <PencilLine class="text-green-500"/>
                 </Link>
 
@@ -38,10 +39,10 @@ defineProps<{
             </div>
         </div>
 
-        <div class="text-center text-article-view-title">{{ article.title }}</div>
+        <div class="text-center text-article-view-title font-bold">{{ article.title }}</div>
 
         <div class="text-article-view-content">
-            {{ article.content }}
+            {{ isDetails ? article.content : article.content.substring(0, 500) + '...' }}
         </div>
     </section>
 </template>

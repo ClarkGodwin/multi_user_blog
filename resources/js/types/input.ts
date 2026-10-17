@@ -7,7 +7,6 @@ export type InputItem = {
     name : string
     value? : string | number
     required : boolean
-    icon? : LucideIcon
 }
 
 export type InputType = {

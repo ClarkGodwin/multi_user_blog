@@ -3,7 +3,6 @@ import { Head, } from '@inertiajs/vue3';
 import { InputItem } from '@/types/input.js';
 import Form from '../components/Form.vue';
 import { create, store } from '@/routes/article/index.js';
-import { FileTypeCorner, SquareText, Tag, TypeOutline } from '@lucide/vue';
 
 defineOptions({
     layout: {
@@ -26,7 +25,6 @@ const inputItems : InputItem[] = [
         },
         name : 'title',
         required : true,
-        icon : FileTypeCorner
     },
     {
         id : 2,
@@ -37,7 +35,6 @@ const inputItems : InputItem[] = [
         },
         name : 'content',
         required : true,
-        icon : SquareText
     },
     {
         id : 3,
@@ -49,7 +46,6 @@ const inputItems : InputItem[] = [
         },
         name : 'status',
         required : true,
-        icon: Tag
     },
 ]
 

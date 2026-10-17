@@ -73,7 +73,7 @@ const compactPagination = computed<CompactItem[]>(() => {
     <!-- Pagination complète sur écran large -->
     <div v-if="paginationLinks.length > 3" class="hidden sm:flex flex-wrap items-center justify-end space-x-1 mt-4">
         <Link v-for="(link, index) in paginationLinks" :key="index" :href="link.url || '#'" :class="[
-            link.active ? 'bg-dark-surface-200 dark:bg-surface-200 text-surface-200 dark:text-dark-surface-200' : 'bg-white text-gray-600',
+            link.active ? 'bg-dark-surface-200 dark:bg-surface-200 text-surface-200 dark:text-dark-surface-200' : 'text-gray-600 dark:text-white',
             link.url ? '' : 'opacity-50 pointer-events-none',
         ]" class="px-3 text-[12px] rounded">
             {{ displayLabel(link.label) }}
@@ -86,7 +86,7 @@ const compactPagination = computed<CompactItem[]>(() => {
             <span v-if="item.type === 'ellipsis'" class="px-1">…</span>
 
             <Link v-else :href="item.link.url || '#'" :class="[
-                item.link.active ? 'bg-dark-surface-200 dark:bg-surface-200 text-surface-200 dark:text-dark-surface-200' : 'bg-white text-gray-600',
+                item.link.active ? 'bg-dark-surface-200 dark:bg-surface-200 text-surface-200 dark:text-dark-surface-200' : 'text-gray-600 dark:text-white',
                 item.link.url ? '' : 'opacity-50 pointer-events-none',
             ]" class="px-2 py-1 text-[11px] rounded border">
                 {{ displayLabel(item.link.label) }}
