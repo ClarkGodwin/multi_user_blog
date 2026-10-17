@@ -23,6 +23,6 @@ class UpdateArticleRequest extends FormRequest
      */
     public function rules(): array
     {
-        return ArticleRules::get();
+        return ArticleRules::get(true);
     }
 }

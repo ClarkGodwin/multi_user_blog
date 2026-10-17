@@ -2,11 +2,14 @@
 
 namespace App\Http\Requests\Article;
 
+use App\Enums\ArticleStatusEnum;
+use Illuminate\Validation\Rule;
+
 class ArticleRules
 {
-    public static function get(): array
+    public static function get(bool $isUpdate = false): array
     {
-        return [
+        $rules = [
             'title' => [
                 'string',
                 'required',
@@ -21,9 +24,17 @@ class ArticleRules
             ],
 
             'status' => [
-                'string',
+                Rule::enum(ArticleStatusEnum::class),
                 'required',
             ],
         ];
+
+        if ($isUpdate) {
+            $rules['id'] = [
+                'required',
+                'integer',
+                'exists:articles,id'
+            ];
+        }
     }
 }
