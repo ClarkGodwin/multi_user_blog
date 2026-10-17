@@ -24,24 +24,6 @@ class StoreArticleRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-            "title"=> [
-                'string',
-                'required',
-                'min:3',
-                'max:100',
-            ],
-
-            "content" => [
-                'string',
-                'required',
-                'min:10'
-            ],
-
-            "status" => [
-                'string',
-                'required'
-            ]
-        ];
+        return ArticleRules::get();
     }
 }
