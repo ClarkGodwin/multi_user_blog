@@ -6,7 +6,7 @@ export type InputItem = {
     type : InputType | TextareaType | SelectType
     name : string
     value? : string | number
-    required : boolean
+    required? : boolean
 }
 
 export type InputType = {
