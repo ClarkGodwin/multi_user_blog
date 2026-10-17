@@ -108,7 +108,7 @@ class ArticleController extends Controller
 
         dd($article);
 
-        return Inertia::render('Articles/ArticleForm', compact('isUpdateForm'));
+        return Inertia::render('Articles/UpdateArticleForm', compact('article'));
     }
 
     /**
