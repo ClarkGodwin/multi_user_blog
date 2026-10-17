@@ -2,14 +2,14 @@
 import { Head, } from '@inertiajs/vue3';
 import { InputItem } from '@/types/input.js';
 import Form from '../components/Form.vue';
-import { create, store } from '@/routes/article/index.js';
+import { edit, update } from '@/routes/article/index.js';
 
 defineOptions({
     layout: {
         breadcrumbs: [
             {
-                title: 'Create an article',
-                href: create,
+                title: 'Edit the article',
+                href: edit,
             },
         ],
     },
@@ -52,6 +52,6 @@ const inputItems : InputItem[] = [
 </script>
 
 <template>
-    <Head title="Create an article" />
-    <Form formTitle="Create an article" :action="store()" :input-items="inputItems"/>
+    <Head title="Edit the article" />
+    <Form formTitle="Edit the article" :action="update()" :input-items="inputItems"/>
 </template>

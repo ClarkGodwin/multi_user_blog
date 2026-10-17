@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { updateForm } from '@/routes/article';
+import { edit } from '@/routes/article';
 import { User } from '@/types';
 import { Article } from '@/types/article';
 import { Link } from '@inertiajs/vue3';
@@ -29,7 +29,7 @@ defineProps<{
             </div>
 
             <div v-if="isDetails" class="flex gap-2.5 **:size-(--text-article-view-content)">
-                <Link :href="updateForm(article.id)">
+                <Link :href="edit(article.id)">
                     <PencilLine class="text-green-500"/>
                 </Link>
 

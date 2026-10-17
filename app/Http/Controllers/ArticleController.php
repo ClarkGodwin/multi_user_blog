@@ -90,25 +90,7 @@ class ArticleController extends Controller
      */
     public function create()
     {
-        return Inertia::render('Articles/CreateArticleForm');
-    }
-
-    /**
-     * Show the form for updating a new resource.
-     */
-    public function updateForm($article_id)
-    {
-        $isUpdateForm = true;
-        $article = Article::find($article_id)->select([
-            "id",
-            "title",
-            "content",
-            "status"
-        ]);
-
-        dd($article);
-
-        return Inertia::render('Articles/UpdateArticleForm', compact('article'));
+        return Inertia::render('Articles/Create');
     }
 
     /**
@@ -134,9 +116,17 @@ class ArticleController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Article $article)
+    public function edit($id)
     {
-        //
+        $article = Article::find($id, [
+            "id",
+            "title",
+            "content",
+            "status"
+        ]);
+
+
+        return Inertia::render('Articles/Edit', compact('article'));
     }
 
     /**

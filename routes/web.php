@@ -30,7 +30,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::get('article/detail/{id}',[ArticleController::class, 'details'])->name('article.details');
 
-    Route::get('article/update/{id}',[ArticleController::class, 'updateForm'])->name('article.updateForm');
+    Route::get('article/edit/{id}',[ArticleController::class, 'edit'])->name('article.edit');
+    Route::post('article/update',[ArticleController::class, 'update'])->name('article.update');
 
 });
 
