@@ -3,6 +3,8 @@ import { Head, } from '@inertiajs/vue3';
 import { InputItem } from '@/types/input.js';
 import Form from '../components/Form.vue';
 import { edit, update } from '@/routes/article/index.js';
+import { Article } from '@/types/article.js';
+import { getArticleFormInputItem } from '@/composables/useArticleFormInputItems.js';
 
 defineOptions({
     layout: {
@@ -15,43 +17,13 @@ defineOptions({
     },
 });
 
-const inputItems : InputItem[] = [
-    {
-        id : 1,
-        label : 'Title',
-        type : {
-            kind : 'InputType',
-            type : 'text'
-        },
-        name : 'title',
-        required : true,
-    },
-    {
-        id : 2,
-        label : 'Content',
-        type : {
-            kind : 'TextareaType',
-            type : 'textarea'
-        },
-        name : 'content',
-        required : true,
-    },
-    {
-        id : 3,
-        label : 'Save to Published or Craft',
-        type : {
-            kind: 'SelectType',
-            type: 'select',
-            options: ['Published', 'Craft']
-        },
-        name : 'status',
-        required : true,
-    },
-]
+defineProps<{
+    article : Article
+}>()
 
 </script>
 
 <template>
     <Head title="Edit the article" />
-    <Form formTitle="Edit the article" :action="update()" :input-items="inputItems"/>
+    <Form formTitle="Edit the article" :action="update()" :input-items="getArticleFormInputItem(true, article)"/>
 </template>

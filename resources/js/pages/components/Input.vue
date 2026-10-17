@@ -24,10 +24,10 @@ defineProps<{
 
 <template>
     <Label v-if="inputItem.type.type != 'hidden'" :for="inputItem.name" class="mb-1">{{ inputItem.label }}</Label>
-    <Input v-if="inputItem.type.kind == 'InputType'" :type="inputItem.type.type" :name="inputItem.name" :required="inputItem.required"/>
+    <Input v-if="inputItem.type.kind == 'InputType'" :type="inputItem.type.type" :name="inputItem.name" :required="inputItem.required" :model-value="inputItem.value"/>
 
 
-    <Select v-else-if="inputItem.type.kind == 'SelectType'" :name="inputItem.name"  :required="inputItem.required" class="w-full h-full absolute inset-0">
+    <Select v-else-if="inputItem.type.kind == 'SelectType'" :name="inputItem.name"  :required="inputItem.required" class="w-full h-full absolute inset-0" :model-value="inputItem.value">
         <SelectTrigger class="w-full">
             <SelectValue />
         </SelectTrigger>
@@ -40,7 +40,7 @@ defineProps<{
         </SelectContent>
     </Select>
 
-    <Textarea v-else :name="inputItem.name" :required="inputItem.required"/>
+    <Textarea v-else :name="inputItem.name" :required="inputItem.required" :model-value="inputItem.value"/>
 
     <div v-if="error" class="text-red-500">{{ error }}</div>
 

@@ -24,7 +24,7 @@ defineProps<{
             {{ formTitle }}
         </h2>
 
-        <div v-for="inputItem in inputItems" :key="inputItem.id" class="relative">
+        <div v-for="inputItem in inputItems" :key="inputItem.id" :class="{'hidden' : inputItem.type.type == 'hidden'}">
             <Input :inputItem="inputItem"
             :error="formErrors[inputItem.name]" />
         </div>
