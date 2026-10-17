@@ -36,5 +36,7 @@ class ArticleRules
                 'exists:articles,id'
             ];
         }
+
+        return $rules;
     }
 }
