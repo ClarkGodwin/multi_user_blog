@@ -6,7 +6,6 @@ use App\Enums\ArticleStatusEnum;
 use App\Http\Requests\Article\StoreArticleRequest;
 use App\Http\Requests\Article\UpdateArticleRequest;
 use App\Models\Article;
-use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
@@ -41,12 +40,12 @@ class ArticleController extends Controller
     {
         $article = Article::find($id);
         $userAuthor = $article->user()->select([
-            "id",
-            "name",
-            "avatar",
+            'id',
+            'name',
+            'avatar',
         ])->first();
 
-        return Inertia::render("Articles/ArticleDetails", compact(["article", "userAuthor"]));
+        return Inertia::render('Articles/ArticleDetails', compact(['article', 'userAuthor']));
     }
 
     /**
@@ -119,12 +118,11 @@ class ArticleController extends Controller
     public function edit($id)
     {
         $article = Article::find($id, [
-            "id",
-            "title",
-            "content",
-            "status"
+            'id',
+            'title',
+            'content',
+            'status',
         ]);
-
 
         return Inertia::render('Articles/Edit', compact('article'));
     }
@@ -146,8 +144,20 @@ class ArticleController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Article $article)
+    public function delete(int $id)
     {
-        //
+        $article = Article::findOrFail($id);
+        if (Auth::user()->can('delete', $article)) {
+            $article->delete();
+
+            Inertia::flash('success', 'Article successfully deleted');
+            return redirect()->route('dashboard');
+        }
+
+        else{
+            Inertia::flash('error', "You are not authorized to delete this article");
+
+            return redirect()->back();
+        }
     }
 }
