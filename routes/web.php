@@ -32,7 +32,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::get('article/edit/{id}',[ArticleController::class, 'edit'])->name('article.edit');
     Route::post('article/update',[ArticleController::class, 'update'])->name('article.update');
-    Route::delete('article/delete',[ArticleController::class, 'delete'])->name('article.delete');
+    Route::delete('article/destroy/{id}',[ArticleController::class, 'destroy'])->name('article.destroy');
 
 });
 

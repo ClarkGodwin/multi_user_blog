@@ -2,7 +2,7 @@ import { Article } from "@/types/article"
 import { InputItem } from "@/types/input"
 
 export function getArticleFormInputItem(isUpdate?: boolean, article?: Article): InputItem[] {
-    const updateOnlyItem: InputItem[] = isUpdate
+    const updateOnlyItemHiddenId: InputItem[] = isUpdate
         ? [{
             id: 4,
             type: {
@@ -51,7 +51,7 @@ export function getArticleFormInputItem(isUpdate?: boolean, article?: Article): 
             ...(isUpdate ? { value: article!.status } : {})
         },
 
-        ...updateOnlyItem
+        ...updateOnlyItemHiddenId
     ]
 
     return inputItems

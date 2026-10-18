@@ -30,7 +30,10 @@ class ArticleController extends Controller
                 'created_at',
                 'updated_at',
             ])
-            ->paginate(10)->onEachSide(1)->withQueryString();
+            ->withCount('comments')
+            ->paginate(10)
+            ->onEachSide(1)
+            ->withQueryString();
     }
 
     /**
@@ -44,6 +47,7 @@ class ArticleController extends Controller
             'name',
             'avatar',
         ])->first();
+        $article = Article::where('id', $id)->withCount('comments')->first();
 
         return Inertia::render('Articles/ArticleDetails', compact(['article', 'userAuthor']));
     }
@@ -144,7 +148,7 @@ class ArticleController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function delete(int $id)
+    public function destroy(int $id)
     {
         $article = Article::findOrFail($id);
         if (Auth::user()->can('delete', $article)) {

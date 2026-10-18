@@ -4,6 +4,7 @@ export type Article = {
     title : string;
     content : string;
     status : ArticleStatusEnum;
+    comments_count? : number;
 }
 
 export enum ArticleStatusEnum {

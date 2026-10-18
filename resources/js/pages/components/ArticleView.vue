@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { edit } from '@/routes/article';
+import { edit, destroy } from '@/routes/article';
 import { User } from '@/types';
 import { Article } from '@/types/article';
 import { Link } from '@inertiajs/vue3';
-import { PencilLine, Trash2 } from '@lucide/vue';
+import { MessageSquare, PencilLine, Trash2 } from '@lucide/vue';
 
 import {
     Dialog,
@@ -60,7 +60,7 @@ defineProps<{
                                     No
                                 </Button>
                             </DialogClose>
-                            <Link>
+                            <Link :href="destroy(article.id)" method="delete">
                                 <Button class="w-full">
                                     Yes
                                 </Button>
@@ -73,8 +73,13 @@ defineProps<{
 
         <div class="text-center text-article-view-title font-bold">{{ article.title }}</div>
 
-        <div class="text-article-view-content">
+        <div class="text-article-view-content whitespace-pre-wrap">
             {{ isDetails ? article.content : article.content.substring(0, 500) + '...' }}
+        </div>
+
+        <div class="text-article-view-name flex items-center gap-1 text-dark-surface-400">
+            <MessageSquare class="size-(--text-article-view-name)"/>
+            {{ article.comments_count }}
         </div>
     </section>
 </template>
