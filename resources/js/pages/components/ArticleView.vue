@@ -57,12 +57,14 @@ defineProps<{
                         <DialogFooter>
                             <DialogClose as-child>
                                 <Button variant="outline">
-                                    Cancel
+                                    No
                                 </Button>
                             </DialogClose>
-                            <Button>
-                                Save changes
-                            </Button>
+                            <Link>
+                                <Button class="w-full">
+                                    Yes
+                                </Button>
+                            </Link>
                         </DialogFooter>
                     </DialogContent>
                 </Dialog>
