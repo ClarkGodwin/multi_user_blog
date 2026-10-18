@@ -18,6 +18,7 @@ import {
 
 import { Button } from '@/components/ui/button'
 import { Comment } from '@/types/comment';
+import CommentView from './CommentView.vue';
 
 defineProps<{
     user: User
@@ -80,10 +81,12 @@ defineProps<{
         </div>
 
         <div class="text-article-view-name flex items-center gap-1 text-dark-surface-400">
-            <MessageSquare class="size-(--text-article-view-name)"/>
+            <MessageSquare class="size-(--text-article-view-name)" />
             {{ article.comments_count }}
         </div>
-
-        <div></div>
     </section>
+
+    <div v-if="isDetails">
+        <CommentView v-for="comment in comments" :key="comment.id" :comment="comment" />
+    </div>
 </template>
