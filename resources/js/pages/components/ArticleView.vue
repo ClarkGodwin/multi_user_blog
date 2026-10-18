@@ -17,11 +17,13 @@ import {
 } from '@/components/ui/dialog'
 
 import { Button } from '@/components/ui/button'
+import { Comment } from '@/types/comment';
 
 defineProps<{
     user: User
     article: Article
     isDetails?: boolean
+    comments?: Comment[]
 }>()
 
 </script>

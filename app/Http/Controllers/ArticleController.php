@@ -47,9 +47,10 @@ class ArticleController extends Controller
             'name',
             'avatar',
         ])->first();
+        $comments = $article->comments();
         $article = Article::where('id', $id)->withCount('comments')->first();
 
-        return Inertia::render('Articles/ArticleDetails', compact(['article', 'userAuthor']));
+        return Inertia::render('Articles/ArticleDetails', compact(['article', 'userAuthor', 'comments']));
     }
 
     /**
