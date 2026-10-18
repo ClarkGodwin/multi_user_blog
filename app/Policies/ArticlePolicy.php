@@ -45,7 +45,7 @@ class ArticlePolicy
      */
     public function delete(User $user, Article $article): bool
     {
-        return $user->id == $article->user_id && ;
+        return $user->id == $article->user_id && ($user->role == UserRoleEnum::Author->value || $user->role == UserRoleEnum::Admin->value);
     }
 
     /**
