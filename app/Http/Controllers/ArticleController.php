@@ -47,7 +47,12 @@ class ArticleController extends Controller
             'name',
             'avatar',
         ])->first();
-        $comments = $article->comments();
+
+        $comments = $article->comments()
+            ->orderBy('created_at', 'desc')
+            ->with('user:id,name,avatar')
+            ->get(['id', 'article_id', 'user_id', 'content', 'updated_at']);
+
         $article = Article::where('id', $id)->withCount('comments')->first();
 
         return Inertia::render('Articles/ArticleDetails', compact(['article', 'userAuthor', 'comments']));
@@ -156,11 +161,10 @@ class ArticleController extends Controller
             $article->delete();
 
             Inertia::flash('success', 'Article successfully deleted');
-            return redirect()->route('dashboard');
-        }
 
-        else{
-            Inertia::flash('error', "You are not authorized to delete this article");
+            return redirect()->route('dashboard');
+        } else {
+            Inertia::flash('error', 'You are not authorized to delete this article');
 
             return redirect()->back();
         }

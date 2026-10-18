@@ -3,6 +3,7 @@ import { Head, } from '@inertiajs/vue3';
 import { User } from '@/types/auth.js';
 import { Article } from '@/types/article.js';
 import ArticleView from '../components/ArticleView.vue';
+import { Comment } from '@/types/comment.js';
 
 defineOptions({
     layout: {
@@ -20,10 +21,11 @@ defineProps<{
     }
     userAuthor :  User
     article: Article
+    comments: Comment[]
 }>()
 </script>
 
 <template>
     <Head title="Details of an Article" />
-    <ArticleView :article="article" :user="userAuthor" isDetails/>
+    <ArticleView :article="article" :user="userAuthor" :comments="comments" isDetails/>
 </template>

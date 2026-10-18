@@ -83,5 +83,7 @@ defineProps<{
             <MessageSquare class="size-(--text-article-view-name)"/>
             {{ article.comments_count }}
         </div>
+
+        <div></div>
     </section>
 </template>

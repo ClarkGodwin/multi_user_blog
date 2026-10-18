@@ -1,3 +1,11 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { Comment } from '@/types/comment';
 
-<template></template>
+defineProps<{
+    comment: Comment
+}>()
+</script>
+
+<template>
+    {{ comment.content }}
+</template>
