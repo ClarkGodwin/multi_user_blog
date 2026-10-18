@@ -70,6 +70,9 @@
     --text-article-view-title : clamp(1.188rem,1.095rem + 0.463vw,1.5rem);
     --text-article-view-content : clamp(0.813rem, 0.757rem + 0.278vw, 1rem);
 
+    /*for the ArticleView component*/
+    --width-comment-view : clamp(16.875rem,6.134rem + 53.704vw,53.125rem);
+
     /*for the ArticleDetails component*/
     --width-article-details : clamp(18.75rem,2.083rem + 83.333vw,75rem);
 

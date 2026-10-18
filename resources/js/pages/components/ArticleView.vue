@@ -30,7 +30,7 @@ defineProps<{
 </script>
 
 <template>
-    <section class=" w-article-view mx-auto py-4 flex flex-col gap-3 border-b">
+    <section class=" w-article-view mx-auto py-4 flex flex-col gap-3 border-b mb-5">
         <div class="flex items-center justify-between">
             <div class="flex items-center gap-1.5">
                 <img :src="user.avatar ? user.avatar : '/storage/images/avatars/default.jpg'" alt=""
