@@ -9,11 +9,10 @@ use App\Models\Comment;
 class CommentController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * display the details of the comment
      */
-    public function index()
+    public function details()
     {
-        //
     }
 
     /**

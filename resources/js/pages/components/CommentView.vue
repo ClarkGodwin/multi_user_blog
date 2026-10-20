@@ -1,10 +1,8 @@
 <script setup lang="ts">
 import { Comment } from '@/types/comment';
 import { edit, destroy } from '@/routes/article';
-import { User } from '@/types';
-import { Article } from '@/types/article';
 import { Link } from '@inertiajs/vue3';
-import { MessageSquare, PencilLine, Trash2 } from '@lucide/vue';
+import {  PencilLine, Trash2 } from '@lucide/vue';
 
 import {
     Dialog,
