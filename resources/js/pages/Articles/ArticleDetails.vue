@@ -22,43 +22,62 @@ defineProps<{
     auth: {
         user: User
     }
-    userAuthor :  User
+    userAuthor: User
     article: Article
     comments?: Comment[]
 }>()
 
+/**
+ * Instead of a link on each comment which will imply to pass by the server to display the details, i decided to handle that locally, when this variable is null, the overview will be displayed, if it contains a comment, its details will  be displayed
+ */
 const selectedCommentToShowItsDetails = ref<Comment | null>(null)
 
+/**
+ * the localstorage is there so that the selectedCommentToShowItsDetails doesn't return to null if  the user refresh the page
+ */
 const savedComment = localStorage.getItem('selectedComment');
 
 selectedCommentToShowItsDetails.value = savedComment
     ? JSON.parse(savedComment) as Comment
     : null;
 
-function clickToSelectACommentToShowItsDetails(comment?: Comment){
-    if(comment){
+function clickToSelectACommentToShowItsDetails(comment?: Comment) {
+    if (comment) {
         selectedCommentToShowItsDetails.value = comment
         localStorage.setItem('selectedComment', JSON.stringify(comment))
+
+        window.history.pushState(
+            { ...window.history.state },
+            '',
+            window.location.href,
+        )
     }
-    else{
+    else {
         selectedCommentToShowItsDetails.value = null
+    }
+}
+
+/**
+ * this function is there to give to the user an illusion of browser navigation when he's navigating back and forth between the overview of the comments of an article and the details of that comment since the display of the comment is handled locally.
+ */
+function handleNavigationBrowserInThisComponent() {
+    if (selectedCommentToShowItsDetails.value !== null) {
+        clickToSelectACommentToShowItsDetails();
     }
 }
 
 </script>
 
 <template>
+
     <Head title="Details of an Article" />
 
-    <ArticleView :article="article" :user="userAuthor" isDetails/>
+    <ArticleView :article="article" :user="userAuthor" isDetails />
 
-    <CommentView v-if="selectedCommentToShowItsDetails" :comment="selectedCommentToShowItsDetails" isDetails/>
+    <CommentView v-if="selectedCommentToShowItsDetails" :comment="selectedCommentToShowItsDetails" isDetails />
 
-    <div v-else
-    v-for="comment in comments" :key="comment.id"
-    @click="clickToSelectACommentToShowItsDetails(comment)"
-    class="hover:cursor-pointer"
-    >
+    <div v-else v-for="comment in comments" :key="comment.id" @click="clickToSelectACommentToShowItsDetails(comment)"
+        class="hover:cursor-pointer">
         <CommentView :comment="comment" />
     </div>
 
