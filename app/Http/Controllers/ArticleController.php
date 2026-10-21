@@ -154,9 +154,8 @@ class ArticleController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(int $id)
+    public function destroy(Article $article)
     {
-        $article = Article::findOrFail($id);
         if (Auth::user()->can('delete', $article)) {
             $article->delete();
 
