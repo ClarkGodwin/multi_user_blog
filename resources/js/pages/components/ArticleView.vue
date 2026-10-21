@@ -38,7 +38,7 @@ defineProps<{
             </div>
 
             <div v-if="isDetails" class="flex gap-2.5 **:size-(--text-article-view-content)">
-                <Link :href="edit(article.id)">
+                <Link :href="edit(article)">
                     <PencilLine class="text-green-500" />
                 </Link>
 

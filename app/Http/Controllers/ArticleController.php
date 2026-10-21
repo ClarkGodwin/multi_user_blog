@@ -125,15 +125,8 @@ class ArticleController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit($id)
+    public function edit(Article $article)
     {
-        $article = Article::find($id, [
-            'id',
-            'title',
-            'content',
-            'status',
-        ]);
-
         return Inertia::render('Articles/Edit', compact('article'));
     }
 

@@ -31,7 +31,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::get('article/detail/{id}',[ArticleController::class, 'details'])->name('article.details');
 
-    Route::get('article/edit/{id}',[ArticleController::class, 'edit'])->name('article.edit');
+    Route::get('article/edit/{article}',[ArticleController::class, 'edit'])->name('article.edit');
     Route::post('article/update/{article}',[ArticleController::class, 'update'])->name('article.update');
     Route::delete('article/destroy/{article}',[ArticleController::class, 'destroy'])->name('article.destroy');
 
