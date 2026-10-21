@@ -60,7 +60,7 @@ console.log(props.articles)
         <div v-else>
             <Pagination class="mb-10" :paginationLinks="articles.links" />
 
-            <Link v-for="article in articles.data" :key="article.id" :href="details(article.id)">
+            <Link v-for="article in articles.data" :key="article.id" :href="details(article)">
                 <ArticleView :article="article" :user="auth.user" />
             </Link>
 

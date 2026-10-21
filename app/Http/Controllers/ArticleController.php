@@ -39,9 +39,8 @@ class ArticleController extends Controller
     /**
      * Display the details of an article.
      */
-    public function details(int $id)
+    public function details(Article $article)
     {
-        $article = Article::find($id);
         $userAuthor = $article->user()->select([
             'id',
             'name',
@@ -53,7 +52,8 @@ class ArticleController extends Controller
             ->with('user:id,name,avatar')
             ->get(['id', 'article_id', 'user_id', 'content', 'updated_at']);
 
-        $article = Article::where('id', $id)->withCount('comments')->first();
+        // $article = Article::where('id', $id)->withCount('comments')->first();
+        $article = $article->withCount('comments')->first();
 
         return Inertia::render('Articles/ArticleDetails', compact(['article', 'userAuthor', 'comments']));
     }
