@@ -43,7 +43,7 @@ defineProps<{
                 </Link>
 
                 <Dialog>
-                    <DialogTrigger>
+                    <DialogTrigger class="hover:cursor-pointer">
                         <Trash2 class="text-red-500" />
                     </DialogTrigger>
                     <DialogContent>
@@ -61,7 +61,7 @@ defineProps<{
                                     No
                                 </Button>
                             </DialogClose>
-                            <Link :href="destroy(article.id)" method="delete">
+                            <Link :href="destroy(article)" method="delete">
                                 <Button class="w-full">
                                     Yes
                                 </Button>

@@ -25,5 +25,5 @@ defineProps<{
 
 <template>
     <Head title="Edit the article" />
-    <Form formTitle="Edit the article" :action="update()" :input-items="getArticleFormInputItem(true, article)"/>
+    <Form formTitle="Edit the article" :action="update(article)" :input-items="getArticleFormInputItem(true, article)"/>
 </template>
