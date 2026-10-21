@@ -13,8 +13,7 @@ class UpdateArticleRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        $article = Article::find($this->input('id'));
-        return $this->user()->can('update', $article, Article::class);
+        return $this->user()->can('update', $this->route('article'));
     }
 
     /**

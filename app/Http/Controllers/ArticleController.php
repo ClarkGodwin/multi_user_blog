@@ -52,8 +52,7 @@ class ArticleController extends Controller
             ->with('user:id,name,avatar')
             ->get(['id', 'article_id', 'user_id', 'content', 'updated_at']);
 
-        // $article = Article::where('id', $id)->withCount('comments')->first();
-        $article = $article->withCount('comments')->first();
+        $article = $article->loadCount('comments');
 
         return Inertia::render('Articles/ArticleDetails', compact(['article', 'userAuthor', 'comments']));
     }
