@@ -1,7 +1,7 @@
 //This util shows minutes, hours, days, then weeks. At 30 days old, it switches to a plain date such as “Sep 21, 2026.
 //it'll moslty take the created_at table's column
 
-export function formatCreatedAt(createdAt: string): string {
+export function formattedRelativeDate(createdAt: string): string {
     const plainDateThresholdMs = 30 * 24 * 60 * 60 * 1000
 
     const plainDateFormatter = new Intl.DateTimeFormat(undefined, {

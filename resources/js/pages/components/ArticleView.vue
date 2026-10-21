@@ -17,7 +17,7 @@ import {
 } from '@/components/ui/dialog'
 
 import { Button } from '@/components/ui/button'
-import { Comment } from '@/types/comment';
+import { formattedRelativeDate } from '@/utils/formattedRelativeDate';
 
 defineProps<{
     user: User
@@ -82,5 +82,7 @@ defineProps<{
             <MessageSquare class="size-(--text-article-view-name)" />
             {{ article.comments_count }}
         </div>
+
+        <div>{{ formattedRelativeDate(article.created_at) }}</div>
     </section>
 </template>

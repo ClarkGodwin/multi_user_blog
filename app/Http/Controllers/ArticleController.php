@@ -50,7 +50,7 @@ class ArticleController extends Controller
         $comments = $article->comments()
             ->orderBy('created_at', 'desc')
             ->with('user:id,name,avatar')
-            ->get(['id', 'article_id', 'user_id', 'content', 'updated_at']);
+            ->get(['id', 'article_id', 'user_id', 'content', 'created_at']);
 
         $article = $article->loadCount('comments');
 
