@@ -41,7 +41,7 @@ defineProps<{
 
                 <Dialog>
                     <DialogTrigger>
-                        <Trash2 class="text-red-500" />
+                        <Trash2 class="text-red-500 hover:cursor-pointer" />
                     </DialogTrigger>
                     <DialogContent>
                         <DialogHeader>
