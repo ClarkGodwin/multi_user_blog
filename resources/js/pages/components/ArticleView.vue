@@ -78,11 +78,13 @@ defineProps<{
             {{ isDetails ? article.content : article.content.substring(0, 500) + '...' }}
         </div>
 
-        <div class="text-article-view-name flex items-center gap-1 text-dark-surface-400 dark:text-surface-400">
-            <MessageSquare class="size-(--text-article-view-name)" />
-            {{ article.comments_count }}
+        <div class="text-article-view-name flex items-center gap-3 text-dark-surface-400 dark:text-surface-400">
+            <div class="flex gap-1 items-center">
+                <MessageSquare class="size-(--text-article-view-name)" />
+                {{ article.comments_count }}
+            </div>
+            <div>{{ formattedRelativeDate(article.created_at) }}</div>
         </div>
 
-        <div>{{ formattedRelativeDate(article.created_at) }}</div>
     </section>
 </template>
