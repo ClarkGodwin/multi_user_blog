@@ -5,5 +5,6 @@ export type Comment = {
     user_id : number;
     article_id : number;
     content : string;
-    user : User
+    user : User;
+    created_at : string;
 }

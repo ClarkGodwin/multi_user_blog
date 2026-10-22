@@ -16,6 +16,7 @@ import {
 } from '@/components/ui/dialog'
 
 import { Button } from '@/components/ui/button'
+import { formattedRelativeDate } from '@/utils/formattedRelativeDate';
 
 defineProps<{
     comment: Comment
@@ -70,6 +71,10 @@ defineProps<{
 
         <div class="text-article-view-content whitespace-pre-wrap">
             {{ isDetails ? comment.content : comment.content.substring(0, 500) + '...' }}
+        </div>
+
+        <div class="text-article-view-name text-dark-surface-400 dark:text-surface-400">
+            {{ formattedRelativeDate(comment.created_at) }}
         </div>
     </section>
 </template>
