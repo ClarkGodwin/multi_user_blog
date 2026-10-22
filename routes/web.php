@@ -35,7 +35,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('article/update/{article}',[ArticleController::class, 'update'])->name('article.update');
     Route::delete('article/destroy/{article}',[ArticleController::class, 'destroy'])->name('article.destroy');
 
-    Route::get('comment/edit/{comment}',[CommentController::class, 'edit'])->name('comment.edit');
+
+
+
     Route::post('comment/update/{comment}',[CommentController::class, 'update'])->name('comment.update');
     Route::delete('comment/destroy/{comment}',[CommentController::class, 'destroy'])->name('comment.destroy');
 

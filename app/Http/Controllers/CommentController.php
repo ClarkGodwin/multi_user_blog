@@ -5,15 +5,15 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreCommentRequest;
 use App\Http\Requests\UpdateCommentRequest;
 use App\Models\Comment;
+use Auth;
+use Inertia\Inertia;
 
 class CommentController extends Controller
 {
     /**
      * display the details of the comment
      */
-    public function details()
-    {
-    }
+    public function details() {}
 
     /**
      * Show the form for creating a new resource.
@@ -60,6 +60,15 @@ class CommentController extends Controller
      */
     public function destroy(Comment $comment)
     {
-        //
+        if (!Auth::user()->can('delete', $comment)) {
+            $comment->delete();
+
+            Inertia::flash('success', 'Comment successfully deleted');
+
+        } else {
+            Inertia::flash('error', 'You are not authorized to delete this article');
+        }
+
+        return redirect()->back();
     }
 }

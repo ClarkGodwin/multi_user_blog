@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { Comment } from '@/types/comment';
-import { edit, destroy } from '@/routes/article';
+import { destroy } from '@/routes/comment';
 import { Link } from '@inertiajs/vue3';
 import {  PencilLine, Trash2 } from '@lucide/vue';
 
@@ -35,7 +35,7 @@ defineProps<{
             </div>
 
             <div v-if="isDetails" class="flex gap-2.5 **:size-(--text-article-view-content)">
-                <Link :href="edit(comment.id)">
+                <Link>
                     <PencilLine class="text-green-500" />
                 </Link>
 
