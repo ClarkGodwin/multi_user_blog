@@ -23,6 +23,8 @@ defineProps<{
     user: User
     article: Article
     isDetails?: boolean
+    canTheAuthenticatedUserUpdateTheArticle?: boolean
+    canTheAuthenticatedUserDeleteTheArticle?: boolean
 }>()
 
 </script>
@@ -38,13 +40,13 @@ defineProps<{
             </div>
 
             <div v-if="isDetails" class="flex gap-2.5 **:size-(--text-article-view-content)">
-                <Link :href="edit(article)">
+                <Link :href="edit(article)" v-if="canTheAuthenticatedUserUpdateTheArticle">
                     <PencilLine class="text-green-500" />
                 </Link>
 
                 <Dialog>
                     <DialogTrigger class="hover:cursor-pointer">
-                        <Trash2 class="text-red-500" />
+                        <Trash2 class="text-red-500" v-if="canTheAuthenticatedUserDeleteTheArticle" />
                     </DialogTrigger>
                     <DialogContent>
                         <DialogHeader>
@@ -62,7 +64,7 @@ defineProps<{
                                 </Button>
                             </DialogClose>
                             <Link :href="destroy(article)" method="delete">
-                                <Button class="w-full">
+                                <Button class="w-full" v-if="canTheAuthenticatedUserDeleteTheArticle">
                                     Yes
                                 </Button>
                             </Link>

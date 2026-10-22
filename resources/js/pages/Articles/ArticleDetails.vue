@@ -24,6 +24,8 @@ const props = defineProps<{
     userAuthor: User
     article: Article
     comments?: Comment[]
+    canTheAuthenticatedUserUpdateTheArticle: boolean
+    canTheAuthenticatedUserDeleteTheArticle: boolean
 }>()
 
 const page = usePage()
@@ -64,7 +66,9 @@ function clickToSelectACommentToShowItsDetails(comment: Comment) {
 
     <Head title="Details of an Article" />
 
-    <ArticleView :article="article" :user="userAuthor" isDetails />
+    <ArticleView :article="article" :user="userAuthor" isDetails
+        :canTheAuthenticatedUserDeleteTheArticle="canTheAuthenticatedUserDeleteTheArticle"
+        :canTheAuthenticatedUserUpdateTheArticle="canTheAuthenticatedUserUpdateTheArticle" />
 
     <CommentView v-if="selectedCommentToShowItsDetails" :comment="selectedCommentToShowItsDetails" isDetails />
 

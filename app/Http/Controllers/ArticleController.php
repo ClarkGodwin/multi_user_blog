@@ -41,6 +41,10 @@ class ArticleController extends Controller
      */
     public function details(Article $article)
     {
+        $canTheAuthenticatedUserUpdateTheArticle = Auth::user()->can('update', $article);
+
+        $canTheAuthenticatedUserDeleteTheArticle = Auth::user()->can('update', $article);
+
         $userAuthor = $article->user()->select([
             'id',
             'name',
@@ -54,7 +58,13 @@ class ArticleController extends Controller
 
         $article = $article->loadCount('comments');
 
-        return Inertia::render('Articles/ArticleDetails', compact(['article', 'userAuthor', 'comments']));
+        return Inertia::render('Articles/ArticleDetails', compact([
+            'article',
+            'userAuthor',
+            'comments',
+            'canTheAuthenticatedUserUpdateTheArticle',
+            'canTheAuthenticatedUserDeleteTheArticle',
+        ]));
     }
 
     /**
