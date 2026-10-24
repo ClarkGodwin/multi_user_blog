@@ -102,8 +102,11 @@ function clickToSelectACommentToShowItsDetails(comment: Comment) {
         :canTheAuthenticatedUserDeleteTheArticle="canTheAuthenticatedUserDeleteTheArticle"
         :canTheAuthenticatedUserUpdateTheArticle="canTheAuthenticatedUserUpdateTheArticle" />
 
-    <Form class="w-comment-view mx-auto">
-        <Textarea name="content"/>
+    <Form method="post" #default="{ errors: formErrors }" class="w-comment-view mx-auto">
+        <div>
+            <Textarea name="content" placehoder="Add a comment"/>
+            <div>{{ formErrors['content'] }}</div>
+        </div>
     </Form>
 
     <CommentView v-if="selectedCommentToShowItsDetails" :comment="selectedCommentToShowItsDetails" isDetails
