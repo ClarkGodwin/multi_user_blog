@@ -6,6 +6,7 @@ use App\Enums\ArticleStatusEnum;
 use App\Http\Requests\Article\StoreArticleRequest;
 use App\Http\Requests\Article\UpdateArticleRequest;
 use App\Models\Article;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Auth;
@@ -16,7 +17,7 @@ class ArticleController extends Controller
 {
     /**
      * it returns the paginated articles of the authenticated author corresponding to a specific status
-     *
+     * @param string $status
      * @return LengthAwarePaginator<int, Article>
      */
     private function articlesByStatus(string $status)
@@ -39,6 +40,9 @@ class ArticleController extends Controller
 
     /**
      * Display the details of an article.
+     * @param Article $article
+     * @param Request $request
+     * @return Response
      */
     public function details(Article $article, Request $request)
     {
@@ -60,6 +64,9 @@ class ArticleController extends Controller
         $canTheAuthenticatedUserUpdateTheComment = false;
         $canTheAuthenticatedUserDeleteTheComment = false;
 
+        /**
+         * Navigation when on a comment to see its details is handled locally, the modifications permissions are asked to the server asynchronously, that following block of code is to get , in case of a page refresh, first the comment the user was inspecting and second, his/her modification permission. I am aware that it could've been done with localStorage but I find this method more clean
+         */
         $commentIDFromTheRequest = $request->query('comment');
         if (is_numeric($commentIDFromTheRequest)) {
             $selectedComment = $comments->firstWhere(
@@ -127,6 +134,7 @@ class ArticleController extends Controller
 
     /**
      * Show the form for creating a new resource.
+     * @return Response
      */
     public function create()
     {
@@ -135,6 +143,8 @@ class ArticleController extends Controller
 
     /**
      * Store a newly created resource in storage.
+     * @param StoreArticleRequest $request
+     * @return RedirectResponse
      */
     public function store(StoreArticleRequest $request)
     {
@@ -155,6 +165,8 @@ class ArticleController extends Controller
 
     /**
      * Show the form for editing the specified resource.
+     * @param Article $article
+     * @return Response
      */
     public function edit(Article $article)
     {
@@ -163,6 +175,9 @@ class ArticleController extends Controller
 
     /**
      * Update the specified resource in storage.
+     * @param UpdateArticleRequest $request
+     * @param Article $article
+     * @return RedirectResponse
      */
     public function update(UpdateArticleRequest $request, Article $article)
     {
@@ -176,6 +191,8 @@ class ArticleController extends Controller
 
     /**
      * Remove the specified resource from storage.
+     * @param Article $article
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy(Article $article)
     {
