@@ -9,6 +9,7 @@ import { computed, ref } from 'vue';
 import { details, store } from '@/routes/comment/index.js';
 import Textarea from '@/components/ui/textarea/Textarea.vue';
 import Button from '@/components/ui/button/Button.vue';
+import Pagination from '../components/Pagination.vue';
 
 defineOptions({
     layout: {
@@ -36,24 +37,24 @@ const canTheAuthenticatedUserUpdateTheComment = ref(false)
 const canTheAuthenticatedUserDeleteTheComment = ref(false)
 
 async function loadCommentPermissions(comment: Comment) {
-        try {
-            const response = await fetch(details.url(comment), {
-                headers: {
-                    Accept: 'application/json',
-                },
-            });
+    try {
+        const response = await fetch(details.url(comment), {
+            headers: {
+                Accept: 'application/json',
+            },
+        });
 
-            if(response.ok){
-                let commentPermissions = await response.json() as CommentPermissions
+        if (response.ok) {
+            let commentPermissions = await response.json() as CommentPermissions
 
-                canTheAuthenticatedUserUpdateTheComment.value = commentPermissions.canTheAuthenticatedUserUpdateTheComment
+            canTheAuthenticatedUserUpdateTheComment.value = commentPermissions.canTheAuthenticatedUserUpdateTheComment
 
-                canTheAuthenticatedUserDeleteTheComment.value = commentPermissions.canTheAuthenticatedUserDeleteTheComment
-            }
+            canTheAuthenticatedUserDeleteTheComment.value = commentPermissions.canTheAuthenticatedUserDeleteTheComment
         }
-        catch(error){
-            console.log(error)
-        }
+    }
+    catch (error) {
+        console.log(error)
+    }
 }
 
 const page = usePage()
@@ -103,10 +104,12 @@ function clickToSelectACommentToShowItsDetails(comment: Comment) {
         :canTheAuthenticatedUserDeleteTheArticle="canTheAuthenticatedUserDeleteTheArticle"
         :canTheAuthenticatedUserUpdateTheArticle="canTheAuthenticatedUserUpdateTheArticle" />
 
-    <Form :action="store(article)" method="post" #default="{ errors: formErrors }" class="w-comment-view mx-auto flex sm:flex-row flex-col gap-3 items-start sm:items-center justify-between text-article-view-content mb-10">
+    <Form :action="store(article)" method="post" #default="{ errors: formErrors }"
+        class="w-comment-view mx-auto flex sm:flex-row flex-col gap-3 items-start sm:items-center justify-between text-article-view-content mb-10">
         <div class="sm:w-[90%] w-full">
-            <Textarea name="content" placeholder="Add a comment" class="text-article-view-content"/>
-            <input v-if="selectedCommentToShowItsDetails" type="hidden" name="selectedCommentToShowItsDetailsID" :value="selectedCommentToShowItsDetails.id">
+            <Textarea name="content" placeholder="Add a comment" class="text-article-view-content" />
+            <input v-if="selectedCommentToShowItsDetails" type="hidden" name="selectedCommentToShowItsDetailsID"
+                :value="selectedCommentToShowItsDetails.id">
             <div class="text-red-500">{{ formErrors['content'] }}</div>
         </div>
         <Button type="submit" class="font-bold text-article-view-content text-white">Submit</Button>
@@ -116,9 +119,14 @@ function clickToSelectACommentToShowItsDetails(comment: Comment) {
         :canTheAuthenticatedUserUpdateTheComment="canTheAuthenticatedUserUpdateTheComment"
         :canTheAuthenticatedUserDeleteTheComment="canTheAuthenticatedUserDeleteTheComment" />
 
-    <div :href="details(comment)" v-else v-for="comment in comments!.data" :key="comment.id" class="hover:cursor-pointer"
-        @click="clickToSelectACommentToShowItsDetails(comment)">
-        <CommentView :comment="comment" />
+    <div v-else class="mb-10">
+        <div :href="details(comment)" v-for="comment in comments!.data" :key="comment.id" class="hover:cursor-pointer"
+            @click="clickToSelectACommentToShowItsDetails(comment)">
+            <CommentView :comment="comment" />
+        </div>
+
+        <Pagination :paginationLinks="comments!.links" />
+
     </div>
 
 </template>
