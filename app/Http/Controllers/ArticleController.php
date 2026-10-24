@@ -57,7 +57,10 @@ class ArticleController extends Controller
         $comments = $article->comments()
             ->orderBy('created_at', 'desc')
             ->with('user:id,name,avatar')
-            ->get(['id', 'article_id', 'user_id', 'content', 'created_at']);
+            ->select(['id', 'article_id', 'user_id', 'content', 'created_at'])
+            ->paginate(10)
+            ->onEachSide(1)
+            ->withQueryString();
 
         $article = $article->loadCount('comments');
 
