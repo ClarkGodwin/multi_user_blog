@@ -103,8 +103,8 @@ function clickToSelectACommentToShowItsDetails(comment: Comment) {
         :canTheAuthenticatedUserDeleteTheArticle="canTheAuthenticatedUserDeleteTheArticle"
         :canTheAuthenticatedUserUpdateTheArticle="canTheAuthenticatedUserUpdateTheArticle" />
 
-    <Form method="post" #default="{ errors: formErrors }" class="w-comment-view mx-auto flex sm:flex-row flex-col items-center justify-between">
-        <div class="sm:w-[90%]">
+    <Form method="post" #default="{ errors: formErrors }" class="w-comment-view mx-auto flex sm:flex-row flex-col gap-3 items-start sm:items-center justify-between text-article-view-content mb-10">
+        <div class="sm:w-[90%] w-full">
             <Textarea name="content" placeholder="Add a comment"/>
             <div class="text-red-500">{{ formErrors['content'] }}</div>
         </div>
