@@ -7,7 +7,6 @@ use App\Http\Requests\Article\StoreArticleRequest;
 use App\Http\Requests\Article\UpdateArticleRequest;
 use App\Models\Article;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
@@ -41,10 +40,9 @@ class ArticleController extends Controller
     /**
      * Display the details of an article.
      * @param Article $article
-     * @param Request $request
      * @return Response
      */
-    public function details(Article $article, Request $request)
+    public function details(Article $article)
     {
         $canTheAuthenticatedUserUpdateTheArticle = Auth::user()->can('update', $article);
 
@@ -61,28 +59,6 @@ class ArticleController extends Controller
             ->with('user:id,name,avatar')
             ->get(['id', 'article_id', 'user_id', 'content', 'created_at']);
 
-        $canTheAuthenticatedUserUpdateTheComment = false;
-        $canTheAuthenticatedUserDeleteTheComment = false;
-
-        /**
-         * Navigation when on a comment to see its details is handled locally, the modifications permissions are asked to the server asynchronously, that following block of code is to get , in case of a page refresh, first the comment the user was inspecting and second, his/her modification permission. I am aware that it could've been done with localStorage but I find this method more clean
-         */
-        $commentIDFromTheRequest = $request->query('comment');
-        if (is_numeric($commentIDFromTheRequest)) {
-            $selectedComment = $comments->firstWhere(
-                'id',
-                (int) $commentIDFromTheRequest
-            );
-
-            if ($selectedComment) {
-                $canTheAuthenticatedUserUpdateTheComment =
-                    Auth::user()->can('update', $selectedComment);
-
-                $canTheAuthenticatedUserDeleteTheComment =
-                    Auth::user()->can('delete', $selectedComment);
-            }
-        }
-
         $article = $article->loadCount('comments');
 
         return Inertia::render('Articles/ArticleDetails', compact([
@@ -91,8 +67,6 @@ class ArticleController extends Controller
             'comments',
             'canTheAuthenticatedUserUpdateTheArticle',
             'canTheAuthenticatedUserDeleteTheArticle',
-            'canTheAuthenticatedUserUpdateTheComment',
-            'canTheAuthenticatedUserDeleteTheComment',
         ]));
     }
 

@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import { Head, Link, router, usePage, } from '@inertiajs/vue3';
+import { Head, router, usePage, } from '@inertiajs/vue3';
 import { User } from '@/types/auth.js';
 import { Article } from '@/types/article.js';
 import ArticleView from '../components/ArticleView.vue';
 import CommentView from '../components/CommentView.vue';
-import { Comment } from '@/types/comment.js';
-import { computed, ref, watch } from 'vue';
+import { Comment, CommentPermissions } from '@/types/comment.js';
+import { computed, ref } from 'vue';
 import { details } from '@/routes/comment/index.js';
 
 defineOptions({
@@ -28,9 +28,31 @@ const props = defineProps<{
     comment?: Comment
     canTheAuthenticatedUserUpdateTheArticle: boolean
     canTheAuthenticatedUserDeleteTheArticle: boolean
-    canTheAuthenticatedUserUpdateTheComment: boolean
-    canTheAuthenticatedUserDeleteTheComment: boolean
 }>()
+
+const canTheAuthenticatedUserUpdateTheComment = ref(false)
+const canTheAuthenticatedUserDeleteTheComment = ref(false)
+
+async function loadCommentPermissions(comment: Comment) {
+        try {
+            const response = await fetch(details.url(comment), {
+                headers: {
+                    Accept: 'application/json',
+                },
+            });
+
+            if(response.ok){
+                let commentPermissions = await response.json() as CommentPermissions
+
+                canTheAuthenticatedUserUpdateTheComment.value = commentPermissions.canTheAuthenticatedUserUpdateTheComment
+
+                canTheAuthenticatedUserDeleteTheComment.value = commentPermissions.canTheAuthenticatedUserDeleteTheComment
+            }
+        }
+        catch(error){
+            console.log(error)
+        }
+}
 
 const page = usePage()
 
@@ -45,9 +67,15 @@ const selectedCommentToShowItsDetails = computed(() => {
         return null;
     }
 
-    return props.comments?.find(
+    let comment = props.comments?.find(
         comment => comment.id === Number(commentId),
     ) ?? null;
+
+    if (comment) {
+        loadCommentPermissions(comment)
+    }
+
+    return comment
 });
 
 function clickToSelectACommentToShowItsDetails(comment: Comment) {
@@ -66,6 +94,7 @@ function clickToSelectACommentToShowItsDetails(comment: Comment) {
 </script>
 
 <template>
+
     <Head title="Details of an Article" />
 
     <ArticleView :article="article" :user="userAuthor" isDetails
@@ -76,7 +105,8 @@ function clickToSelectACommentToShowItsDetails(comment: Comment) {
         :canTheAuthenticatedUserUpdateTheComment="canTheAuthenticatedUserUpdateTheComment"
         :canTheAuthenticatedUserDeleteTheComment="canTheAuthenticatedUserDeleteTheComment" />
 
-    <div :href="details(comment)" v-else v-for="comment in comments" :key="comment.id" class="hover:cursor-pointer" @click="clickToSelectACommentToShowItsDetails(comment)">
+    <div :href="details(comment)" v-else v-for="comment in comments" :key="comment.id" class="hover:cursor-pointer"
+        @click="clickToSelectACommentToShowItsDetails(comment)">
         <CommentView :comment="comment" />
     </div>
 

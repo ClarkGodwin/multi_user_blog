@@ -43,8 +43,6 @@ class HandleInertiaRequests extends Middleware
             ],
             'sidebarOpen' => ! $request->hasCookie('sidebar_state') || $request->cookie('sidebar_state') === 'true',
             'comment' => $request->session()->get('comment'),
-            'canTheAuthenticatedUserUpdateTheComment' => $request->session()->get('canTheAuthenticatedUserUpdateTheComment'),
-            'canTheAuthenticatedUserDeleteTheComment' => $request->session()->get('canTheAuthenticatedUserDeleteTheComment'),
         ];
     }
 }
