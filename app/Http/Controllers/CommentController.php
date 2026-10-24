@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Comment\StoreCommentRequest;
 use App\Http\Requests\UpdateCommentRequest;
+use App\Models\Article;
 use App\Models\Comment;
 use Auth;
 use Inertia\Inertia;
@@ -34,9 +35,17 @@ class CommentController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreCommentRequest $request)
+    public function store(StoreCommentRequest $request, Article $article)
     {
-        dd($request);
+        Comment::create([
+            "user_id" => Auth::user()->id,
+            "article_id" => $article->id,
+            "content" => $request->validated('content')
+        ]);
+
+        Inertia::flash('success', 'Comment successfully created');
+
+        return redirect()->back();
     }
 
     /**

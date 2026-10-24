@@ -39,7 +39,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
 
     Route::get('comment/detail/{comment}',[CommentController::class, 'details'])->name('comment.details');
-    Route::post('comment/store',[CommentController::class, 'store'])->name('comment.store');
+    Route::post('comment/store/{article}',[CommentController::class, 'store'])->name('comment.store');
     Route::post('comment/update/{comment}',[CommentController::class, 'update'])->name('comment.update');
     Route::delete('comment/destroy/{comment}',[CommentController::class, 'destroy'])->name('comment.destroy');
 
