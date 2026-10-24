@@ -8,6 +8,7 @@ import { Comment, CommentPermissions } from '@/types/comment.js';
 import { computed, ref } from 'vue';
 import { details } from '@/routes/comment/index.js';
 import Textarea from '@/components/ui/textarea/Textarea.vue';
+import Button from '@/components/ui/button/Button.vue';
 
 defineOptions({
     layout: {
@@ -102,11 +103,12 @@ function clickToSelectACommentToShowItsDetails(comment: Comment) {
         :canTheAuthenticatedUserDeleteTheArticle="canTheAuthenticatedUserDeleteTheArticle"
         :canTheAuthenticatedUserUpdateTheArticle="canTheAuthenticatedUserUpdateTheArticle" />
 
-    <Form method="post" #default="{ errors: formErrors }" class="w-comment-view mx-auto">
-        <div>
+    <Form method="post" #default="{ errors: formErrors }" class="w-comment-view mx-auto flex sm:flex-row flex-col items-center justify-between">
+        <div class="sm:w-[90%]">
             <Textarea name="content" placeholder="Add a comment"/>
-            <div>{{ formErrors['content'] }}</div>
+            <div class="text-red-500">{{ formErrors['content'] }}</div>
         </div>
+        <Button type="submit" class="font-bold">Submit</Button>
     </Form>
 
     <CommentView v-if="selectedCommentToShowItsDetails" :comment="selectedCommentToShowItsDetails" isDetails
