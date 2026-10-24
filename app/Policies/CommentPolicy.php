@@ -5,6 +5,7 @@ namespace App\Policies;
 use App\Enums\UserRoleEnum;
 use App\Models\Comment;
 use App\Models\User;
+use function _PHPStan_395468aef\GuzzleHttp\default_ca_bundle;
 
 class CommentPolicy
 {
@@ -29,7 +30,16 @@ class CommentPolicy
      */
     public function create(User $user): bool
     {
-        return false;
+        switch ($user->role) {
+            case UserRoleEnum::Banned->value :
+                return false;
+
+            case UserRoleEnum::Suspended->value :
+                return false;
+
+            default :
+                return true;
+        }
     }
 
     /**
