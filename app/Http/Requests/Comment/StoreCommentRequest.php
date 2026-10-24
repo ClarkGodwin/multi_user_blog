@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Comment;
 
+use App\Models\Comment;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -12,7 +13,7 @@ class StoreCommentRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return $this->user()->can('store',);
+        return $this->user()->can('create', Comment::class);
     }
 
     /**
@@ -23,7 +24,6 @@ class StoreCommentRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
         ];
     }
 }

@@ -6,7 +6,7 @@ import ArticleView from '../components/ArticleView.vue';
 import CommentView from '../components/CommentView.vue';
 import { Comment, CommentPermissions } from '@/types/comment.js';
 import { computed, ref } from 'vue';
-import { details } from '@/routes/comment/index.js';
+import { details, store } from '@/routes/comment/index.js';
 import Textarea from '@/components/ui/textarea/Textarea.vue';
 import Button from '@/components/ui/button/Button.vue';
 
@@ -103,7 +103,7 @@ function clickToSelectACommentToShowItsDetails(comment: Comment) {
         :canTheAuthenticatedUserDeleteTheArticle="canTheAuthenticatedUserDeleteTheArticle"
         :canTheAuthenticatedUserUpdateTheArticle="canTheAuthenticatedUserUpdateTheArticle" />
 
-    <Form method="post" #default="{ errors: formErrors }" class="w-comment-view mx-auto flex sm:flex-row flex-col gap-3 items-start sm:items-center justify-between text-article-view-content mb-10">
+    <Form :action="store()" method="post" #default="{ errors: formErrors }" class="w-comment-view mx-auto flex sm:flex-row flex-col gap-3 items-start sm:items-center justify-between text-article-view-content mb-10">
         <div class="sm:w-[90%] w-full">
             <Textarea name="content" placeholder="Add a comment"/>
             <div class="text-red-500">{{ formErrors['content'] }}</div>
