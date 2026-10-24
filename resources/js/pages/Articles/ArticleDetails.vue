@@ -104,7 +104,7 @@ function clickToSelectACommentToShowItsDetails(comment: Comment) {
 
     <Form method="post" #default="{ errors: formErrors }" class="w-comment-view mx-auto">
         <div>
-            <Textarea name="content" placehoder="Add a comment"/>
+            <Textarea name="content" placeholder="Add a comment"/>
             <div>{{ formErrors['content'] }}</div>
         </div>
     </Form>
