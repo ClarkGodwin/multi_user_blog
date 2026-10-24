@@ -8,3 +8,8 @@ export type Comment = {
     user : User;
     created_at : string;
 }
+
+export type CommentPermissions = {
+    canTheAuthenticatedUserUpdateTheComment: boolean;
+    canTheAuthenticatedUserDeleteTheComment: boolean;
+}
