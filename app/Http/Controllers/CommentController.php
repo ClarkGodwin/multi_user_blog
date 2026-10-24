@@ -17,11 +17,10 @@ class CommentController extends Controller
         $canTheAuthenticatedUserUpdateTheComment = Auth::user()->can('update', $comment);
         $canTheAuthenticatedUserDeleteTheComment = Auth::user()->can('delete', $comment);
 
-        return redirect()->back()->with(compact([
-            'comment',
-            'canTheAuthenticatedUserUpdateTheComment',
-            'canTheAuthenticatedUserDeleteTheComment',
-        ]));
+        return response()->json([
+        'canTheAuthenticatedUserUpdateTheComment' => $canTheAuthenticatedUserUpdateTheComment,
+        'canTheAuthenticatedUserDeleteTheComment' => $canTheAuthenticatedUserDeleteTheComment,
+    ]);
     }
 
     /**
