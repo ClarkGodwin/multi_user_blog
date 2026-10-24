@@ -105,10 +105,10 @@ function clickToSelectACommentToShowItsDetails(comment: Comment) {
 
     <Form :action="store()" method="post" #default="{ errors: formErrors }" class="w-comment-view mx-auto flex sm:flex-row flex-col gap-3 items-start sm:items-center justify-between text-article-view-content mb-10">
         <div class="sm:w-[90%] w-full">
-            <Textarea name="content" placeholder="Add a comment"/>
+            <Textarea name="content" placeholder="Add a comment" class="text-article-view-content"/>
             <div class="text-red-500">{{ formErrors['content'] }}</div>
         </div>
-        <Button type="submit" class="font-bold">Submit</Button>
+        <Button type="submit" class="font-bold text-article-view-content text-white">Submit</Button>
     </Form>
 
     <CommentView v-if="selectedCommentToShowItsDetails" :comment="selectedCommentToShowItsDetails" isDetails
