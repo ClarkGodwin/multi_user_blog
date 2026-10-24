@@ -13,7 +13,16 @@ class CommentController extends Controller
     /**
      * display the details of the comment
      */
-    public function details() {}
+    public function details(Comment $comment) {
+        $canTheAuthenticatedUserUpdateTheComment = Auth::user()->can('update', $comment);
+        $canTheAuthenticatedUserDeleteTheComment = Auth::user()->can('delete', $comment);
+
+        return redirect()->back()->with(compact([
+            'comment',
+            'canTheAuthenticatedUserUpdateTheComment',
+            'canTheAuthenticatedUserDeleteTheComment',
+        ]));
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -60,7 +69,7 @@ class CommentController extends Controller
      */
     public function destroy(Comment $comment)
     {
-        if (!Auth::user()->can('delete', $comment)) {
+        if (Auth::user()->can('delete', $comment)) {
             $comment->delete();
 
             Inertia::flash('success', 'Comment successfully deleted');

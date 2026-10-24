@@ -6,6 +6,7 @@ use App\Enums\ArticleStatusEnum;
 use App\Http\Requests\Article\StoreArticleRequest;
 use App\Http\Requests\Article\UpdateArticleRequest;
 use App\Models\Article;
+use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
@@ -39,7 +40,7 @@ class ArticleController extends Controller
     /**
      * Display the details of an article.
      */
-    public function details(Article $article)
+    public function details(Article $article, Request $request)
     {
         $canTheAuthenticatedUserUpdateTheArticle = Auth::user()->can('update', $article);
 
@@ -56,6 +57,25 @@ class ArticleController extends Controller
             ->with('user:id,name,avatar')
             ->get(['id', 'article_id', 'user_id', 'content', 'created_at']);
 
+        $canTheAuthenticatedUserUpdateTheComment = false;
+        $canTheAuthenticatedUserDeleteTheComment = false;
+
+        $commentIDFromTheRequest = $request->query('comment');
+        if (is_numeric($commentIDFromTheRequest)) {
+            $selectedComment = $comments->firstWhere(
+                'id',
+                (int) $commentIDFromTheRequest
+            );
+
+            if ($selectedComment) {
+                $canTheAuthenticatedUserUpdateTheComment =
+                    Auth::user()->can('update', $selectedComment);
+
+                $canTheAuthenticatedUserDeleteTheComment =
+                    Auth::user()->can('delete', $selectedComment);
+            }
+        }
+
         $article = $article->loadCount('comments');
 
         return Inertia::render('Articles/ArticleDetails', compact([
@@ -64,6 +84,8 @@ class ArticleController extends Controller
             'comments',
             'canTheAuthenticatedUserUpdateTheArticle',
             'canTheAuthenticatedUserDeleteTheArticle',
+            'canTheAuthenticatedUserUpdateTheComment',
+            'canTheAuthenticatedUserDeleteTheComment',
         ]));
     }
 

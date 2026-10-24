@@ -1,11 +1,12 @@
 <script setup lang="ts">
-import { Head, router, usePage, } from '@inertiajs/vue3';
+import { Head, Link, router, usePage, } from '@inertiajs/vue3';
 import { User } from '@/types/auth.js';
 import { Article } from '@/types/article.js';
 import ArticleView from '../components/ArticleView.vue';
 import CommentView from '../components/CommentView.vue';
 import { Comment } from '@/types/comment.js';
-import { computed, ref } from 'vue';
+import { computed, ref, watch } from 'vue';
+import { details } from '@/routes/comment/index.js';
 
 defineOptions({
     layout: {
@@ -24,8 +25,11 @@ const props = defineProps<{
     userAuthor: User
     article: Article
     comments?: Comment[]
+    comment?: Comment
     canTheAuthenticatedUserUpdateTheArticle: boolean
     canTheAuthenticatedUserDeleteTheArticle: boolean
+    canTheAuthenticatedUserUpdateTheComment: boolean
+    canTheAuthenticatedUserDeleteTheComment: boolean
 }>()
 
 const page = usePage()
@@ -59,21 +63,20 @@ function clickToSelectACommentToShowItsDetails(comment: Comment) {
     });
 }
 
-
 </script>
 
 <template>
-
     <Head title="Details of an Article" />
 
     <ArticleView :article="article" :user="userAuthor" isDetails
         :canTheAuthenticatedUserDeleteTheArticle="canTheAuthenticatedUserDeleteTheArticle"
         :canTheAuthenticatedUserUpdateTheArticle="canTheAuthenticatedUserUpdateTheArticle" />
 
-    <CommentView v-if="selectedCommentToShowItsDetails" :comment="selectedCommentToShowItsDetails" isDetails />
+    <CommentView v-if="selectedCommentToShowItsDetails" :comment="selectedCommentToShowItsDetails" isDetails
+        :canTheAuthenticatedUserUpdateTheComment="canTheAuthenticatedUserUpdateTheComment"
+        :canTheAuthenticatedUserDeleteTheComment="canTheAuthenticatedUserDeleteTheComment" />
 
-    <div v-else v-for="comment in comments" :key="comment.id" @click="clickToSelectACommentToShowItsDetails(comment)"
-        class="hover:cursor-pointer">
+    <div :href="details(comment)" v-else v-for="comment in comments" :key="comment.id" class="hover:cursor-pointer" @click="clickToSelectACommentToShowItsDetails(comment)">
         <CommentView :comment="comment" />
     </div>
 

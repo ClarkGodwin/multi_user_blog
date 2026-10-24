@@ -21,6 +21,8 @@ import { formattedRelativeDate } from '@/utils/formattedRelativeDate';
 defineProps<{
     comment: Comment
     isDetails?: boolean
+    canTheAuthenticatedUserUpdateTheComment?: boolean
+    canTheAuthenticatedUserDeleteTheComment?: boolean
 }>()
 </script>
 
@@ -35,13 +37,13 @@ defineProps<{
             </div>
 
             <div v-if="isDetails" class="flex gap-2.5 **:size-(--text-article-view-content)">
-                <Link>
+                <Link v-if="canTheAuthenticatedUserUpdateTheComment">
                     <PencilLine class="text-green-500" />
                 </Link>
 
                 <Dialog>
                     <DialogTrigger>
-                        <Trash2 class="text-red-500 hover:cursor-pointer" />
+                        <Trash2 v-if="canTheAuthenticatedUserDeleteTheComment" class="text-red-500 hover:cursor-pointer" />
                     </DialogTrigger>
                     <DialogContent>
                         <DialogHeader>
@@ -58,7 +60,7 @@ defineProps<{
                                     No
                                 </Button>
                             </DialogClose>
-                            <Link :href="destroy(comment.id)" method="delete">
+                            <Link :href="destroy(comment.id)" method="delete" v-if="canTheAuthenticatedUserDeleteTheComment">
                                 <Button class="w-full">
                                     Yes
                                 </Button>
