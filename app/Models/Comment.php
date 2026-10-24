@@ -16,7 +16,7 @@ use Illuminate\Support\Carbon;
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  */
-#[Fillable(['article_id', 'content'])]
+#[Fillable(['user_id', 'article_id', 'content'])]
 class Comment extends Model
 {
     /** @use HasFactory<\Database\Factories\CommentFactory> */

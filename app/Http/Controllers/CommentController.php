@@ -14,14 +14,15 @@ class CommentController extends Controller
     /**
      * display the details of the comment
      */
-    public function details(Comment $comment) {
+    public function details(Comment $comment)
+    {
         $canTheAuthenticatedUserUpdateTheComment = Auth::user()->can('update', $comment);
         $canTheAuthenticatedUserDeleteTheComment = Auth::user()->can('delete', $comment);
 
         return response()->json([
-        'canTheAuthenticatedUserUpdateTheComment' => $canTheAuthenticatedUserUpdateTheComment,
-        'canTheAuthenticatedUserDeleteTheComment' => $canTheAuthenticatedUserDeleteTheComment,
-    ]);
+            'canTheAuthenticatedUserUpdateTheComment' => $canTheAuthenticatedUserUpdateTheComment,
+            'canTheAuthenticatedUserDeleteTheComment' => $canTheAuthenticatedUserDeleteTheComment,
+        ]);
     }
 
     /**
@@ -38,12 +39,16 @@ class CommentController extends Controller
     public function store(StoreCommentRequest $request, Article $article)
     {
         Comment::create([
-            "user_id" => Auth::user()->id,
-            "article_id" => $article->id,
-            "content" => $request->validated('content')
+            'user_id' => Auth::user()->id,
+            'article_id' => $article->id,
+            'content' => $request->validated('content'),
         ]);
 
         Inertia::flash('success', 'Comment successfully created');
+
+        if ($request->selectedCommentToShowItsDetailsID) {
+            return redirect()->route('article.details', $article);
+        }
 
         return redirect()->back();
     }
