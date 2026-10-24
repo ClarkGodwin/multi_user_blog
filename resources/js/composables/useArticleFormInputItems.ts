@@ -37,7 +37,6 @@ export function getArticleFormInputItem(isUpdate?: boolean, article?: Article): 
             required: true,
             ...(isUpdate ? { value: article!.status } : {})
         },
-
     ]
 
     return inputItems
