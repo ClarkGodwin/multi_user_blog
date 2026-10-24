@@ -7,7 +7,7 @@ use Illuminate\Validation\Rule;
 
 class ArticleRules
 {
-    public static function get(bool $isUpdate = false): array
+    public static function get(): array
     {
         $rules = [
             'title' => [
@@ -28,14 +28,6 @@ class ArticleRules
                 'required',
             ],
         ];
-
-        if ($isUpdate) {
-            $rules['id'] = [
-                'required',
-                'integer',
-                'exists:articles,id'
-            ];
-        }
 
         return $rules;
     }
