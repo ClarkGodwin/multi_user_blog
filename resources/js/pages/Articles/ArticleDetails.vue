@@ -4,7 +4,7 @@ import { User } from '@/types/auth.js';
 import { Article } from '@/types/article.js';
 import ArticleView from '../components/ArticleView.vue';
 import CommentView from '../components/CommentView.vue';
-import { Comment, CommentPermissions } from '@/types/comment.js';
+import { Comment, CommentPermissions, CommentsPaginated } from '@/types/comment.js';
 import { computed, ref } from 'vue';
 import { details, store } from '@/routes/comment/index.js';
 import Textarea from '@/components/ui/textarea/Textarea.vue';
@@ -26,7 +26,7 @@ const props = defineProps<{
     }
     userAuthor: User
     article: Article
-    comments?: Comment[]
+    comments?: CommentsPaginated
     comment?: Comment
     canTheAuthenticatedUserUpdateTheArticle: boolean
     canTheAuthenticatedUserDeleteTheArticle: boolean
@@ -69,7 +69,7 @@ const selectedCommentToShowItsDetails = computed(() => {
         return null;
     }
 
-    let comment = props.comments?.find(
+    let comment = props.comments?.data.find(
         comment => comment.id === Number(commentId),
     ) ?? null;
 
@@ -116,7 +116,7 @@ function clickToSelectACommentToShowItsDetails(comment: Comment) {
         :canTheAuthenticatedUserUpdateTheComment="canTheAuthenticatedUserUpdateTheComment"
         :canTheAuthenticatedUserDeleteTheComment="canTheAuthenticatedUserDeleteTheComment" />
 
-    <div :href="details(comment)" v-else v-for="comment in comments" :key="comment.id" class="hover:cursor-pointer"
+    <div :href="details(comment)" v-else v-for="comment in comments!.data" :key="comment.id" class="hover:cursor-pointer"
         @click="clickToSelectACommentToShowItsDetails(comment)">
         <CommentView :comment="comment" />
     </div>
