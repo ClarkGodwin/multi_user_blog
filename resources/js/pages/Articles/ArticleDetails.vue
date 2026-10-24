@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Head, router, usePage, } from '@inertiajs/vue3';
+import { Form, Head, router, usePage, } from '@inertiajs/vue3';
 import { User } from '@/types/auth.js';
 import { Article } from '@/types/article.js';
 import ArticleView from '../components/ArticleView.vue';
@@ -7,6 +7,7 @@ import CommentView from '../components/CommentView.vue';
 import { Comment, CommentPermissions } from '@/types/comment.js';
 import { computed, ref } from 'vue';
 import { details } from '@/routes/comment/index.js';
+import Textarea from '@/components/ui/textarea/Textarea.vue';
 
 defineOptions({
     layout: {
@@ -100,6 +101,10 @@ function clickToSelectACommentToShowItsDetails(comment: Comment) {
     <ArticleView :article="article" :user="userAuthor" isDetails
         :canTheAuthenticatedUserDeleteTheArticle="canTheAuthenticatedUserDeleteTheArticle"
         :canTheAuthenticatedUserUpdateTheArticle="canTheAuthenticatedUserUpdateTheArticle" />
+
+    <Form class="w-comment-view mx-auto">
+        <Textarea name="content"/>
+    </Form>
 
     <CommentView v-if="selectedCommentToShowItsDetails" :comment="selectedCommentToShowItsDetails" isDetails
         :canTheAuthenticatedUserUpdateTheComment="canTheAuthenticatedUserUpdateTheComment"
