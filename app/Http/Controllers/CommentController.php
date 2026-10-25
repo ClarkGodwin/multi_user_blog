@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Comment\StoreCommentRequest;
-use App\Http\Requests\UpdateCommentRequest;
+use App\Http\Requests\Comment\UpdateCommentRequest;
 use App\Models\Article;
 use App\Models\Comment;
 use Auth;
@@ -71,6 +71,9 @@ class CommentController extends Controller
 
     /**
      * Update the specified resource in storage.
+     * @param UpdateCommentRequest $request
+     * @param Comment $comment
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(UpdateCommentRequest $request, Comment $comment)
     {
