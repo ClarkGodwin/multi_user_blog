@@ -6,7 +6,7 @@ import ArticleView from '../components/ArticleView.vue';
 import CommentView from '../components/CommentView.vue';
 import { Comment, CommentPermissions, CommentsPaginated } from '@/types/comment.js';
 import { computed, ref } from 'vue';
-import { details, store } from '@/routes/comment/index.js';
+import { details, store, update } from '@/routes/comment/index.js';
 import Textarea from '@/components/ui/textarea/Textarea.vue';
 import Button from '@/components/ui/button/Button.vue';
 import Pagination from '../components/Pagination.vue';
@@ -99,6 +99,12 @@ function clickToSelectACommentToShowItsDetails(comment: Comment) {
 
 const actionForTheFormToAddAComment = ref(store(props.article))
 const valueInTheTextareaOfTheFormToAddAComment = ref('')
+
+function  editAComment(){
+    valueInTheTextareaOfTheFormToAddAComment.value = selectedCommentToShowItsDetails.value!.content
+
+    actionForTheFormToAddAComment.value = update(selectedCommentToShowItsDetails.value!)
+}
 
 </script>
 
