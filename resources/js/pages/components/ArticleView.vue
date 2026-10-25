@@ -22,7 +22,9 @@ import { formattedRelativeDate } from '@/utils/formattedRelativeDate';
 defineProps<{
     user: User
     article: Article
-    isDetails?: boolean
+
+    isDetails?: boolean //just to know if the modification links can be displayed in case the user has the permissions
+
     canTheAuthenticatedUserUpdateTheArticle?: boolean
     canTheAuthenticatedUserDeleteTheArticle?: boolean
 }>()
@@ -39,7 +41,9 @@ defineProps<{
                 <span class="text-article-view-name">{{ user.name }}</span>
             </div>
 
+            <!-- Modification links -->
             <div v-if="isDetails" class="flex gap-2.5 **:size-(--text-article-view-content)">
+                <!-- To edit -->
                 <Link :href="edit(article)" v-if="canTheAuthenticatedUserUpdateTheArticle">
                     <PencilLine class="text-green-500" />
                 </Link>
@@ -64,6 +68,7 @@ defineProps<{
                                 </Button>
                             </DialogClose>
                             <Link :href="destroy(article)" method="delete">
+                                <!-- To delete -->
                                 <Button class="w-full" v-if="canTheAuthenticatedUserDeleteTheArticle">
                                     Yes
                                 </Button>
@@ -80,6 +85,7 @@ defineProps<{
             {{ isDetails ? article.content : article.content.substring(0, 500) + '...' }}
         </div>
 
+        <!-- To show the number of  comments and when the article was published -->
         <div class="text-article-view-name flex items-center gap-3 text-dark-surface-400 dark:text-surface-400">
             <div class="flex gap-1 items-center">
                 <MessageSquare class="size-(--text-article-view-name)" />

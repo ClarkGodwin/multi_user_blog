@@ -61,6 +61,8 @@ const page = usePage()
 
 /**
  * Instead of a link on each comment which will imply to pass by the server to display the details, i decided to handle that locally, when this variable is null, the overview will be displayed, if it contains a comment, its details will  be displayed
+ *
+ * How does it work, well, it's a computed value, it listens to the page variable, containing the usePage() given ,by inertia, so that whenever it changes inside this component, the selectedcomment recalculate its value. If the link contains the id of a comment (like when a user clicks on a comment, see the next function) that variable will get as value, the comment corresponding to that id, all that without calling the server
  */
 const selectedCommentToShowItsDetails = computed(() => {
     const url = new URL(page.url, 'http://inertia.local');
@@ -84,7 +86,7 @@ const selectedCommentToShowItsDetails = computed(() => {
 function clickToSelectACommentToShowItsDetails(comment: Comment) {
     const url = new URL(page.url, 'http://inertia.local');
 
-    url.searchParams.set('comment', String(comment.id)); //when a comment is clicked, a new url is created with the id of the comment as a parametere
+    url.searchParams.set('comment', String(comment.id)); //when a comment is clicked, a new url is created with the id of the comment as a parameter
 
     //the goal is to create another history state so that the user can go back and forth between the overview of all the comments and the details of one comment without any call to the server. Everything stays local
     router.push({
@@ -104,6 +106,7 @@ function clickToSelectACommentToShowItsDetails(comment: Comment) {
         :canTheAuthenticatedUserDeleteTheArticle="canTheAuthenticatedUserDeleteTheArticle"
         :canTheAuthenticatedUserUpdateTheArticle="canTheAuthenticatedUserUpdateTheArticle" />
 
+    <!-- The form to add a new comment under the details of a specific article -->
     <Form :action="store(article)" method="post" #default="{ errors: formErrors }"
         class="w-comment-view mx-auto flex sm:flex-row flex-col gap-3 items-start sm:items-center justify-between text-article-view-content mb-10">
         <div class="sm:w-[90%] w-full">
@@ -115,10 +118,12 @@ function clickToSelectACommentToShowItsDetails(comment: Comment) {
         <Button type="submit" class="font-bold text-article-view-content text-white">Submit</Button>
     </Form>
 
+    <!-- To show the details of a specific comment when clicked which also displays the modification links -->
     <CommentView v-if="selectedCommentToShowItsDetails" :comment="selectedCommentToShowItsDetails" isDetails
         :canTheAuthenticatedUserUpdateTheComment="canTheAuthenticatedUserUpdateTheComment"
         :canTheAuthenticatedUserDeleteTheComment="canTheAuthenticatedUserDeleteTheComment" />
 
+    <!-- To display the list of comments under the article-->
     <div v-else class="mb-10">
         <div :href="details(comment)" v-for="comment in comments!.data" :key="comment.id" class="hover:cursor-pointer"
             @click="clickToSelectACommentToShowItsDetails(comment)">
