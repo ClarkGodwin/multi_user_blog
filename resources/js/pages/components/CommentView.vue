@@ -37,9 +37,9 @@ defineProps<{
             </div>
 
             <div v-if="isDetails" class="flex gap-2.5 **:size-(--text-article-view-content)">
-                <Link v-if="canTheAuthenticatedUserUpdateTheComment">
-                    <PencilLine class="text-green-500" />
-                </Link>
+                <div v-if="canTheAuthenticatedUserUpdateTheComment">
+                    <PencilLine class="text-green-500" @click="$emit('editAComment')"/>
+                </div>
 
                 <Dialog>
                     <DialogTrigger>

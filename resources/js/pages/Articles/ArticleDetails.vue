@@ -131,7 +131,7 @@ function  editAComment(){
     <!-- To show the details of a specific comment when clicked which also displays the modification links -->
     <CommentView v-if="selectedCommentToShowItsDetails" :comment="selectedCommentToShowItsDetails" isDetails
         :canTheAuthenticatedUserUpdateTheComment="canTheAuthenticatedUserUpdateTheComment"
-        :canTheAuthenticatedUserDeleteTheComment="canTheAuthenticatedUserDeleteTheComment" />
+        :canTheAuthenticatedUserDeleteTheComment="canTheAuthenticatedUserDeleteTheComment" @edit-a-comment="editAComment" />
 
     <!-- To display the list of comments under the article-->
     <div v-else class="mb-10">
