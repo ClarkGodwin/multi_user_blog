@@ -96,6 +96,10 @@ function clickToSelectACommentToShowItsDetails(comment: Comment) {
     });
 }
 
+
+const actionForTheFormToAddAComment = ref(store(props.article))
+const valueInTheTextareaOfTheFormToAddAComment = ref('')
+
 </script>
 
 <template>
@@ -107,10 +111,10 @@ function clickToSelectACommentToShowItsDetails(comment: Comment) {
         :canTheAuthenticatedUserUpdateTheArticle="canTheAuthenticatedUserUpdateTheArticle" />
 
     <!-- The form to add a new comment under the details of a specific article -->
-    <Form :action="store(article)" method="post" #default="{ errors: formErrors }"
+    <Form :action="actionForTheFormToAddAComment" method="post" #default="{ errors: formErrors }"
         class="w-comment-view mx-auto flex sm:flex-row flex-col gap-3 items-start sm:items-center justify-between text-article-view-content mb-10">
         <div class="sm:w-[90%] w-full">
-            <Textarea name="content" placeholder="Add a comment" class="text-article-view-content" />
+            <Textarea name="content" placeholder="Add a comment" class="text-article-view-content" :modelValue="valueInTheTextareaOfTheFormToAddAComment" />
             <input v-if="selectedCommentToShowItsDetails" type="hidden" name="selectedCommentToShowItsDetailsID"
                 :value="selectedCommentToShowItsDetails.id">
             <div class="text-red-500">{{ formErrors['content'] }}</div>
