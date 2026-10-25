@@ -74,7 +74,13 @@ class CommentController extends Controller
      */
     public function update(UpdateCommentRequest $request, Comment $comment)
     {
-        //
+        dd($request->validated('content'));
+        $comment->content = $request->validated('content');
+        $comment->save();
+
+        Inertia::flash('success', 'The comment was successfully modified');
+
+        return redirect()->back();
     }
 
     /**
