@@ -82,7 +82,7 @@ defineProps<{
         <div class="text-center text-article-view-title font-bold">{{ article.title }}</div>
 
         <div class="text-article-view-content whitespace-pre-wrap">
-            {{ isDetails ? article.content : article.content.substring(0, 500) + '...' }}
+            {{  }}
         </div>
 
         <!-- To show the number of  comments and when the article was published -->

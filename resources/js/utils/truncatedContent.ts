@@ -4,4 +4,11 @@
  * Picture a long text, well this function will return the full text if the boolean is true or the truncated content, which means the 500 characters(or any  other number you provided) with '...' to indicate that there's more, if the variable is true
  */
 
-export function truncatedContent(){}
+export function truncatedContent(isDetailed: boolean, content: string, maxLength: number = 500): string {
+    if (content.length <= maxLength) {
+        return content
+    }
+    else{
+        return isDetailed ? content : content.substring(0, 500) + '...'
+    }
+}
