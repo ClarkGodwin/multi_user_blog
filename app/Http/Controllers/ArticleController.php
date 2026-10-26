@@ -121,14 +121,26 @@ class ArticleController extends Controller
     }
 
     /**
-     * to extract the tags from an article
+     * This is a function to create tags from an article.
+     * It's meant to be used in both the store and  update functions inside  this controller
+     * @param Article $article
+     * @return void
      */
     private function createTagsFromAnArticle(Article $article)
     {
+        /**
+         * it searches inside the content of the article as a parameter and look for '#', it specifies the beginning of the name of the tag, the end is either another '#'(witch also specifies the beginning of another tag  name) or a whitespace.
+         *
+         * it searches inside $article->content and put the result in $tagNames which is an array of  arrayes containg 2 elements. The first one is the result of the search but each string is prefixed with '#' which is why we won't use  it since the prefix won't be needed to insert the name create the tag and this is when the second element comes and  why I used $tagNames[1]
+         */
         preg_match_all('/#([^\s#]+)/u', $article->content, $tagNames);
 
         $tagIds = collect($tagNames[1])
-            ->unique()
+            ->unique() // to remove  duplicates in $tagNames[1] case there are some
+
+            /**
+             * It first check if the tag already exist in the database and if not, it creates it with the id of the author of the article as the user_id
+             */
             ->map(function (string $TagName) use ($article) {
                 $tag = Tag::query()
                     ->where('name', $TagName)
@@ -144,6 +156,11 @@ class ArticleController extends Controller
             })
             ->all();
 
+        /**
+         * This insert each tag id inside the article_tag table with the id of the article as the article_id since the tags and articles tables have a many to many relationship
+         *
+         * Check the Tag and Article Model classes for more details
+         */
         $article->tags()->sync($tagIds);
     }
 
