@@ -173,6 +173,8 @@ class ArticleController extends Controller
     {
         $article = $request->user()->articles()->create($request->validated());
 
+        $this->createTagsFromAnArticle($article);
+
         Inertia::flash('success', 'The article was successfully created');
 
         return redirect()->route('dashboard');
