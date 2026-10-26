@@ -24,7 +24,20 @@ export function truncatedContent(isDetailed: boolean, content: string, maxLength
         return content;
     }
     else {
-        return isDetailed ? content : content.substring(0, maxLength) + '...';
+        if(!isDetailed){
+            const truncatedContentByLenght = content.substring(0, maxLength) + '...'
+
+            const arrayOfContentDividedByLine = truncatedContentByLenght.split(/\r?\n/);
+
+            if (arrayOfContentDividedByLine.length > maxLines) {
+                return arrayOfContentDividedByLine.slice(0, maxLines).join('\n') + '...';
+            }
+
+            return truncatedContentByLenght
+
+        }
+
+        return content
     }
 }
 
