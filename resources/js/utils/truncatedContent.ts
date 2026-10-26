@@ -4,19 +4,27 @@
  * Picture a long text, well this function will return the full text if the boolean is true or the truncated content, which means the 500 characters(or any  other number you provided) with '...' to indicate that there's more, if the variable is true
  */
 
-export function truncatedContent(isDetailed: boolean, content: string, maxLength: number = 500): string {
+export function truncatedContent(isDetailed: boolean, content: string, maxLength: number = 500, maxLines: number = 5): string {
     if (content.length <= maxLength) {
-    //     if (!isDetailed) {
-    //         const lines = content.split(/\r?\n/);
+        if (!isDetailed) {
+            /**
+             * This variable split the content parameter with the line breaks used in an operating system
+             * split(/\r?\n/) handles both Unix (\n) and Windows (\r\n) line breaks
+             */
+            const arrayOfContentDividedByLine = content.split(/\r?\n/);
 
-    //         if (lines.length > 3) {
-    //             return lines.slice(0, 3).join('\n') + '...';
-    //         }
-    //     }
+            /**
+             * If we have more than the maxLines in the parameter, then we only show the first maxLines lines
+             */
+            if (arrayOfContentDividedByLine.length > maxLines) {
+                return arrayOfContentDividedByLine.slice(0, maxLines).join('\n') + '...';
+            }
+        }
 
-    //     return content;
-    // }
-    // else {
-    //     return isDetailed ? content : content.substring(0, maxLength) + '...';
-    // }
+        return content;
+    }
+    else {
+        return isDetailed ? content : content.substring(0, maxLength) + '...';
+    }
 }
+
