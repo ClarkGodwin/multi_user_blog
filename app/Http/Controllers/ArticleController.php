@@ -208,6 +208,8 @@ class ArticleController extends Controller
         $validated = $request->validated();
         $article->update(collect($validated)->except('id')->all());
 
+        $this->createTagsFromAnArticle($article);
+
         Inertia::flash('success', 'The Article was successfully updated');
 
         return redirect()->route('dashboard');
