@@ -17,6 +17,7 @@ import {
 
 import { Button } from '@/components/ui/button'
 import { formattedRelativeDate } from '@/utils/formattedRelativeDate';
+import { truncatedContent } from '@/utils/truncatedContent';
 
 defineProps<{
     comment: Comment
@@ -72,7 +73,7 @@ defineProps<{
         </div>
 
         <div class="text-article-view-content whitespace-pre-wrap">
-            {{ isDetails ? comment.content : comment.content.substring(0, 500) + '...' }}
+            {{ truncatedContent(isDetails, comment.content) }}
         </div>
 
         <div class="text-article-view-name text-dark-surface-400 dark:text-surface-400">

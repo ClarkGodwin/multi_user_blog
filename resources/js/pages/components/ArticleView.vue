@@ -18,6 +18,7 @@ import {
 
 import { Button } from '@/components/ui/button'
 import { formattedRelativeDate } from '@/utils/formattedRelativeDate';
+import { truncatedContent } from '@/utils/truncatedContent';
 
 defineProps<{
     user: User
@@ -82,7 +83,7 @@ defineProps<{
         <div class="text-center text-article-view-title font-bold">{{ article.title }}</div>
 
         <div class="text-article-view-content whitespace-pre-wrap">
-            {{  }}
+            {{ truncatedContent(isDetails, article.content) }}
         </div>
 
         <!-- To show the number of  comments and when the article was published -->
