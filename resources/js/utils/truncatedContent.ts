@@ -7,24 +7,12 @@
 export function truncatedContent(isDetailed: boolean, content: string, maxLength: number = 500, maxLines: number = 5): string {
     if (content.length <= maxLength) {
         if (!isDetailed) {
-            /**
-             * This variable split the content parameter with the line breaks used in an operating system
-             * split(/\r?\n/) handles both Unix (\n) and Windows (\r\n) line breaks
-             */
-            const arrayOfContentDividedByLine = content.split(/\r?\n/);
-
-            /**
-             * If we have more than the maxLines in the parameter, then we only show the first maxLines lines
-             */
-            if (arrayOfContentDividedByLine.length > maxLines) {
-                return arrayOfContentDividedByLine.slice(0, maxLines).join('\n') + '...';
-            }
         }
 
         return content;
     }
     else {
-        if(!isDetailed){
+        if (!isDetailed) {
             const truncatedContentByLenght = content.substring(0, maxLength) + '...'
 
             const arrayOfContentDividedByLine = truncatedContentByLenght.split(/\r?\n/);
@@ -41,7 +29,20 @@ export function truncatedContent(isDetailed: boolean, content: string, maxLength
     }
 }
 
-function truncatedContentByLine(content: string, maxLines: number) : string {
-    
+function truncatedContentByLine(content: string, maxLines: number): string {
+    /**
+     * This variable split the content parameter with the line breaks used in an operating system
+     * split(/\r?\n/) handles both Unix (\n) and Windows (\r\n) line breaks
+     */
+    const arrayOfContentDividedByLine = content.split(/\r?\n/);
+
+    /**
+     * If we have more than the maxLines in the parameter, then we only show the first maxLines lines
+     */
+    if (arrayOfContentDividedByLine.length > maxLines) {
+        return arrayOfContentDividedByLine.slice(0, maxLines).join('\n') + '...';
+    }
+
+    return content
 }
 
