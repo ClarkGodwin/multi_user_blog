@@ -41,3 +41,7 @@ export function truncatedContent(isDetailed: boolean, content: string, maxLength
     }
 }
 
+function truncatedContentByLine(content: string, maxLines: number) : string {
+    
+}
+
