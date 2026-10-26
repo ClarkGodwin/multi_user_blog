@@ -6,6 +6,7 @@ use App\Enums\ArticleStatusEnum;
 use App\Http\Requests\Article\StoreArticleRequest;
 use App\Http\Requests\Article\UpdateArticleRequest;
 use App\Models\Article;
+use App\Models\Tag;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Auth;
@@ -16,7 +17,7 @@ class ArticleController extends Controller
 {
     /**
      * it returns the paginated articles of the authenticated author corresponding to a specific status
-     * @param string $status
+     *
      * @return LengthAwarePaginator<int, Article>
      */
     private function articlesByStatus(string $status)
@@ -39,7 +40,7 @@ class ArticleController extends Controller
 
     /**
      * Display the details of an article.
-     * @param Article $article
+     *
      * @return Response
      */
     public function details(Article $article)
@@ -111,6 +112,7 @@ class ArticleController extends Controller
 
     /**
      * Show the form for creating a new resource.
+     *
      * @return Response
      */
     public function create()
@@ -119,13 +121,29 @@ class ArticleController extends Controller
     }
 
     /**
+     * to extract the tags from an article
+     * @param string $content
+     * @return array
+     */
+    private function extractTags(Article $article): array
+    {
+        preg_match_all('/#([^\s#]+)/u', $article->content, $tagsContent);
+
+        if($tagsContent){
+            foreach($tagsContent as $tagContent){
+                Tag::create([]);
+            }
+        }
+    }
+
+    /**
      * Store a newly created resource in storage.
-     * @param StoreArticleRequest $request
+     *
      * @return RedirectResponse
      */
     public function store(StoreArticleRequest $request)
     {
-        $request->user()->articles()->create($request->validated());
+        $article = $request->user()->articles()->create($request->validated());
 
         Inertia::flash('success', 'The article was successfully created');
 
@@ -142,7 +160,7 @@ class ArticleController extends Controller
 
     /**
      * Show the form for editing the specified resource.
-     * @param Article $article
+     *
      * @return Response
      */
     public function edit(Article $article)
@@ -152,8 +170,7 @@ class ArticleController extends Controller
 
     /**
      * Update the specified resource in storage.
-     * @param UpdateArticleRequest $request
-     * @param Article $article
+     *
      * @return RedirectResponse
      */
     public function update(UpdateArticleRequest $request, Article $article)
@@ -168,7 +185,7 @@ class ArticleController extends Controller
 
     /**
      * Remove the specified resource from storage.
-     * @param Article $article
+     *
      * @return RedirectResponse
      */
     public function destroy(Article $article)
