@@ -122,18 +122,29 @@ class ArticleController extends Controller
 
     /**
      * to extract the tags from an article
-     * @param string $content
-     * @return array
      */
-    private function extractTags(Article $article): array
+    private function createTagsFromAnArticle(Article $article)
     {
-        preg_match_all('/#([^\s#]+)/u', $article->content, $tagsContent);
+        preg_match_all('/#([^\s#]+)/u', $article->content, $tagNames);
 
-        if($tagsContent){
-            foreach($tagsContent as $tagContent){
-                Tag::create([]);
-            }
-        }
+        $tagIds = collect($tagNames[1])
+            ->unique()
+            ->map(function (string $TagName) use ($article) {
+                $tag = Tag::query()
+                    ->where('name', $TagName)
+                    ->first();
+
+                if ($tag === null) {
+                    $tag = $article->user->tags()->create([
+                        'name' => $TagName,
+                    ]);
+                }
+
+                return $tag->id;
+            })
+            ->all();
+
+        $article->tags()->sync($tagIds);
     }
 
     /**
