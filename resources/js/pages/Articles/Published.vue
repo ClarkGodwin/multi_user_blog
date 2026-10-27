@@ -5,6 +5,7 @@ import { User, UserRoleEnum } from '@/types';
 import Button from '../components/Button.vue';
 import type { ArticlesPaginated } from '@/types/article.js';
 import { create, published } from '@/routes/article/index.js';
+import BecomeAnAuthor from '../components/BecomeAnAuthor.vue';
 
 defineOptions({
     layout: {
@@ -30,15 +31,7 @@ defineProps<{
     <Head title="Articles" />
 
     <!-- for the part where the user has not yet an author role -->
-    <div v-if="auth.user.role != UserRoleEnum.Author"
-        class="w-fit mx-auto flex flex-col justify-center items-center gap-articles-notAnAuthor-gap min-h-[90%] text-articles-notAnAuthor">
-        <div>It seems like you're trying to create articles without being registered as an author</div>
-        <Link :href="toAuthor()" method="post">
-            <Button class="w-fit hover:cursor-pointer">
-                Become an author
-            </Button>
-        </Link>
-    </div>
+    <BecomeAnAuthor v-if="auth.user.role != UserRoleEnum.Author"/>
 
     <!-- for the part where the user has an author role -->
     <div v-else class="min-h-[90%]">
