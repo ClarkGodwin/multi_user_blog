@@ -38,7 +38,7 @@ defineProps<{
             </div>
 
             <div v-if="isDetails" class="flex gap-2.5 **:size-(--text-article-view-content)">
-                <div v-if="canTheAuthenticatedUserUpdateTheComment">
+                <div v-if="canTheAuthenticatedUserUpdateTheComment" class="hover:cursor-pointer">
                     <PencilLine class="text-green-500" @click="$emit('editAComment')"/>
                 </div>
 
@@ -61,7 +61,7 @@ defineProps<{
                                     No
                                 </Button>
                             </DialogClose>
-                            <Link :href="destroy(comment.id)" method="delete" v-if="canTheAuthenticatedUserDeleteTheComment">
+                            <Link :href="destroy(comment.id)" method="delete" class="hover:cursor-pointer" v-if="canTheAuthenticatedUserDeleteTheComment">
                                 <Button class="w-full">
                                     Yes
                                 </Button>

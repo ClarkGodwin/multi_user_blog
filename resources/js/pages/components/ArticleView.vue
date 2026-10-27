@@ -68,7 +68,7 @@ defineProps<{
                                     No
                                 </Button>
                             </DialogClose>
-                            <Link :href="destroy(article)" method="delete">
+                            <Link :href="destroy(article)" method="delete" class="hover:cursor-pointer">
                                 <!-- To delete -->
                                 <Button class="w-full" v-if="canTheAuthenticatedUserDeleteTheArticle">
                                     Yes
