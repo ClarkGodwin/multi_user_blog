@@ -8,6 +8,7 @@ import { craft, create, details } from '@/routes/article/index.js';
 import ArticleView from '../components/ArticleView.vue';
 import Pagination from '../components/Pagination.vue';
 import BecomeAnAuthor from '../components/BecomeAnAuthor.vue';
+import CreateAnArticleLink from '../components/CreateAnArticleLink.vue';
 
 defineOptions({
     layout: {
@@ -38,17 +39,7 @@ console.log(props.articles)
 
     <!-- for the part where the user has an author role -->
     <div v-else class="min-h-[90%]">
-        <div v-if="articles.data.length == 0"
-            class="w-fit mx-auto flex flex-col justify-center items-center gap-articles-notAnAuthor-gap min-h-[90%] text-articles-notAnAuthor">
-            <div>
-                It seems like you've never created an article
-            </div>
-            <Link :href="create()">
-                <Button class="w-fit hover:cursor-pointer">
-                    Create an article
-                </Button>
-            </Link>
-        </div>
+        <CreateAnArticleLink  v-if="articles.data.length == 0"/>
 
         <div v-else>
             <Pagination class="mb-10" :paginationLinks="articles.links" />
