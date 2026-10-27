@@ -5,28 +5,13 @@
  */
 
 export function truncatedContent(isDetailed: boolean, content: string, maxLength: number = 500, maxLines: number = 5): string {
-    if (content.length <= maxLength) {
-        if (!isDetailed) {
-        }
-
-        return content;
-    }
-    else {
-        if (!isDetailed) {
-            const truncatedContentByLenght = content.substring(0, maxLength) + '...'
-
-            const arrayOfContentDividedByLine = truncatedContentByLenght.split(/\r?\n/);
-
-            if (arrayOfContentDividedByLine.length > maxLines) {
-                return arrayOfContentDividedByLine.slice(0, maxLines).join('\n') + '...';
-            }
-
-            return truncatedContentByLenght
-
-        }
-
+    if (isDetailed) {
         return content
     }
+
+    return content.length <= maxLength ?
+        truncatedContentByLine(content, maxLines) :
+        truncatedContentByLine(content.substring(0, maxLength) + '...', maxLines)
 }
 
 function truncatedContentByLine(content: string, maxLines: number): string {
