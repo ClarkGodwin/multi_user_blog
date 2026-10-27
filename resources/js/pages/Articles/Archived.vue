@@ -4,9 +4,11 @@ import { toAuthor } from '@/routes';
 import { User, UserRoleEnum } from '@/types';
 import Button from '../components/Button.vue';
 import type { ArticlesPaginated } from '@/types/article.js';
-import { archived, create } from '@/routes/article/index.js';
+import { archived, create, details } from '@/routes/article/index.js';
 import BecomeAnAuthor from '../components/BecomeAnAuthor.vue';
 import CreateAnArticleLink from '../components/CreateAnArticleLink.vue';
+import ArticleView from '../components/ArticleView.vue';
+import Pagination from '../components/Pagination.vue';
 
 defineOptions({
     layout: {
@@ -39,9 +41,11 @@ defineProps<{
         <CreateAnArticleLink  v-if="articles.data.length == 0"/>
 
         <div v-else>
-            <div v-for="article in articles.data" :key="article.id">
-                {{ article.title }}
-            </div>
+            <Pagination class="mb-10" :paginationLinks="articles.links" />
+
+            <Link v-for="article in articles.data" :key="article.id" :href="details(article)">
+                <ArticleView :article="article" :user="auth.user" />
+            </Link>
         </div>
     </div>
 </template>

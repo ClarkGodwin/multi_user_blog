@@ -38,11 +38,6 @@ defineProps<{
     <div v-else class="min-h-[90%]">
         <CreateAnArticleLink  v-if="articles.data.length == 0"/>
 
-        <!-- <div v-else>
-            <div v-for="article in articles.data" :key="article.id">
-                {{ article.title }}
-            </div>
-        </div> -->
         <div v-else>
             <Pagination class="mb-10" :paginationLinks="articles.links" />
 
