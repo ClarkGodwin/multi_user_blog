@@ -33,8 +33,8 @@ defineProps<{
         </SelectTrigger>
         <SelectContent>
             <SelectGroup>
-                <SelectItem v-for="option in inputItem.type.options" :value="option.toLowerCase()">
-                    {{ option }}
+                <SelectItem v-for="option in inputItem.type.options" :value="option">
+                    {{ option.charAt(0).toUpperCase() + option.slice(1) }}
                 </SelectItem>
             </SelectGroup>
         </SelectContent>

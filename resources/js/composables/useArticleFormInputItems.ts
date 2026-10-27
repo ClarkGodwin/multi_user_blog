@@ -1,4 +1,4 @@
-import { Article } from "@/types/article"
+import { Article, ArticleStatusEnum } from "@/types/article"
 import { InputItem } from "@/types/input"
 
 export function getArticleFormInputItem(isUpdate?: boolean, article?: Article): InputItem[] {
@@ -31,7 +31,7 @@ export function getArticleFormInputItem(isUpdate?: boolean, article?: Article): 
             type: {
                 kind: 'SelectType',
                 type: 'select',
-                options: ['Published', 'Craft']
+                options: Object.values(ArticleStatusEnum)
             },
             name: 'status',
             required: true,
