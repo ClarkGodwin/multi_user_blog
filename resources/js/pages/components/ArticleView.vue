@@ -19,6 +19,7 @@ import {
 import { Button } from '@/components/ui/button'
 import { formattedRelativeDate } from '@/utils/formattedRelativeDate';
 import { truncatedContent } from '@/utils/truncatedContent';
+import { truncatedContentSegments } from '@/utils/truncatedContentSegments';
 
 defineProps<{
     user: User
@@ -82,8 +83,12 @@ defineProps<{
 
         <div class="text-center text-article-view-title font-bold">{{ article.title }}</div>
 
-        <div class="text-article-view-content whitespace-pre-wrap">
-            {{ truncatedContent(isDetails, article.content) }}
+        <div
+        v-for="(segment, index) in truncatedContentSegments(isDetails, article.content)"
+        :key="index"
+        :class="{'text-blue-600 dark:text-blue-400' : segment.isTag}"
+        class="text-article-view-content whitespace-pre-wrap">
+            {{ segment.text }}
         </div>
 
         <!-- To show the number of  comments and when the article was published -->
