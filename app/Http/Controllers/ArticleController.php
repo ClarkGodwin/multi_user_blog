@@ -177,7 +177,8 @@ class ArticleController extends Controller
 
         Inertia::flash('success', 'The article was successfully created');
 
-        return redirect()->route('dashboard');
+        //to redirect in published, craft or archived page depending on which status the user gave his article. Check web.php for more details
+        return redirect()->route('article.'. $article->status);
     }
 
     /**
@@ -212,7 +213,7 @@ class ArticleController extends Controller
 
         Inertia::flash('success', 'The Article was successfully updated');
 
-        return redirect()->route('dashboard');
+        return redirect()->route('article.details', $article);
     }
 
     /**
