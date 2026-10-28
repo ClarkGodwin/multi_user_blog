@@ -9,7 +9,7 @@ use Inertia\Inertia;
 Route::inertia('/', 'Welcome')->name('home');
 
 Route::middleware(['auth', 'verified'])->group(function () {
-    Route::inertia('home', 'Home')->name('dashboard');
+    Route::get('home', [ArticleController::class,  'home'])->name('dashboard');
 
     Route::post('toAuthor', function () {
         $user = auth()->user();
