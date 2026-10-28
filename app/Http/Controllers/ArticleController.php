@@ -15,6 +15,10 @@ use Inertia\Response;
 
 class ArticleController extends Controller
 {
+    public function home() {}
+
+
+
     /**
      * it returns the paginated articles of the authenticated author corresponding to a specific status
      *
