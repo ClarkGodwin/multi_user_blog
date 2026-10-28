@@ -4,6 +4,7 @@ import { InputItem } from '@/types/input.js';
 import Form from '../components/Form.vue';
 import { create, store } from '@/routes/article/index.js';
 import { getArticleFormInputItem } from '@/composables/useArticleFormInputItems.js';
+import { User, UserRoleEnum } from '@/types/auth.js';
 
 defineOptions({
     layout: {
@@ -16,9 +17,16 @@ defineOptions({
     },
 });
 
+defineProps<{
+    auth : {
+        user : User
+    }
+}>()
+
 </script>
 
 <template>
     <Head title="Create an article" />
-    <Form formTitle="Create an article" :action="store()" :input-items="getArticleFormInputItem()"/>
+    <BecomeAnAuthor v-if="auth.user.role != UserRoleEnum.Author"/>
+    <Form v-else formTitle="Create an article" :action="store()" :input-items="getArticleFormInputItem()"/>
 </template>
