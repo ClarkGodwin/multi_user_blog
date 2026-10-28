@@ -7,6 +7,7 @@ export type Comment = {
     content : string;
     user : User;
     created_at : string;
+    updated_at : string;
 }
 
 export type CommentPermissions = {

@@ -77,7 +77,7 @@ defineProps<{
         </div>
 
         <div class="text-article-view-name text-dark-surface-400 dark:text-surface-400">
-            {{ formattedRelativeDate(comment.created_at) }}
+            {{ formattedRelativeDate(comment.updated_at) }}
         </div>
     </section>
 </template>

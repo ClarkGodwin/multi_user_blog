@@ -96,7 +96,7 @@ defineProps<{
                 <MessageSquare class="size-(--text-article-view-name)" />
                 {{ article.comments_count }}
             </div>
-            <div>{{ formattedRelativeDate(article.created_at) }}</div>
+            <div>{{ formattedRelativeDate(article.updated_at) }}</div>
         </div>
 
     </section>

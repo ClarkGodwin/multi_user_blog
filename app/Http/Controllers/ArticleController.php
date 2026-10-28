@@ -15,7 +15,22 @@ use Inertia\Response;
 
 class ArticleController extends Controller
 {
-    public function home() {}
+    public function home() {
+        $articles = Article::orderBy('updated_at', 'desc')
+            ->select([
+                'id',
+                'title',
+                'content',
+                'created_at',
+                'updated_at',
+            ])
+            ->withCount('comments')
+            ->paginate(30)
+            ->onEachSide(1)
+            ->withQueryString();
+
+        return Inertia::render('Home', compact('articles'));
+    }
 
 
 
@@ -62,7 +77,7 @@ class ArticleController extends Controller
         $comments = $article->comments()
             ->orderBy('created_at', 'desc')
             ->with('user:id,name,avatar')
-            ->select(['id', 'article_id', 'user_id', 'content', 'created_at'])
+            ->select(['id', 'article_id', 'user_id', 'content', 'updated_at'])
             ->paginate(10)
             ->onEachSide(1)
             ->withQueryString();
