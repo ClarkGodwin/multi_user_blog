@@ -19,11 +19,13 @@ class ArticleController extends Controller
         $articles = Article::orderBy('updated_at', 'desc')
             ->select([
                 'id',
+                'user_id',
                 'title',
                 'content',
                 'created_at',
                 'updated_at',
             ])
+            ->with('user:id,name,avatar')
             ->withCount('comments')
             ->paginate(30)
             ->onEachSide(1)

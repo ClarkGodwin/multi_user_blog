@@ -1,9 +1,12 @@
+import { User } from "./auth";
+
 export type Article = {
     id : number;
     user_id : number;
     title : string;
     content : string;
     status : ArticleStatusEnum;
+    author?: User
     comments_count? : number;
     created_at : string;
     updated_at : string;
