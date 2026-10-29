@@ -1,3 +1,8 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { Search } from '@lucide/vue';
 
-<template></template>
+</script>
+
+<template>
+    <Search/>
+</template>
