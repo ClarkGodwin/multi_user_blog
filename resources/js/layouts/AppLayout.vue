@@ -4,11 +4,12 @@ import type { BreadcrumbItem } from '@/types';
 
 const { breadcrumbs = [] } = defineProps<{
     breadcrumbs?: BreadcrumbItem[];
+    showSearch?: boolean;
 }>();
 </script>
 
 <template>
-    <AppLayout :breadcrumbs="breadcrumbs">
+    <AppLayout :show-search="showSearch" :breadcrumbs="breadcrumbs">
         <slot />
     </AppLayout>
 </template>

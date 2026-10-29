@@ -8,10 +8,12 @@ import type { BreadcrumbItem } from '@/types';
 
 type Props = {
     breadcrumbs?: BreadcrumbItem[];
+    showSearch?: boolean;
 };
 
 withDefaults(defineProps<Props>(), {
     breadcrumbs: () => [],
+    showSearch: false,
 });
 </script>
 
@@ -19,7 +21,7 @@ withDefaults(defineProps<Props>(), {
     <AppShell variant="sidebar">
         <AppSidebar />
         <AppContent variant="sidebar" class="min-w-0 overflow-x-clip">
-            <AppSidebarHeader :breadcrumbs="breadcrumbs" />
+            <AppSidebarHeader :show-search="showSearch" :breadcrumbs="breadcrumbs" />
             <slot />
         </AppContent>
         <Toaster />
