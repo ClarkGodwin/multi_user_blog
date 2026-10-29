@@ -6,7 +6,7 @@ export type Article = {
     title : string;
     content : string;
     status : ArticleStatusEnum;
-    author?: User
+    user?: User
     comments_count? : number;
     created_at : string;
     updated_at : string;

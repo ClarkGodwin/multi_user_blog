@@ -1,11 +1,12 @@
 <script setup lang="ts">
-import { Head } from '@inertiajs/vue3';
+import { Head, Link } from '@inertiajs/vue3';
 import { dashboard } from '@/routes';
 import { ArticlesPaginated } from '@/types/article';
 import CreateAnArticleLink from './components/CreateAnArticleLink.vue';
 import Pagination from './components/Pagination.vue';
 import ArticleView from './components/ArticleView.vue';
 import { details } from '@/routes/article/index.js';
+import { User } from '@/types/auth.js';
 
 defineOptions({
     layout: {
@@ -19,6 +20,9 @@ defineOptions({
 });
 
 defineProps<{
+    auth: {
+        user: User
+    }
     articles: ArticlesPaginated
 }>()
 </script>
@@ -33,7 +37,7 @@ defineProps<{
         <Pagination class="mb-10" :paginationLinks="articles.links" />
 
         <Link v-for="article in articles.data" :key="article.id" :href="details(article)">
-            <ArticleView :article="article" :user="article.author!" />
+            <ArticleView :article="article" :user="article.user!" />
         </Link>
 
     </div>
