@@ -25,6 +25,7 @@ class ArticleController extends Controller
                 'created_at',
                 'updated_at',
             ])
+            ->where('status', ArticleStatusEnum::Published->value)
             ->with('user:id,name,avatar')
             ->withCount('comments')
             ->paginate(30)
