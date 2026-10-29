@@ -7,6 +7,7 @@ import Pagination from './components/Pagination.vue';
 import ArticleView from './components/ArticleView.vue';
 import { details } from '@/routes/article/index.js';
 import { User } from '@/types/auth.js';
+import Search from './components/Search.vue';
 
 defineOptions({
     layout: {
@@ -16,6 +17,7 @@ defineOptions({
                 href: dashboard(),
             },
         ],
+        showSearch: true,
     },
 });
 

@@ -4,5 +4,5 @@ import { Search } from '@lucide/vue';
 </script>
 
 <template>
-    <Search/>
+    <Search class="text-dark-surface-300 dark:text-surface-300 hover:cursor-pointer"/>
 </template>
