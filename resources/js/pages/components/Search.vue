@@ -69,6 +69,10 @@ function isString(value: unknown): value is string {
     return typeof value === 'string';
 }
 
+
+/**
+ * To asynchronoulsy fetch the datas from the url for the search or the tagSuggestion
+ */
 async function fetchList<T>(
     url: string,
     signal: AbortSignal,
@@ -80,20 +84,26 @@ async function fetchList<T>(
     });
 
     if (!response.ok) {
-        throw new Error(`La recherche a échoué (${response.status}).`);
+        throw new Error(`The search failed (${response.status}).`);
     }
 
     const payload: unknown = await response.json();
 
+    //If the answer is not an object
     if (!isDataEnvelope(payload)) {
-        throw new Error('La réponse de recherche est invalide.');
+        throw new Error('The search results are invalid.');
     }
 
     const items: T[] = [];
 
     for (const item of payload.data) {
+        /**
+         * If an answer doesn't correspond to the type T
+         *
+         * For example, if we make the fetch request with T as SearchArticle, isItem will have the type SearchArticle and if the item doesn't correspond to that type, throw an error,  and if it corresponds, well, the item will be pushed inside items
+         */
         if (!isItem(item)) {
-            throw new Error('Un résultat de recherche est invalide.');
+            throw new Error('A search result is invalid.');
         }
 
         items.push(item);
