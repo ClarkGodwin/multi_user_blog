@@ -7,7 +7,10 @@ use App\Http\Requests\Article\StoreArticleRequest;
 use App\Http\Requests\Article\UpdateArticleRequest;
 use App\Models\Article;
 use App\Models\Tag;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
@@ -15,7 +18,8 @@ use Inertia\Response;
 
 class ArticleController extends Controller
 {
-    public function home() {
+    public function home()
+    {
         $articles = Article::orderBy('updated_at', 'desc')
             ->select([
                 'id',
@@ -35,7 +39,37 @@ class ArticleController extends Controller
         return Inertia::render('Home', compact('articles'));
     }
 
+    public function search(Request $request): JsonResponse
+    {
+        $filters = $request->validate([
+            'q' => ['nullable', 'string', 'max:100'],
+            'tag' => ['nullable', 'string', 'max:80'],
+        ]);
 
+        $term = trim($filters['q'] ?? '');
+        $tag = trim($filters['tag'] ?? '');
+
+        $articles = Article::query()
+            ->where('status', ArticleStatusEnum::Published->value)
+            ->when($tag !== '', function (Builder $query) use ($tag) {
+                $query->whereHas('tags', function (Builder $tagQuery) use ($tag) {
+                    $tagQuery->where('name', $tag);
+                });
+            })
+            ->when($tag === '' && $term !== '', function (Builder $query) use ($term) {
+                $query->where(function (Builder $textQuery) use ($term) {
+                    $textQuery
+                        ->where('title', 'like', "%{$term}%")
+                        ->orWhere('content', 'like', "%{$term}%");
+                });
+            })
+            ->select(['id', 'user_id', 'title', 'updated_at'])
+            ->orderByDesc('updated_at')
+            ->limit(8)
+            ->get();
+
+        return response()->json(['data' => $articles]);
+    }
 
     /**
      * it returns the paginated articles of the authenticated author corresponding to a specific status
@@ -145,7 +179,7 @@ class ArticleController extends Controller
     /**
      * This is a function to create tags from an article.
      * It's meant to be used in both the store and  update functions inside  this controller
-     * @param Article $article
+     *
      * @return void
      */
     private function createTagsFromAnArticle(Article $article)
@@ -199,8 +233,8 @@ class ArticleController extends Controller
 
         Inertia::flash('success', 'The article was successfully created');
 
-        //to redirect in published, craft or archived page depending on which status the user gave his article. Check web.php for more details
-        return redirect()->route('article.'. $article->status);
+        // to redirect in published, craft or archived page depending on which status the user gave his article. Check web.php for more details
+        return redirect()->route('article.'.$article->status);
     }
 
     /**
