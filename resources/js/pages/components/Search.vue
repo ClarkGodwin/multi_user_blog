@@ -38,6 +38,13 @@ let debounceTimer: ReturnType<typeof setTimeout> | undefined;
  */
 let activeController: AbortController | undefined;
 
+
+
+/**
+ * Since Typescript doesn't check the type of datas returned by the controller, the following functions will do that job before they're used in a function
+ *
+ */
+
 function isDataEnvelope(value: unknown): value is { data: unknown[] } {
     return (
         typeof value === 'object' &&
