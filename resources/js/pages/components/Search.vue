@@ -69,6 +69,39 @@ function isString(value: unknown): value is string {
     return typeof value === 'string';
 }
 
+async function fetchList<T>(
+    url: string,
+    signal: AbortSignal,
+    isItem: (value: unknown) => value is T,
+): Promise<T[]> {
+    const response = await fetch(url, {
+        headers: { Accept: 'application/json' },
+        signal,
+    });
+
+    if (!response.ok) {
+        throw new Error(`La recherche a échoué (${response.status}).`);
+    }
+
+    const payload: unknown = await response.json();
+
+    if (!isDataEnvelope(payload)) {
+        throw new Error('La réponse de recherche est invalide.');
+    }
+
+    const items: T[] = [];
+
+    for (const item of payload.data) {
+        if (!isItem(item)) {
+            throw new Error('Un résultat de recherche est invalide.');
+        }
+
+        items.push(item);
+    }
+
+    return items;
+}
+
 </script>
 
 <template>
