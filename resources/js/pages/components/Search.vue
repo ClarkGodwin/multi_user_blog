@@ -112,6 +112,71 @@ async function fetchList<T>(
     return items;
 }
 
+
+
+watch([query, selectedTag], ([rawQuery, chosenTag]) => {
+    if (debounceTimer) {
+        clearTimeout(debounceTimer);
+    }
+
+    activeController?.abort();
+
+    const value = rawQuery.trim();
+    const isChosenTag = chosenTag !== null && value === `#${chosenTag}`;
+
+    articles.value = [];
+    tagSuggestions.value = [];
+    searchError.value = '';
+
+    if (value === '') {
+        loading.value = false;
+        return;
+    }
+
+    debounceTimer = setTimeout(async () => {
+        const controller = new AbortController();
+        activeController = controller;
+        loading.value = true;
+
+        try {
+            if (isChosenTag) {
+                const url = `/article-search?tag=${encodeURIComponent(chosenTag)}`;
+                articles.value = await fetchList(
+                    url,
+                    controller.signal,
+                    isSearchArticle,
+                );
+            } else if (value.startsWith('#')) {
+                const tagTerm = value.slice(1);
+                const url = `/tag-suggestions?q=${encodeURIComponent(tagTerm)}`;
+
+                tagSuggestions.value = await fetchList(
+                    url,
+                    controller.signal,
+                    isString,
+                );
+            } else {
+                const url = `/article-search?q=${encodeURIComponent(value)}`;
+                articles.value = await fetchList(
+                    url,
+                    controller.signal,
+                    isSearchArticle,
+                );
+            }
+        } catch {
+            if (!controller.signal.aborted) {
+                searchError.value =
+                    'La recherche est momentanément indisponible.';
+            }
+        } finally {
+            if (activeController === controller) {
+                loading.value = false;
+                activeController = undefined;
+            }
+        }
+    }, 250);
+});
+
 </script>
 
 <template>
