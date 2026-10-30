@@ -226,6 +226,27 @@ onBeforeUnmount(() => {
                     <SearchIcon />
                 </InputGroupAddon>
             </InputGroup>
+
+            <div>
+                <p v-if="loading">Search in progress…</p>
+                <p v-else-if="searchError" role="alert">{{ searchError }}</p>
+
+                <ul v-else-if="query.trim().startsWith('#') && selectedTag === null">
+                    <li v-for="tag in tagSuggestions" :key="tag">
+                        <button type="button" @click="selectTag(tag)">
+                            #{{ tag }}
+                        </button>
+                    </li>
+                </ul>
+
+                <ul v-else>
+                    <li v-for="article in articles" :key="article.id">
+                        <a :href="`/article/detail/${article.id}`">
+                            {{ article.title }}
+                        </a>
+                    </li>
+                </ul>
+            </div>
         </DialogContent>
     </Dialog>
 </template>
