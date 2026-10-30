@@ -73,6 +73,14 @@ class ArticleController extends Controller
         return response()->json(['data' => $articles]);
     }
 
+    /**
+     * To show a suggestion of tag if the search starts with a '#'
+     *
+     * It shows suggestions based on the characters in the search, for a the suggestion to be returned, its name must contain the characters in the search, not necesseraly in the same order
+     *
+     * @param Request $request
+     * @return JsonResponse
+     */
     public function tagSuggestions(Request $request): JsonResponse
     {
         $filters = $request->validate([
