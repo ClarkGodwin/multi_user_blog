@@ -220,7 +220,8 @@ onBeforeUnmount(() => {
         </DialogTrigger>
         <DialogContent :show-close-button="false" class="w-dialog-content top-4 translate-y-0">
             <InputGroup>
-                <InputGroupInput placeholder="Search..." />
+                <InputGroupInput :model-value="query" placeholder="Search an article or enter a #tag..."
+                    @update:model-value="onQueryInput" />
                 <InputGroupAddon>
                     <SearchIcon />
                 </InputGroupAddon>
