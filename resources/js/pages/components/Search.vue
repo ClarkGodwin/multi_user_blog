@@ -203,6 +203,14 @@ function selectTag(tag: string) {
     query.value = `#${tag}`;
 }
 
+onBeforeUnmount(() => {
+    if (debounceTimer) {
+        clearTimeout(debounceTimer);
+    }
+
+    activeController?.abort();
+});
+
 </script>
 
 <template>
