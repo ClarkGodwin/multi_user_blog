@@ -39,10 +39,6 @@ class ArticleController extends Controller
         return Inertia::render('Home', compact('articles'));
     }
 
-    /**
-     * @param Request $request
-     * @return JsonResponse
-     */
     public function search(Request $request): JsonResponse
     {
         $filters = $request->validate([
@@ -51,13 +47,13 @@ class ArticleController extends Controller
         ]);
 
         $term = trim($filters['q'] ?? '');
-        //the tag is considered as the word with the character '#' as a prefix
+        // the tag is considered as the word with the character '#' as a prefix
         $tag = trim($filters['tag'] ?? '');
 
         $articles = Article::query()
             ->where('status', ArticleStatusEnum::Published->value)
             ->when($tag !== '', function (Builder $query) use ($tag) {
-                //If it's a tag, it'll search among the articles with the relationship tags and check where the name corresponds  to the name of a tag in the database
+                // If it's a tag, it'll search among the articles with the relationship tags and check where the name corresponds  to the name of a tag in the database
                 $query->whereHas('tags', function (Builder $tagQuery) use ($tag) {
                     $tagQuery->where('name', $tag);
                 });
@@ -75,6 +71,29 @@ class ArticleController extends Controller
             ->get();
 
         return response()->json(['data' => $articles]);
+    }
+
+    public function tagSuggestions(Request $request): JsonResponse
+    {
+        $filters = $request->validate([
+            'q' => ['nullable', 'string', 'max:80'],
+        ]);
+
+        $term = trim($filters['q'] ?? '');
+
+        $tags = Tag::query()
+            ->whereHas('articles', function (Builder $articleQuery) {
+                $articleQuery->where('status', ArticleStatusEnum::Published->value);
+            })
+            ->when($term !== '', function (Builder $query) use ($term) {
+                $query->where('name', 'like', "%{$term}%");
+            })
+            ->distinct()
+            ->orderBy('name')
+            ->limit(8)
+            ->pluck('name');
+
+        return response()->json(['data' => $tags]);
     }
 
     /**
