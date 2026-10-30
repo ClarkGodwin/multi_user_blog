@@ -198,6 +198,11 @@ function onQueryInput(value: string) {
     query.value = value;
 }
 
+function selectTag(tag: string) {
+    selectedTag.value = tag;
+    query.value = `#${tag}`;
+}
+
 </script>
 
 <template>
