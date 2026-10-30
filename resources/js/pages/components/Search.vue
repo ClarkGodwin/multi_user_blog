@@ -193,6 +193,11 @@ watch([query, selectedTag], ([rawQuery, chosenTag]) => {
     }, 250);
 });
 
+function onQueryInput(value: string) {
+    selectedTag.value = null;
+    query.value = value;
+}
+
 </script>
 
 <template>
