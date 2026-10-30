@@ -116,18 +116,28 @@ async function fetchList<T>(
 
 watch([query, selectedTag], ([rawQuery, chosenTag]) => {
     if (debounceTimer) {
+        //to not send a request for a precedent input in the search input by the user
         clearTimeout(debounceTimer);
     }
 
+    //since this block will be executed whenever either of the two values in watch changes, we need to abort any precedent request that was on
     activeController?.abort();
 
     const value = rawQuery.trim();
+
+    /**
+     * True when we have a selected tag
+     * The selected tag is the one chosen in the tag suggestion that will be displayed as the user is typing a word starting with '#'
+     *
+     * so, unless it's a selected tag, this variable will be false
+     */
     const isChosenTag = chosenTag !== null && value === `#${chosenTag}`;
 
     articles.value = [];
     tagSuggestions.value = [];
     searchError.value = '';
 
+    //it stops the request if the search input is empty or just filled with space
     if (value === '') {
         loading.value = false;
         return;
@@ -141,6 +151,8 @@ watch([query, selectedTag], ([rawQuery, chosenTag]) => {
         try {
             if (isChosenTag) {
                 const url = `/article-search?tag=${encodeURIComponent(chosenTag)}`;
+
+                //fetch results if there's a selected tag
                 articles.value = await fetchList(
                     url,
                     controller.signal,
@@ -150,6 +162,7 @@ watch([query, selectedTag], ([rawQuery, chosenTag]) => {
                 const tagTerm = value.slice(1);
                 const url = `/tag-suggestions?q=${encodeURIComponent(tagTerm)}`;
 
+                //fetch results if there's not a selected tag and the word starts with a '#' so that the tag suggestions can be displayed
                 tagSuggestions.value = await fetchList(
                     url,
                     controller.signal,
@@ -157,6 +170,8 @@ watch([query, selectedTag], ([rawQuery, chosenTag]) => {
                 );
             } else {
                 const url = `/article-search?q=${encodeURIComponent(value)}`;
+
+                //in this case, it's a normal search through the title and the content of one or many articles
                 articles.value = await fetchList(
                     url,
                     controller.signal,
@@ -164,9 +179,10 @@ watch([query, selectedTag], ([rawQuery, chosenTag]) => {
                 );
             }
         } catch {
+            //to show the error only if the query wasn't aborted
             if (!controller.signal.aborted) {
                 searchError.value =
-                    'La recherche est momentanément indisponible.';
+                    'The search is unavailable.';
             }
         } finally {
             if (activeController === controller) {
