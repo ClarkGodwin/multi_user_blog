@@ -28,11 +28,39 @@ const tagSuggestions = ref<string[]>([]);
 const loading = ref(false);
 const searchError = ref('');
 
-//To wait and see if the user stopped typing for 250ms before lauching the request
+/**
+ *To wait and see if the user stopped typing for 250ms before lauching the request
+ */
 let debounceTimer: ReturnType<typeof setTimeout> | undefined;
 
-//to be able to stop  a precedent request which became obsolete in case the user typed another character after that 250ms wait
+/**
+ *To be able to stop  a precedent request which became obsolete in case the user typed another character after that 250ms wait
+ */
 let activeController: AbortController | undefined;
+
+function isDataEnvelope(value: unknown): value is { data: unknown[] } {
+    return (
+        typeof value === 'object' &&
+        value !== null &&
+        'data' in value &&
+        Array.isArray(value.data)
+    );
+}
+
+function isSearchArticle(value: unknown): value is SearchArticle {
+    return (
+        typeof value === 'object' &&
+        value !== null &&
+        'id' in value &&
+        typeof value.id === 'number' &&
+        'title' in value &&
+        typeof value.title === 'string'
+    );
+}
+
+function isString(value: unknown): value is string {
+    return typeof value === 'string';
+}
 
 </script>
 
