@@ -13,6 +13,8 @@ import { onBeforeUnmount, ref, watch } from 'vue';
 
 /**
  * The type of the data returned by either the search or the tagSuggestion function in ArticleController.php
+ *
+ * The return type of datas from that controller is json
  */
 type SearchArticle = {
     id: number;
@@ -26,7 +28,10 @@ const tagSuggestions = ref<string[]>([]);
 const loading = ref(false);
 const searchError = ref('');
 
+//To wait and see if the user stopped typing for 250ms before lauching the request
 let debounceTimer: ReturnType<typeof setTimeout> | undefined;
+
+//to be able to stop  a precedent request which became obsolete in case the user typed another character after that 250ms wait
 let activeController: AbortController | undefined;
 
 </script>
