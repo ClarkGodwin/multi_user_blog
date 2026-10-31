@@ -10,9 +10,9 @@ import { SearchIcon } from '@lucide/vue'
 import { InputGroup, InputGroupAddon, InputGroupInput } from '@/components/ui/input-group'
 
 import { computed, onBeforeUnmount, ref, watch } from 'vue';
-import { usePage } from '@inertiajs/vue3';
+import { Link, usePage } from '@inertiajs/vue3';
 import { ArticleStatusEnum } from '@/types/article';
-import { search, tag_suggestions } from '@/routes/article';
+import { details, search, tag_suggestions } from '@/routes/article';
 
 const page = usePage()
 
@@ -262,32 +262,34 @@ onBeforeUnmount(() => {
         <DialogTrigger as-child>
             <Search class="text-dark-surface-300 dark:text-surface-300 hover:cursor-pointer size-search-icon" />
         </DialogTrigger>
-        <DialogContent :show-close-button="false" class="w-dialog-content top-4 translate-y-0">
+        <DialogContent :show-close-button="false" class="w-dialog-content top-4 translate-y-0 max-h-max-dialog overflow-y-auto">
             <InputGroup>
-                <InputGroupInput :model-value="query" placeholder="Search an article or enter a #tag..."
-                    @update:model-value="onQueryInput" />
+                <InputGroupInput :model-value="query" class="text-article-view-content"
+                    placeholder="Search an article or enter a #tag..." @update:model-value="onQueryInput" />
                 <InputGroupAddon>
                     <SearchIcon />
                 </InputGroupAddon>
             </InputGroup>
 
-            <div>
+            <div class="text-article-view-content">
                 <p v-if="loading">Search in progress…</p>
-                <p v-else-if="searchError" role="alert">{{ searchError }}</p>
+                <p v-else-if="searchError" role="alert" class="text-red-600 dark:text-red-400">{{ searchError }}</p>
 
-                <ul v-else-if="query.trim().startsWith('#') && selectedTag === null">
-                    <li v-for="tag in tagSuggestions" :key="tag">
+                <ul v-else-if="query.trim().startsWith('#') && selectedTag === null" class="flex flex-col gap-2">
+                    <li v-for="tag in tagSuggestions" :key="tag"
+                        class="bg-surface-300 rounded-lg px-2.5 py-1 hover:font-bold hover:cursor-pointer">
                         <button type="button" @click="selectTag(tag)">
                             #{{ tag }}
                         </button>
                     </li>
                 </ul>
 
-                <ul v-else>
-                    <li v-for="article in articles" :key="article.id">
-                        <a :href="`/article/detail/${article.id}`">
+                <ul v-else class="flex flex-col gap-2">
+                    <li v-for="article in articles" :key="article.id"
+                        class="bg-surface-300 rounded-lg px-2.5 py-1 hover:font-bold hover:cursor-pointer">
+                        <Link :href="details(article.id)">
                             {{ article.title }}
-                        </a>
+                        </Link>
                     </li>
                 </ul>
             </div>

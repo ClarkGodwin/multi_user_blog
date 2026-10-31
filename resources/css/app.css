@@ -79,6 +79,9 @@
     /*for the custom Search component*/
     --width-dialog-content : clamp(18.75rem,14.583rem + 20.833vw,32.813rem);
     --spacing-search-icon : clamp(0.938rem,0.789rem + 0.741vw,1.438rem);
+    --height-max-dialog : clamp(21.875rem,19.097rem + 13.889vw,31.25rem);
+
+
 
 
 

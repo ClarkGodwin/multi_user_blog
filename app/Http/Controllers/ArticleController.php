@@ -42,7 +42,7 @@ class ArticleController extends Controller
 
     /**
      * To show the results of a search from an input
-     *
+     
      * @param Request $request
      * @return JsonResponse
      */
