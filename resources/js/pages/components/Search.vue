@@ -9,7 +9,24 @@ import {
 import { SearchIcon } from '@lucide/vue'
 import { InputGroup, InputGroupAddon, InputGroupInput } from '@/components/ui/input-group'
 
-import { onBeforeUnmount, ref, watch } from 'vue';
+import { computed, onBeforeUnmount, ref, watch } from 'vue';
+import { usePage } from '@inertiajs/vue3';
+import { ArticleStatusEnum } from '@/types/article';
+
+const page = usePage()
+
+const currentStatus = computed(() => {
+    const path = page.url.split('?')[0];
+    const segments = path.split('/').filter(Boolean);
+
+    if (segments.includes('craft')) return ArticleStatusEnum.Craft;
+    if (segments.includes('archived')) return ArticleStatusEnum.Archived;
+    if (segments.includes('published')) return ArticleStatusEnum.Published;
+    if (segments.includes('home')) return ArticleStatusEnum.Published;
+
+    return ArticleStatusEnum.Published
+
+});
 
 /**
  * The type of the data returned by either the search or the tagSuggestion function in ArticleController.php

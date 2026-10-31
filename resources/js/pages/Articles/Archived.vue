@@ -2,7 +2,7 @@
 import { Head, Link } from '@inertiajs/vue3';
 import { User, UserRoleEnum } from '@/types';
 import type { ArticlesPaginated } from '@/types/article.js';
-import { archived, create, details } from '@/routes/article/index.js';
+import { archived, details } from '@/routes/article/index.js';
 import BecomeAnAuthor from '../components/BecomeAnAuthor.vue';
 import CreateAnArticleLink from '../components/CreateAnArticleLink.vue';
 import ArticleView from '../components/ArticleView.vue';

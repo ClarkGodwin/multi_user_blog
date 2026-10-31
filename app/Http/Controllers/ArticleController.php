@@ -45,18 +45,18 @@ class ArticleController extends Controller
      * This makes the search reusable for all article's status instead of making a specific search function for every route where it's needed
      *
      * @param Request $request
-     * @return ArticleStatusEnum|null
+     * @return string
      */
     private function statusCorrespondingToARequest(Request $request)
     {
         $url = $request->url();
 
         return match (true) {
-            str_contains($url, 'craft') => ArticleStatusEnum::Craft,
-            str_contains($url, 'published') => ArticleStatusEnum::Published,
-            str_contains($url, 'home') => ArticleStatusEnum::Published,
-            str_contains($url, 'archived') => ArticleStatusEnum::Archived,
-            default => null,
+            str_contains($url, 'craft') => ArticleStatusEnum::Craft->value,
+            str_contains($url, 'published') => ArticleStatusEnum::Published->value,
+            str_contains($url, 'home') => ArticleStatusEnum::Published->value,
+            str_contains($url, 'archived') => ArticleStatusEnum::Archived->value,
+            default => ArticleStatusEnum::Published->value,
         };
     }
 
@@ -80,7 +80,7 @@ class ArticleController extends Controller
         $tag = trim($filters['tag'] ?? '');
 
         $articles = Article::query()
-            ->where('status', $statusFromTheRequest->value)
+            ->where('status', $statusFromTheRequest)
             ->when($tag !== '', function (Builder $query) use ($tag) {
                 // If it's a tag, it'll search among the articles with the relationship tags and check where the name corresponds  to the name of a tag in the database
                 $query->whereHas('tags', function (Builder $tagQuery) use ($tag) {
