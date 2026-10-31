@@ -39,14 +39,23 @@ class ArticleController extends Controller
         return Inertia::render('Home', compact('articles'));
     }
 
+    /**
+     * This function is there to help with the search and tag suggestion features
+     * The returned articles will have the status corresponding to the route where the request came from.
+     * This makes the search reusable for all article's status instead of making a specific search function for every route where it's needed
+     *
+     * @param Request $request
+     * @return ArticleStatusEnum|null
+     */
     private function statusCorrespondingToARequest(Request $request)
     {
-        $routeName = $request->route()?->getName();
+        $url = $request->url();
 
-        return match ($routeName) {
-            'article.craft' => ArticleStatusEnum::Craft,
-            'article.published', 'dashboard' => ArticleStatusEnum::Published,
-            'article.archived' => ArticleStatusEnum::Archived,
+        return match (true) {
+            str_contains($url, 'craft') => ArticleStatusEnum::Craft,
+            str_contains($url, 'published') => ArticleStatusEnum::Published,
+            str_contains($url, 'home') => ArticleStatusEnum::Published,
+            str_contains($url, 'archived') => ArticleStatusEnum::Archived,
             default => null,
         };
     }
