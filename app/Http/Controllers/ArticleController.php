@@ -60,6 +60,12 @@ class ArticleController extends Controller
         };
     }
 
+    /**
+     * To show the results of a search from an input
+     *
+     * @param Request $request
+     * @return JsonResponse
+     */
     public function search(Request $request): JsonResponse
     {
         $filters = $request->validate([
@@ -67,12 +73,14 @@ class ArticleController extends Controller
             'tag' => ['nullable', 'string', 'max:80'],
         ]);
 
+        $statusFromTheRequest = $this->statusCorrespondingToARequest($request);
+
         $term = trim($filters['q'] ?? '');
         // the tag is considered as the word with the character '#' as a prefix
         $tag = trim($filters['tag'] ?? '');
 
         $articles = Article::query()
-            ->where('status', ArticleStatusEnum::Published->value)
+            ->where('status', $statusFromTheRequest->value)
             ->when($tag !== '', function (Builder $query) use ($tag) {
                 // If it's a tag, it'll search among the articles with the relationship tags and check where the name corresponds  to the name of a tag in the database
                 $query->whereHas('tags', function (Builder $tagQuery) use ($tag) {
@@ -98,6 +106,8 @@ class ArticleController extends Controller
      * To show a suggestion of tag if the search starts with a '#'
      *
      * It shows suggestions based on the characters in the search, for a the suggestion to be returned, its name must contain the characters in the search, not necesseraly in the same order
+     * @param Request $request
+     * @return JsonResponse
      */
     public function tagSuggestions(Request $request): JsonResponse
     {
