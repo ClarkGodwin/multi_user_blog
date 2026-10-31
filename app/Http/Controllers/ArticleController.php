@@ -13,6 +13,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rule;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -40,27 +41,6 @@ class ArticleController extends Controller
     }
 
     /**
-     * This function is there to help with the search and tag suggestion features
-     * The returned articles will have the status corresponding to the route where the request came from.
-     * This makes the search reusable for all article's status instead of making a specific search function for every route where it's needed
-     *
-     * @param Request $request
-     * @return string
-     */
-    private function statusCorrespondingToARequest(Request $request)
-    {
-        $url = $request->url();
-
-        return match (true) {
-            str_contains($url, 'craft') => ArticleStatusEnum::Craft->value,
-            str_contains($url, 'published') => ArticleStatusEnum::Published->value,
-            str_contains($url, 'home') => ArticleStatusEnum::Published->value,
-            str_contains($url, 'archived') => ArticleStatusEnum::Archived->value,
-            default => ArticleStatusEnum::Published->value,
-        };
-    }
-
-    /**
      * To show the results of a search from an input
      *
      * @param Request $request
@@ -71,16 +51,15 @@ class ArticleController extends Controller
         $filters = $request->validate([
             'q' => ['nullable', 'string', 'max:100'],
             'tag' => ['nullable', 'string', 'max:80'],
+            'status' => ['required', Rule::enum(ArticleStatusEnum::class)],
         ]);
-
-        $statusFromTheRequest = $this->statusCorrespondingToARequest($request);
 
         $term = trim($filters['q'] ?? '');
         // the tag is considered as the word with the character '#' as a prefix
         $tag = trim($filters['tag'] ?? '');
 
         $articles = Article::query()
-            ->where('status', $statusFromTheRequest)
+            ->where('status', $filters['status'])
             ->when($tag !== '', function (Builder $query) use ($tag) {
                 // If it's a tag, it'll search among the articles with the relationship tags and check where the name corresponds  to the name of a tag in the database
                 $query->whereHas('tags', function (Builder $tagQuery) use ($tag) {
@@ -113,13 +92,14 @@ class ArticleController extends Controller
     {
         $filters = $request->validate([
             'q' => ['nullable', 'string', 'max:80'],
+            'status' => ['required', Rule::enum(ArticleStatusEnum::class)],
         ]);
 
         $term = trim($filters['q'] ?? '');
 
         $tags = Tag::query()
-            ->whereHas('articles', function (Builder $articleQuery) {
-                $articleQuery->where('status', ArticleStatusEnum::Published->value);
+            ->whereHas('articles', function (Builder $articleQuery) use ($filters) {
+                $articleQuery->where('status', $filters['status']);
             })
             ->when($term !== '', function (Builder $query) use ($term) {
                 $query->where('name', 'like', "%{$term}%");
