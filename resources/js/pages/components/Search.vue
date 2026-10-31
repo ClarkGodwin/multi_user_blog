@@ -277,7 +277,7 @@ onBeforeUnmount(() => {
 
                 <ul v-else-if="query.trim().startsWith('#') && selectedTag === null" class="flex flex-col gap-2">
                     <li v-for="tag in tagSuggestions" :key="tag"
-                        class="bg-surface-300 rounded-lg px-2.5 py-1 hover:font-bold hover:cursor-pointer">
+                        class="bg-surface-300 dark:bg-dark-surface-300 rounded-lg px-2.5 py-1 hover:font-bold hover:cursor-pointer">
                         <button type="button" @click="selectTag(tag)">
                             #{{ tag }}
                         </button>
@@ -286,7 +286,7 @@ onBeforeUnmount(() => {
 
                 <ul v-else class="flex flex-col gap-2">
                     <li v-for="article in articles" :key="article.id"
-                        class="bg-surface-300 rounded-lg px-2.5 py-1 hover:font-bold hover:cursor-pointer">
+                        class="bg-surface-300 dark:bg-dark-surface-300 rounded-lg px-2.5 py-1 hover:font-bold hover:cursor-pointer">
                         <Link :href="details(article.id)">
                             {{ article.title }}
                         </Link>

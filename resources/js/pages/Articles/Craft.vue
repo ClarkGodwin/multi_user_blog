@@ -1,8 +1,6 @@
 <script setup lang="ts">
 import { Head, Link } from '@inertiajs/vue3';
-import { toAuthor } from '@/routes';
 import { User, UserRoleEnum } from '@/types';
-import Button from '../components/Button.vue';
 import type { ArticlesPaginated } from '@/types/article.js';
 import { craft, create, details } from '@/routes/article/index.js';
 import ArticleView from '../components/ArticleView.vue';
