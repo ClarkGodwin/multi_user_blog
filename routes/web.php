@@ -26,7 +26,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     ->name('article.search');
 
     Route::get('tag-suggestions', [ArticleController::class, 'tagSuggestions'])
-    ->name('article.tag-suggestions');
+    ->name('article.tag_suggestions');
 
     Route::get('published', [ArticleController::class, 'published'])->name('article.published');
     Route::get('craft', [ArticleController::class, 'craft'])->name('article.craft');

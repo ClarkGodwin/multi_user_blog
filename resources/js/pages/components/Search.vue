@@ -12,7 +12,7 @@ import { InputGroup, InputGroupAddon, InputGroupInput } from '@/components/ui/in
 import { computed, onBeforeUnmount, ref, watch } from 'vue';
 import { usePage } from '@inertiajs/vue3';
 import { ArticleStatusEnum } from '@/types/article';
-import { search } from '@/routes/article';
+import { search, tag_suggestions } from '@/routes/article';
 
 const page = usePage()
 
@@ -194,7 +194,12 @@ watch([query, selectedTag], ([rawQuery, chosenTag]) => {
                 );
             } else if (value.startsWith('#')) {
                 const tagTerm = value.slice(1);
-                const url = `/tag-suggestions?q=${encodeURIComponent(tagTerm)}`;
+                const url = tag_suggestions.url({
+                    query: {
+                        status: currentStatus.value,
+                        q: encodeURIComponent(tagTerm),
+                    },
+                });
 
                 //fetch results if there's not a selected tag and the word starts with a '#' so that the tag suggestions can be displayed
                 tagSuggestions.value = await fetchList(
