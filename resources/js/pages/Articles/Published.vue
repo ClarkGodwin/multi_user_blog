@@ -16,6 +16,7 @@ defineOptions({
                 href: published(),
             },
         ],
+        showSearch: true,
     },
 });
 

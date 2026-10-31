@@ -18,6 +18,7 @@ defineOptions({
                 href: craft(),
             },
         ],
+        showSearch: true,
     },
 });
 
