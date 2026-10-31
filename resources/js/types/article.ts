@@ -12,6 +12,7 @@ export type Article = {
     updated_at : string;
 }
 
+//If any of theses values is changes, the corresponding values have also to be changed  in ArticleStatusEnum.php
 export enum ArticleStatusEnum {
     Craft = 'craft',
     Published = 'published',
