@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Models\Tag;
 use Illuminate\Console\Attributes\Description;
 use Illuminate\Console\Attributes\Signature;
 use Illuminate\Console\Command;
@@ -12,9 +13,14 @@ class CleanUnusedTags extends Command
 {
     /**
      * Execute the console command.
+     * @return int
      */
     public function handle()
     {
-        //
+        $deleted = Tag::doesntHave('articles')->delete();
+
+        $this->info("Deleted {$deleted} unused tags.");
+
+        return self::SUCCESS;
     }
 }
