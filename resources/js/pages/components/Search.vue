@@ -12,6 +12,7 @@ import { InputGroup, InputGroupAddon, InputGroupInput } from '@/components/ui/in
 import { computed, onBeforeUnmount, ref, watch } from 'vue';
 import { usePage } from '@inertiajs/vue3';
 import { ArticleStatusEnum } from '@/types/article';
+import { search } from '@/routes/article';
 
 const page = usePage()
 
@@ -178,7 +179,12 @@ watch([query, selectedTag], ([rawQuery, chosenTag]) => {
 
         try {
             if (isChosenTag) {
-                const url = `/article-search?tag=${encodeURIComponent(chosenTag)}`;
+                const url = search.url({
+                    query: {
+                        status: currentStatus.value,
+                        q: encodeURIComponent(chosenTag),
+                    },
+                });
 
                 //fetch results if there's a selected tag
                 articles.value = await fetchList(
