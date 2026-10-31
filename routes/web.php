@@ -16,35 +16,38 @@ Route::middleware(['auth', 'verified'])->group(function () {
         $user->role = UserRoleEnum::Author->value;
         $user->save();
 
-        Inertia::flash('status', "Congratulations, you're now an author");
+        Inertia::flash('status',"Congratulations, you're now an author");
 
         return redirect()->back();
 
     })->middleware('password.confirm')->name('toAuthor');
 
     Route::get('article-search', [ArticleController::class, 'search'])
-        ->name('article.search');
+    ->name('article.search');
 
     Route::get('tag-suggestions', [ArticleController::class, 'tagSuggestions'])
-        ->name('article.tag-suggestions');
+    ->name('article.tag-suggestions');
 
     Route::get('published', [ArticleController::class, 'published'])->name('article.published');
     Route::get('craft', [ArticleController::class, 'craft'])->name('article.craft');
     Route::get('archived', [ArticleController::class, 'archived'])->name('article.archived');
 
-    Route::get('article/create', [ArticleController::class, 'create'])->name('article.create');
+    Route::get('article/create',[ArticleController::class, 'create'])->name('article.create');
     Route::post('article/create', [ArticleController::class, 'store'])->name('article.store');
 
-    Route::get('article/detail/{article}', [ArticleController::class, 'details'])->name('article.details');
+    Route::get('article/detail/{article}',[ArticleController::class, 'details'])->name('article.details');
 
-    Route::get('article/edit/{article}', [ArticleController::class, 'edit'])->name('article.edit');
-    Route::post('article/update/{article}', [ArticleController::class, 'update'])->name('article.update');
-    Route::delete('article/destroy/{article}', [ArticleController::class, 'destroy'])->name('article.destroy');
+    Route::get('article/edit/{article}',[ArticleController::class, 'edit'])->name('article.edit');
+    Route::post('article/update/{article}',[ArticleController::class, 'update'])->name('article.update');
+    Route::delete('article/destroy/{article}',[ArticleController::class, 'destroy'])->name('article.destroy');
 
-    Route::get('comment/detail/{comment}', [CommentController::class, 'details'])->name('comment.details');
-    Route::post('comment/store/{article}', [CommentController::class, 'store'])->name('comment.store');
-    Route::post('comment/update/{comment}', [CommentController::class, 'update'])->name('comment.update');
-    Route::delete('comment/destroy/{comment}', [CommentController::class, 'destroy'])->name('comment.destroy');
+
+
+
+    Route::get('comment/detail/{comment}',[CommentController::class, 'details'])->name('comment.details');
+    Route::post('comment/store/{article}',[CommentController::class, 'store'])->name('comment.store');
+    Route::post('comment/update/{comment}',[CommentController::class, 'update'])->name('comment.update');
+    Route::delete('comment/destroy/{comment}',[CommentController::class, 'destroy'])->name('comment.destroy');
 
 });
 

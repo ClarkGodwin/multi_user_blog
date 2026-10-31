@@ -39,7 +39,17 @@ class ArticleController extends Controller
         return Inertia::render('Home', compact('articles'));
     }
 
-    private function statusCorrespondingToARequest(Request $request){}
+    private function statusCorrespondingToARequest(Request $request)
+    {
+        $routeName = $request->route()?->getName();
+
+        return match ($routeName) {
+            'article.craft' => ArticleStatusEnum::Craft,
+            'article.published', 'dashboard' => ArticleStatusEnum::Published,
+            'article.archived' => ArticleStatusEnum::Archived,
+            default => null,
+        };
+    }
 
     public function search(Request $request): JsonResponse
     {
@@ -79,9 +89,6 @@ class ArticleController extends Controller
      * To show a suggestion of tag if the search starts with a '#'
      *
      * It shows suggestions based on the characters in the search, for a the suggestion to be returned, its name must contain the characters in the search, not necesseraly in the same order
-     *
-     * @param Request $request
-     * @return JsonResponse
      */
     public function tagSuggestions(Request $request): JsonResponse
     {
