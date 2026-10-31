@@ -208,7 +208,12 @@ watch([query, selectedTag], ([rawQuery, chosenTag]) => {
                     isString,
                 );
             } else {
-                const url = `/article-search?q=${encodeURIComponent(value)}`;
+                const url = search.url({
+                    query: {
+                        status: currentStatus.value,
+                        q: encodeURIComponent(value),
+                    },
+                });
 
                 //in this case, it's a normal search through the title and the content of one or many articles
                 articles.value = await fetchList(
