@@ -15,8 +15,19 @@ import { ArticleStatusEnum } from '@/types/article';
 
 const page = usePage()
 
+/**
+ * To extract the status that'll be used in the search or the tag suggestion depending on which page the user is
+ */
 const currentStatus = computed(() => {
+    /**
+     * To get the url we're on without the parameters
+     * It's splitted using '?', to separate the url from the parameters and then we take the first element
+     */
     const path = page.url.split('?')[0];
+
+    /**
+     * To get the array of the words used to make the url without the '/' and filtered with Boolean to get rid of the empty strings
+     */
     const segments = path.split('/').filter(Boolean);
 
     if (segments.includes('craft')) return ArticleStatusEnum.Craft;
