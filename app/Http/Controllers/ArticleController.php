@@ -39,6 +39,8 @@ class ArticleController extends Controller
         return Inertia::render('Home', compact('articles'));
     }
 
+    private function statusCorrespondingToARequest(Request $request){}
+
     public function search(Request $request): JsonResponse
     {
         $filters = $request->validate([
@@ -268,14 +270,6 @@ class ArticleController extends Controller
 
         // to redirect in published, craft or archived page depending on which status the user gave his article. Check web.php for more details
         return redirect()->route('article.'.$article->status);
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(Article $article)
-    {
-        //
     }
 
     /**
